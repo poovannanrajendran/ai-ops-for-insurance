@@ -1,0 +1,13 @@
+{
+  "name": "ai-ops-for-insurance",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "format:md": "prettier --write \"**/*.md\"",
+    "lint:md": "markdownlint --ignore node_modules \"**/*.md\""
+  },
+  "devDependencies": {
+    "markdownlint-cli": "^0.48.0",
+    "prettier": "^3.8.1"
+  }
+}
