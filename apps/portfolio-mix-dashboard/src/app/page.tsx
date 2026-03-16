@@ -176,104 +176,105 @@ export default function Page() {
           </div>
         </section>
 
-        <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-          <Card eyebrow="Intake" title="Portfolio source">
-            <div className="space-y-5">
-              <div className="rounded-[26px] border border-dashed border-[var(--accent)]/45 bg-white/70 p-6">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                  Upload zone
-                </p>
-                <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">
-                  Use one of the built-in demo samples, paste raw CSV rows, or load a local file.
-                  The Day 2 route performs deterministic parsing, aggregation, commentary, and
-                  concentration warning generation.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <button
-                    className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
-                    onClick={() => fileInputRef.current?.click()}
-                    type="button"
-                  >
-                    Select CSV
-                  </button>
-                  <button
-                    className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700"
-                    onClick={() => loadSample("balanced")}
-                    type="button"
-                  >
-                    Reset sample
-                  </button>
-                  <input
-                    accept=".csv,text/csv"
-                    className="hidden"
-                    onChange={handleFileSelection}
-                    ref={fileInputRef}
-                    type="file"
-                  />
+        <Card eyebrow="Intake" title="Portfolio source">
+          <div className="space-y-5">
+            <div className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
+              <div className="space-y-5">
+                <div className="rounded-[26px] border border-dashed border-[var(--accent)]/45 bg-white/70 p-5">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                    Upload zone
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
+                    Use built-in samples, paste CSV rows, or load a local file.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button
+                      className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+                      onClick={() => fileInputRef.current?.click()}
+                      type="button"
+                    >
+                      Select CSV
+                    </button>
+                    <button
+                      className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700"
+                      onClick={() => loadSample("balanced")}
+                      type="button"
+                    >
+                      Reset sample
+                    </button>
+                    <input
+                      accept=".csv,text/csv"
+                      className="hidden"
+                      onChange={handleFileSelection}
+                      ref={fileInputRef}
+                      type="file"
+                    />
+                  </div>
+
+                  <div className="mt-4 space-y-2">
+                    <label className="block text-sm font-semibold text-slate-700" htmlFor="sourceLabel">
+                      Source label
+                    </label>
+                    <input
+                      className="w-full rounded-[16px] border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 outline-none"
+                      id="sourceLabel"
+                      onChange={(event) => setSourceLabel(event.target.value)}
+                      value={sourceLabel}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {demoSamples.map((sample) => (
+                    <button
+                      className={`rounded-[20px] border p-3 text-left transition ${
+                        selectedSampleId === sample.id
+                          ? "border-[var(--accent)] bg-[var(--accent-soft)]"
+                          : "border-[var(--panel-border)] bg-white/72"
+                      }`}
+                      key={sample.id}
+                      onClick={() => loadSample(sample.id)}
+                      type="button"
+                    >
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                        {sample.label}
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-slate-700">{sample.description}</p>
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-3">
-                {demoSamples.map((sample) => (
+              <div className="space-y-3">
+                <div className="rounded-[26px] border border-[var(--panel-border)] bg-white/72 p-5">
+                  <p className="text-sm font-semibold text-slate-700">Portfolio CSV</p>
+                  <textarea
+                    className="mt-3 min-h-[300px] w-full rounded-[22px] border border-slate-300 bg-white px-5 py-4 text-sm leading-7 text-slate-800 outline-none ring-0"
+                    id="csvText"
+                    onChange={(event) => setCsvText(event.target.value)}
+                    value={csvText}
+                  />
+                </div>
+                <div className="flex flex-col items-center gap-2 pt-1">
                   <button
-                    className={`rounded-[24px] border p-4 text-left transition ${
-                      selectedSampleId === sample.id
-                        ? "border-[var(--accent)] bg-[var(--accent-soft)]"
-                        : "border-[var(--panel-border)] bg-white/72"
-                    }`}
-                    key={sample.id}
-                    onClick={() => loadSample(sample.id)}
+                    className="rounded-full bg-[var(--accent)] px-10 py-3 text-base font-semibold text-white disabled:opacity-60"
+                    disabled={isPending}
+                    onClick={submit}
                     type="button"
                   >
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                      {sample.label}
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-slate-700">{sample.description}</p>
+                    {isPending ? "Analyzing..." : "Analyze portfolio"}
                   </button>
-                ))}
+                  <p className="text-center text-sm text-slate-500">
+                    Current flow analyzes pasted or uploaded CSV locally through the app route.
+                  </p>
+                </div>
+                {error ? <p className="text-sm font-medium text-red-700">{error}</p> : null}
               </div>
-
-              <div className="space-y-3">
-                <label className="block text-sm font-semibold text-slate-700" htmlFor="sourceLabel">
-                  Source label
-                </label>
-                <input
-                  className="w-full rounded-[18px] border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none"
-                  id="sourceLabel"
-                  onChange={(event) => setSourceLabel(event.target.value)}
-                  value={sourceLabel}
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="block text-sm font-semibold text-slate-700" htmlFor="csvText">
-                  Portfolio CSV
-                </label>
-                <textarea
-                  className="min-h-80 w-full rounded-[22px] border border-slate-300 bg-white px-5 py-4 text-sm leading-7 text-slate-800 outline-none ring-0"
-                  id="csvText"
-                  onChange={(event) => setCsvText(event.target.value)}
-                  value={csvText}
-                />
-              </div>
-
-              <div className="flex items-center gap-3">
-                <button
-                  className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
-                  disabled={isPending}
-                  onClick={submit}
-                  type="button"
-                >
-                  {isPending ? "Analyzing..." : "Analyze portfolio"}
-                </button>
-                <p className="text-sm text-slate-500">
-                  Current flow analyzes pasted or uploaded CSV locally through the app route.
-                </p>
-              </div>
-              {error ? <p className="text-sm font-medium text-red-700">{error}</p> : null}
             </div>
-          </Card>
+          </div>
+        </Card>
 
+        <div className="grid gap-6 lg:grid-cols-2">
           <div className="space-y-6">
             <Card eyebrow="Commentary" title="Executive readout">
               {result ? (
@@ -294,7 +295,9 @@ export default function Page() {
                 </p>
               )}
             </Card>
+          </div>
 
+          <div className="space-y-6">
             <Card eyebrow="Warnings" title="Concentration triggers">
               {result ? (
                 result.analysis.warnings.length > 0 ? (
@@ -309,6 +312,7 @@ export default function Page() {
                         key={`${warning.dimension}-${warning.label}`}
                       >
                         <p className="text-sm font-semibold text-slate-900">
+                          {warning.severity === "high" ? "⛔ " : "⚠ "}
                           {warning.dimension} concentration: {warning.label}
                         </p>
                         <p className="mt-1 text-sm leading-6 text-slate-700">{warning.message}</p>

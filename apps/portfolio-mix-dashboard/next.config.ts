@@ -9,7 +9,11 @@ const repoRoot = resolve(appDir, "../..");
 loadEnvConfig(repoRoot);
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@ai-ops/common-ui", "@ai-ops/config"]
+  transpilePackages: ["@ai-ops/common-ui", "@ai-ops/config"],
+  outputFileTracingRoot: repoRoot,
+  turbopack: {
+    root: repoRoot
+  }
 };
 
 export default nextConfig;
