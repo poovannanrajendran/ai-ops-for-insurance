@@ -11,10 +11,26 @@ interface AnalyzeResponse {
     status: string;
     reason?: string;
   };
+  processingTimeMs?: number;
   requestId: string;
 }
 
-const projectName = "AI Ops for Insurance | 30 Useful Insurance & Productivity Apps";
+const appProjectName = "30 Useful Insurance and Productivity Apps";
+const appName = "Portfolio Mix Dashboard";
+
+function formatDuration(ms: number | null): string {
+  if (ms == null) {
+    return "00:00:00";
+  }
+
+  const totalMilliseconds = Math.max(0, Math.round(ms));
+  const totalSeconds = Math.floor(totalMilliseconds / 1000);
+  const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+  const centiseconds = String(Math.floor((totalMilliseconds % 1000) / 10)).padStart(2, "0");
+
+  return `${minutes}:${seconds}:${centiseconds}`;
+}
 
 export default function Page() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -24,8 +40,10 @@ export default function Page() {
   const [result, setResult] = useState<AnalyzeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
+  const [analysisTimeMs, setAnalysisTimeMs] = useState<number | null>(null);
 
   async function runAnalysis() {
+    const startedAt = performance.now();
     const response = await fetch("/api/portfoliomix/analyze", {
       method: "POST",
       headers: {
@@ -45,6 +63,11 @@ export default function Page() {
       return;
     }
 
+    setAnalysisTimeMs(
+      typeof data.processingTimeMs === "number"
+        ? data.processingTimeMs
+        : Math.round(performance.now() - startedAt)
+    );
     setResult(data);
   }
 
@@ -101,11 +124,11 @@ export default function Page() {
   return (
     <main className="min-h-screen px-6 py-10 md:px-10 md:py-14">
       <div className="mx-auto flex max-w-7xl flex-col gap-8">
-        <section className="overflow-hidden rounded-[34px] border border-white/70 bg-white/90 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur md:p-8">
+        <section className="overflow-hidden rounded-[34px] border border-[var(--hero-border)] bg-white/90 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur md:p-8">
           <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-slate-950 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+                <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[var(--accent-strong)] shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
                   <AppGroupLogo className="h-12 w-12" />
                 </div>
                 <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[var(--accent-soft)]">
@@ -115,13 +138,15 @@ export default function Page() {
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
                     Day 2 Internal Tool
                   </p>
-                  <p className="text-sm font-medium text-slate-500">{projectName}</p>
+                  <p className="text-sm font-medium text-slate-500">
+                    {appProjectName} | {appName}
+                  </p>
                 </div>
               </div>
 
               <div className="space-y-3">
                 <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-slate-950 md:text-6xl">
-                  Portfolio Mix Dashboard
+                  {appName}
                 </h1>
                 <p className="max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
                   Upload or paste a portfolio schedule, then surface class, territory, and limit
@@ -132,6 +157,7 @@ export default function Page() {
 
             <div className="grid gap-3 sm:grid-cols-2 xl:min-w-[24rem]">
               <MetaCard label="Created by" value="Poovannan Rajendran" />
+              <MetaCard label="Analysis and review time (MM:SS:CS)" value={formatDuration(analysisTimeMs)} />
               <MetaCard label="Current source" value={sourceLabel} />
               <MetaCard
                 label="Storage"

@@ -20,6 +20,9 @@
     "symphony:doctor": "bash ./scripts/symphony-doctor.sh",
     "symphony:run": "bash ./scripts/symphony-run.sh",
     "symphony:stop": "bash ./scripts/symphony-stop.sh",
+    "deploy:day1": "bash ./scripts/deploy-vercel-app.sh submission-triage-copilot",
+    "deploy:day2": "bash ./scripts/deploy-vercel-app.sh portfolio-mix-dashboard",
+    "deploy:app": "bash ./scripts/deploy-vercel-app.sh",
     "format": "prettier --write .",
     "format:md": "prettier --write \"**/*.md\"",
     "lint:md": "markdownlint --ignore node_modules \"**/*.md\""

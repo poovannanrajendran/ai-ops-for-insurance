@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --page-bg: #eef3ef;
-  --page-ink: #1d2a23;
-  --accent: #0f766e;
-  --accent-soft: #cde9e4;
-  --panel-border: rgba(255, 255, 255, 0.5);
+  --page-bg: #e8eef3;
+  --page-ink: #0f172a;
+  --accent: #0f5f66;
+  --accent-soft: #dbeff0;
+  --accent-strong: #0b3b47;
+  --panel-subtle: rgba(255, 255, 255, 0.82);
+  --panel-border: rgba(71, 85, 105, 0.18);
+  --hero-border: rgba(255, 255, 255, 0.72);
 }
 
 * {
@@ -14,9 +17,9 @@
 
 html {
   background:
-    radial-gradient(circle at top right, rgba(205, 233, 228, 0.95), transparent 28%),
-    radial-gradient(circle at bottom left, rgba(216, 225, 209, 0.8), transparent 34%),
-    linear-gradient(180deg, #f8fbf7 0%, var(--page-bg) 100%);
+    radial-gradient(circle at top left, rgba(15, 95, 102, 0.14), transparent 26%),
+    radial-gradient(circle at top right, rgba(30, 64, 175, 0.12), transparent 24%),
+    linear-gradient(180deg, #f4f7fa 0%, var(--page-bg) 100%);
 }
 
 body {
@@ -30,6 +33,9 @@ body {
     Arial,
     sans-serif;
   min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.44), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(15, 23, 42, 0));
 }
 
 button,

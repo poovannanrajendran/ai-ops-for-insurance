@@ -18,3 +18,23 @@ create table if not exists app_portfoliomix.app_portfoliomix_analysis_runs (
 
 create index if not exists idx_app_portfoliomix_analysis_runs_created_at
   on app_portfoliomix.app_portfoliomix_analysis_runs (created_at desc);
+
+-- Required for Supabase Data API access:
+-- 1) Expose schema `app_portfoliomix` in Supabase Dashboard -> API -> Data API.
+-- 2) Ensure runtime roles have access to schema, tables, and sequences.
+
+grant usage on schema app_portfoliomix to anon, authenticated, service_role;
+
+grant all privileges on all tables in schema app_portfoliomix
+  to anon, authenticated, service_role;
+
+grant all privileges on all sequences in schema app_portfoliomix
+  to anon, authenticated, service_role;
+
+alter default privileges in schema app_portfoliomix
+  grant all privileges on tables
+  to anon, authenticated, service_role;
+
+alter default privileges in schema app_portfoliomix
+  grant all privileges on sequences
+  to anon, authenticated, service_role;

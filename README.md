@@ -77,6 +77,38 @@ Each app in `apps/` is intended to be a stand-alone **Next.js latest stable** pr
 
    Ensure the required environment variables are set in the Vercel project settings before deployment.
 
+   Or use root shortcuts:
+
+   ```sh
+   pnpm deploy:day1
+   pnpm deploy:day2
+   ```
+
+   For new apps:
+
+   ```sh
+   pnpm deploy:app <app-folder-name>
+   ```
+
+### Vercel Monorepo Setup (Important)
+
+For each app, create a separate Vercel project and configure:
+
+- `Root Directory`: `apps/<app-folder>`
+- `Framework Preset`: `Next.js`
+- `Output Directory`: leave empty (do not set `public`)
+
+If `Output Directory` is set to `public`, Vercel treats the app as static output and fails with:
+`No Output Directory named "public" found after the Build completed.`
+
+### PNPM Build Script Warning
+
+If Vercel logs show:
+`Ignored build scripts: sharp@... Run "pnpm approve-builds"...`
+
+This repo already whitelists `sharp` via `pnpm-workspace.yaml` (`onlyBuiltDependencies`).
+If the warning still appears in an existing build cache, trigger a fresh redeploy after the latest commit.
+
 ## Symphony
 
 This repo is configured to run the official OpenAI Symphony Elixir reference runtime against the repo-owned [WORKFLOW.md](/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/WORKFLOW.md).

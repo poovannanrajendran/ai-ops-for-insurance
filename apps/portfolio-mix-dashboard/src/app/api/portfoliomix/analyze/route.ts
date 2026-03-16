@@ -9,6 +9,28 @@ const requestSchema = z.object({
   sourceLabel: z.string().max(120).optional()
 });
 
+function formatPersistenceFailure(reason: string): string {
+  if (
+    reason.includes("Invalid schema") ||
+    reason.includes("PGRST106")
+  ) {
+    return "Supabase schema is not exposed in Data API. Add app_portfoliomix under API -> Data API -> Exposed schemas, then retry.";
+  }
+
+  if (
+    reason.includes("permission denied for schema") ||
+    reason.includes("permission denied for sequence")
+  ) {
+    return "Supabase permissions are incomplete for app_portfoliomix. Grant schema, table, and sequence privileges to service_role (and other runtime roles if needed), then retry.";
+  }
+
+  if (reason.includes("relation") || reason.includes("does not exist")) {
+    return "Supabase schema is not bootstrapped yet. Run apps/portfolio-mix-dashboard/db/init_portfoliomix.sql in your target project, then retry.";
+  }
+
+  return reason;
+}
+
 async function persistAnalysis(
   requestId: string,
   csvText: string,
@@ -44,7 +66,7 @@ async function persistAnalysis(
     if (error) {
       return {
         status: "failed",
-        reason: error.message
+        reason: formatPersistenceFailure(error.message)
       } as const;
     }
 
@@ -52,12 +74,16 @@ async function persistAnalysis(
   } catch (error) {
     return {
       status: "failed",
-      reason: error instanceof Error ? error.message : "Unknown persistence error"
+      reason:
+        error instanceof Error
+          ? formatPersistenceFailure(error.message)
+          : "Unknown persistence error"
     } as const;
   }
 }
 
 export async function POST(request: Request) {
+  const startedAt = Date.now();
   const requestId = crypto.randomUUID();
   const logger = createLogger({
     appKey: portfolioMixApp.shortName,
@@ -99,7 +125,8 @@ export async function POST(request: Request) {
     return NextResponse.json({
       requestId,
       analysis,
-      persistence
+      persistence,
+      processingTimeMs: Date.now() - startedAt
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Portfolio analysis failed.";
