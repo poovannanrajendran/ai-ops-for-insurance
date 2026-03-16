@@ -170,6 +170,21 @@ export SYMPHONY_WATCHDOG_NO_CODE_RUNTIME_MS=60000
 export SYMPHONY_WATCHDOG_NO_CODE_TOKEN_FLOOR=80000
 ```
 
+## Shared RAG Memory
+
+Shared RAG infrastructure is under [`infra/rag`](/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/infra/rag/README.md) and supports:
+
+- cross-project persistence in a dedicated Postgres DB (`ai_ops_rag`)
+- project-specific retrieval via `project_key` filters
+- Qdrant vector search with optional OpenAI embeddings
+
+Commands:
+
+```sh
+pnpm rag:ingest -- --project ai-ops-for-insurance --name "AI Ops for Insurance"
+pnpm rag:query -- --project ai-ops-for-insurance --q "port 3000 openwebui" --k 5
+```
+
 Operational rule:
 
 1. Split each day into child issues before turning Symphony on.

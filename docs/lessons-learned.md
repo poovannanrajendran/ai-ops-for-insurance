@@ -13,3 +13,7 @@
 - Vercel may warn: `Ignored build scripts: sharp@...`.
 - For this monorepo, allowlist `sharp` in `pnpm-workspace.yaml` using `onlyBuiltDependencies`.
 - After updating the allowlist, run a fresh redeploy so the updated install behavior is picked up.
+
+## 2026-03-16 - Shared RAG bootstrap gotchas
+- For Docker-to-host Postgres connections, `host.docker.internal` works from containers, but host-shell `psql` should use `localhost`.
+- When creating a dedicated RAG app user, grant schema usage plus table and sequence privileges (including default privileges) or ingestion fails with `permission denied for table`.

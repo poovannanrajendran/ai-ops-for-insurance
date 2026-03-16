@@ -1,0 +1,25 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.14.1
+    container_name: ai-ops-rag-qdrant
+    restart: unless-stopped
+    ports:
+      - "${QDRANT_PORT:-6333}:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+  rag-db-init:
+    image: postgres:16-alpine
+    container_name: ai-ops-rag-db-init
+    profiles: ["setup"]
+    restart: "no"
+    env_file:
+      - .env
+    volumes:
+      - ./init-rag-db.sql:/sql/init-rag-db.sql:ro
+    command: >
+      sh -eu -c "until pg_isready -h \"$RAG_PG_HOST\" -p \"$RAG_PG_PORT\" -U \"$RAG_PG_ADMIN_USER\" -d \"$RAG_PG_ADMIN_DB\"; do echo 'Waiting for existing Postgres to accept connections...'; sleep 2; done;
+      PGPASSWORD=\"$RAG_PG_ADMIN_PASSWORD\" psql -v ON_ERROR_STOP=1 -h \"$RAG_PG_HOST\" -p \"$RAG_PG_PORT\" -U \"$RAG_PG_ADMIN_USER\" -d \"$RAG_PG_ADMIN_DB\" -v rag_db_name=\"$RAG_DB_NAME\" -v rag_db_user=\"$RAG_DB_USER\" -v rag_db_password=\"$RAG_DB_PASSWORD\" -v rag_schema=\"$RAG_DB_SCHEMA\" -f /sql/init-rag-db.sql"
+
+volumes:
+  qdrant_storage:

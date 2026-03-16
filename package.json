@@ -23,6 +23,8 @@
     "deploy:day1": "bash ./scripts/deploy-vercel-app.sh submission-triage-copilot",
     "deploy:day2": "bash ./scripts/deploy-vercel-app.sh portfolio-mix-dashboard",
     "deploy:app": "bash ./scripts/deploy-vercel-app.sh",
+    "rag:ingest": "node ./scripts/rag/ingest.mjs",
+    "rag:query": "node ./scripts/rag/query.mjs",
     "format": "prettier --write .",
     "format:md": "prettier --write \"**/*.md\"",
     "lint:md": "markdownlint --ignore node_modules \"**/*.md\""
@@ -39,5 +41,8 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.0",
     "vitest": "^4.1.0"
+  },
+  "dependencies": {
+    "pg": "^8.20.0"
   }
 }
