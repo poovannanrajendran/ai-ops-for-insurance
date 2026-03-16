@@ -25,6 +25,7 @@
     "deploy:app": "bash ./scripts/deploy-vercel-app.sh",
     "rag:ingest": "node ./scripts/rag/ingest.mjs",
     "rag:query": "node ./scripts/rag/query.mjs",
+    "rag:sync-all": "node ./scripts/rag/sync-all.mjs",
     "format": "prettier --write .",
     "format:md": "prettier --write \"**/*.md\"",
     "lint:md": "markdownlint --ignore node_modules \"**/*.md\""

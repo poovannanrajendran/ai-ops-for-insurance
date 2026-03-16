@@ -1,0 +1,10 @@
+{
+  "projects": [
+    {
+      "project_key": "ai-ops-for-insurance",
+      "name": "AI Ops for Insurance",
+      "root": "/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance",
+      "enabled": true
+    }
+  ]
+}

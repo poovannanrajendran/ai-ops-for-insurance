@@ -46,6 +46,7 @@ From repo root:
 ```sh
 pnpm rag:ingest -- --project ai-ops-for-insurance --name "AI Ops for Insurance"
 pnpm rag:query -- --project ai-ops-for-insurance --q "vercel output directory public warning" --k 8
+pnpm rag:sync-all -- --purge true
 ```
 
 Behavior:
@@ -55,6 +56,10 @@ Behavior:
 - Enforces project focus with `project_key` filter.
 - If `OPENAI_API_KEY` is set, uses OpenAI embeddings.
 - If not set, uses a deterministic local hash embedding fallback (works offline, lower quality).
+
+`rag:sync-all` reads project definitions from:
+
+- [`docs/rag/projects.json`](/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/docs/rag/projects.json)
 
 ## Notes
 

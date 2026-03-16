@@ -17,3 +17,4 @@
 ## 2026-03-16 - Shared RAG bootstrap gotchas
 - For Docker-to-host Postgres connections, `host.docker.internal` works from containers, but host-shell `psql` should use `localhost`.
 - When creating a dedicated RAG app user, grant schema usage plus table and sequence privileges (including default privileges) or ingestion fails with `permission denied for table`.
+- Keep project registration in `docs/rag/projects.json` and run `rag:sync-all` to avoid stale memory across repositories.
