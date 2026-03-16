@@ -1,11 +1,21 @@
 
 # Local secrets
+.env
 .env.local
 .env.*.local
 
+# Package managers
+node_modules/
+.pnpm-store/
+
+# Build output
+.next/
+coverage/
+dist/
+
 # macOS
 .DS_Store
-.vercel
 
-# Dependencies
-node_modules/
+# Local platform state
+.vercel
+.symphony/

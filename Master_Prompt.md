@@ -32,7 +32,7 @@ ai-ops-for-insurance/
 
 ### `apps/`
 
-Each folder under `apps/` should be a stand-alone **Next.js 14** application using TypeScript, Tailwind CSS, and the Next.js App Router. Include:
+Each folder under `apps/` should be a stand-alone **Next.js latest stable** application using TypeScript, Tailwind CSS, and the Next.js App Router. As of **March 15, 2026**, the baseline stack is **Next.js 16.1.6**, **React 19.2.4**, **TypeScript 5.9.3**, and **Tailwind CSS 4.2.1**. Include:
 
 - A `db/` directory with an idempotent SQL script named `init_<appname>.sql`.
 - `src/app/page.tsx` for the main page.
@@ -62,7 +62,7 @@ Centralize configuration such as environment variable access and constants, for 
 1. **Schemas**: Each app uses its own Supabase schema named `app_<shortname>`, such as `app_submissiontriage`.
 2. **Tables**: Prefix tables with the app key, for example `app_submissiontriage_core` and `app_submissiontriage_audit`.
 3. **API routes**: Use `/api/<shortname>/<endpoint>`. Log the start and end of each request, including important decisions and errors.
-4. **Environment variables**: Shared variables such as `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` live at the repo root. Per-app secrets should use names such as `APP_<SHORTNAME>_OPENAI_KEY`.
+4. **Environment variables**: Shared variables such as `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` should be stored in local `.env.local` files or managed secret stores, never committed. Per-app secrets should use names such as `APP_<SHORTNAME>_OPENAI_KEY`.
 5. **Logging**: Always include `appKey` and `requestId` in log messages. Do not log sensitive data.
 
 ## Process and Harness Engineering

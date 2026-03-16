@@ -28,12 +28,12 @@ This repository houses **30 small AI-powered applications** developed over a 30-
 └── README.md
 ```
 
-Each app in `apps/` is intended to be a stand-alone **Next.js 14** project. Apps share common code via packages under `packages/`. A shared Supabase project can be used across all apps, with separate schemas and tables per app following the naming convention `app_<shortname>_*`.
+Each app in `apps/` is intended to be a stand-alone **Next.js latest stable** project. As of **March 15, 2026**, the baseline stack is **Next.js 16.1.6**, **React 19.2.4**, **TypeScript 5.9.3**, and **Tailwind CSS 4.2.1**. Apps share common code via packages under `packages/`. A shared Supabase project can be used across all apps, with separate schemas and tables per app following the naming convention `app_<shortname>_*`.
 
 ## Prerequisites
 
-- **Node.js v18+** and **pnpm** or **npm v7+**. This repo uses workspaces to manage packages.
-- A **Supabase** account with a single project created for this challenge. Copy `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` into `.env` at the repo root. Additional per-app secrets, such as API keys, should be stored in Vercel environment variables.
+- **Node.js 22 LTS** is recommended. Next.js 16.1.6 requires **Node.js >= 20.9.0**.
+- A **Supabase** account with a single project created for this challenge. Store `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in a local `.env.local` file and keep additional per-app secrets in Vercel environment variables or another secret manager.
 - A **Vercel** account for deploying the Next.js apps.
 - Optional: **Linear** and **Symphony** for agent-assisted development.
 
@@ -56,15 +56,15 @@ Each app in `apps/` is intended to be a stand-alone **Next.js 14** project. Apps
 3. Copy the example environment variables and set your Supabase credentials:
 
    ```sh
-   cp .env.example .env
+   cp .env.example .env.local
    ```
 
-   Then edit `.env` and set `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
+   Then edit `.env.local` and set `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
 
 4. Run an app locally. For example:
 
    ```sh
-   pnpm --filter @apps/submission-triage-copilot dev
+   pnpm --filter @ai-ops/submission-triage-copilot dev
    ```
 
    Then visit `http://localhost:3000`.
@@ -77,12 +77,79 @@ Each app in `apps/` is intended to be a stand-alone **Next.js 14** project. Apps
 
    Ensure the required environment variables are set in the Vercel project settings before deployment.
 
+## Symphony
+
+This repo is configured to run the official OpenAI Symphony Elixir reference runtime against the repo-owned [WORKFLOW.md](/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/WORKFLOW.md).
+
+1. Install or refresh the local Symphony runtime:
+
+   ```sh
+   pnpm symphony:install
+   ```
+
+2. Export the required orchestration environment:
+
+   ```sh
+   export LINEAR_API_KEY=...
+   export SYMPHONY_WORKSPACE_ROOT="$HOME/Documents/GitHub/symphony-workspaces/ai-ops-for-insurance"
+   ```
+
+   Or store the same values in `.env.local` or `.env.symphony.local` if you want the repo scripts to load them automatically.
+
+   Optional overrides:
+
+   ```sh
+   export SYMPHONY_HOME="$HOME/.local/share/openai-symphony"
+   export SYMPHONY_PORT=4310
+   export SOURCE_REPO_URL="git@github.com:poovannanrajendran/ai-ops-for-insurance.git"
+   ```
+
+3. Check the local setup:
+
+   ```sh
+   pnpm symphony:doctor
+   ```
+
+4. Start Symphony:
+
+   ```sh
+   pnpm symphony:run
+   ```
+
+The repo runner already includes Symphony's required preview acknowledgment flag. It also starts a local watchdog that can terminate the runtime if token burn stays high without code changes. The optional dashboard is exposed on `http://localhost:4310` by default.
+
+See [docs/symphony-execution-playbook.md](/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/docs/symphony-execution-playbook.md) for the task-splitting and operator workflow.
+
+Useful operations:
+
+```sh
+pnpm symphony:stop
+tail -f .symphony/runtime.log
+tail -f .symphony/watchdog.log
+cat .symphony/watchdog-last-stop.json
+```
+
+Useful watchdog overrides:
+
+```sh
+export SYMPHONY_WATCHDOG_HARD_MAX_TOTAL_TOKENS=400000
+export SYMPHONY_WATCHDOG_HARD_MAX_ISSUE_TOKENS=250000
+export SYMPHONY_WATCHDOG_NO_CODE_RUNTIME_MS=60000
+export SYMPHONY_WATCHDOG_NO_CODE_TOKEN_FLOOR=80000
+```
+
+Operational rule:
+
+1. Split each day into child issues before turning Symphony on.
+2. Move only one child issue into `Todo` or `In Progress`.
+3. Keep the parent day issue out of active states until the child tasks are complete.
+
 ## Contributing
 
 This challenge is structured for both human contributors and agentic coding assistants.
 
 1. Create a Linear issue describing the work to be done.
-2. Assign the issue to yourself, or let Symphony pick it up.
+2. Assign the issue to yourself, or let Symphony pick it up from the Linear project queue.
 3. Write tests first, then implement the code. Use structured logging and shared utilities.
 4. Commit with a descriptive message referencing the Linear issue key, then open a pull request.
 5. After review, merge the PR, deploy the app, and update its README if necessary.

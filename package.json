@@ -2,12 +2,39 @@
   "name": "ai-ops-for-insurance",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
+    "dev": "pnpm --filter @ai-ops/submission-triage-copilot dev",
+    "build": "pnpm -r --if-present build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "lint": "pnpm exec eslint .",
+    "symphony:install": "bash ./scripts/install-symphony.sh",
+    "symphony:doctor": "bash ./scripts/symphony-doctor.sh",
+    "symphony:run": "bash ./scripts/symphony-run.sh",
+    "symphony:stop": "bash ./scripts/symphony-stop.sh",
+    "format": "prettier --write .",
     "format:md": "prettier --write \"**/*.md\"",
     "lint:md": "markdownlint --ignore node_modules \"**/*.md\""
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0",
     "markdownlint-cli": "^0.48.0",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.0",
+    "vitest": "^4.1.0"
   }
 }

@@ -6,7 +6,7 @@ This document provides a high-level overview of the architecture for the Insuran
 
 All 30 applications live in a single repository, organized into separate directories under `apps/`. Shared code lives under `packages/`. The repository uses npm or pnpm workspaces to manage dependencies and simplify local development.
 
-- `apps/<app>`: A stand-alone Next.js 14 application for a specific use case. Each app has its own `package.json`, `src/app/`, API routes under `src/app/api/<shortname>`, tests under `tests/`, and `db/` with an idempotent init script.
+- `apps/<app>`: A stand-alone Next.js latest stable application for a specific use case. As of March 15, 2026, use the baseline stack of Next.js 16.1.6, React 19.2.4, TypeScript 5.9.3, and Tailwind CSS 4.2.1. Each app has its own `package.json`, `src/app/`, API routes under `src/app/api/<shortname>`, tests under `tests/`, and `db/` with an idempotent init script.
 - `packages/lib`: Shared utilities such as logging wrappers, the Supabase client factory, AI helper functions, and test utilities.
 - `packages/common-ui`: Shared React components such as tables, cards, and charts, styled with Tailwind and designed for reuse.
 - `packages/config`: Centralized configuration utilities and constants such as environment helpers and naming prefixes.

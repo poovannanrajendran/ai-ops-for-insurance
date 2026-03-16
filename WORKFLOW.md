@@ -1,155 +1,171 @@
-# Development and Deployment Workflow
+---
+tracker:
+  kind: linear
+  api_key: $LINEAR_API_KEY
+  project_slug: "ai-ops-for-insurance-30-day-challenge-b35a68163a2d"
+  active_states:
+    - "Todo"
+    - "In Progress"
+polling:
+  interval_ms: 30000
+workspace:
+  root: $SYMPHONY_WORKSPACE_ROOT
+hooks:
+  after_create: |
+    source_repo="${SOURCE_REPO_PATH:-/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance}"
+    source_repo_url="${SOURCE_REPO_URL:-https://github.com/poovannanrajendran/ai-ops-for-insurance.git}"
+    if [ -d "$source_repo/.git" ]; then
+      git init -q .
+      rsync -a \
+        --delete \
+        --exclude '.git' \
+        --exclude '.env.local' \
+        --exclude '.env.symphony.local' \
+        --exclude '.symphony' \
+        --exclude 'apps/*/.next' \
+        --exclude '.next' \
+        --exclude '.pnpm-store' \
+        "$source_repo"/ ./
+      git remote add origin "$source_repo"
+      git add -A >/dev/null 2>&1 || true
+    else
+      git clone --depth 1 "$source_repo_url" .
+      corepack enable
+      pnpm install
+    fi
+  timeout_ms: 120000
+agent:
+  max_concurrent_agents: 1
+  max_turns: 8
+server:
+  port: 4310
+codex:
+  command: "${CODEX_BIN:-codex} --model ${CODEX_MODEL:-gpt-5.4-codex} app-server"
+  approval_policy: "never"
+  thread_sandbox: "workspace-write"
+---
 
-This document describes how to work within the **AI-Ops-for-Insurance** monorepo. It covers the end-to-end process from initial setup through local development, testing, deployment, and collaboration with Symphony and Linear.
+# AI Ops for Insurance Workflow
 
-## 1. Pre-Development Checklist
+You are Codex working inside the `ai-ops-for-insurance` monorepo on Linear issue `{{ issue.identifier }}`.
 
-Before starting work on any app:
+Issue context:
+- Title: `{{ issue.title }}`
+- Description: `{{ issue.description }}`
 
-1. **Repository initialization**: Ensure the monorepo exists under `/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance` and has been pushed to GitHub. The repo should include `WORKFLOW.md`, `Master_Prompt.md`, and the `docs/` directory. Do not add a `vercel.json` file unless required; Vercel's defaults are usually sufficient for Next.js.
-2. **Supabase project**: Confirm that a single Supabase project has been created for the entire challenge. Copy `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` into `.env` at the repository root. Do not commit secrets to GitHub.
-3. **Environment variables**: For each app, determine which third-party API keys are required, such as OpenAI keys. Store them in Vercel project settings using the prefix `APP_<SHORTNAME>_...`. For local testing, use `.env.local` or terminal environment variables.
-4. **Linear board**: If using Linear and Symphony, create a project or team for the challenge. Add an epic for each app with an overview description. Within each epic, create issues for design and requirements, API implementation, UI implementation, testing, logging and observability, deployment, and documentation. Include acceptance criteria and test scenarios.
-5. **Third-party APIs**: Before coding, review the documentation for any external APIs, such as OpenAI or Lloyd's feeds, and experiment with simple calls. Confirm quota limits and required scopes before implementation.
+## Mission
 
-Automation tip: Rather than creating the Linear board manually, you can automate the process by calling Linear's GraphQL API via a Node script. Use your Linear API key and a script like the example in the next section to create the project, epics, and a standard set of issues in a batch.
+Build production-quality, demo-ready insurance AI applications in a single shared monorepo. Move work forward with small, reviewable changes that preserve velocity across all 30 apps.
 
-## 2. Automated Linear Setup via Codex
+## First Reads
 
-If you want to create your Linear project, epics, and issues programmatically, write a small Node script or ask Codex to generate it. The high-level steps are:
+Before changing code, read the minimum relevant context from the repo:
 
-1. Generate a Linear API key in your Linear settings.
-2. Create a project named `Insurance AI 30 Challenge`, or another name, via a GraphQL mutation.
-3. Iterate over the 30 app definitions from the roadmap to create an epic for each.
-4. Within each epic, optionally create a standard set of issues for design, API, UI, testing, logging and observability, deployment, and documentation.
+1. `Master_Prompt.md`
+2. `ARCHITECTURE_OVERVIEW.md`
+3. `docs/day-0-day-1-execution-plan.md` if the issue relates to setup or the first app
+4. Any app-local README or `db/init_*.sql` file for the app you are touching
 
-Example Node script using `node-fetch`:
+Use the roadmap PDF under `docs/30-topics-30-day-challenge-roadmap-v4-final.pdf` when you need the product summary, week narrative, or app ordering.
 
-```js
-const fetch = require("node-fetch");
+## Repo Rules
 
-const apiKey = process.env.LINEAR_API_KEY;
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: apiKey,
-};
+- The baseline stack is Next.js 16.1.6, React 19.2.4, TypeScript 5.9.3, Tailwind CSS 4.2.1, and Node.js 22 LTS.
+- Use `pnpm` workspaces.
+- Symphony is expected to run through the repo helpers in `scripts/install-symphony.sh`, `scripts/symphony-doctor.sh`, and `scripts/symphony-run.sh`.
+- Shared code belongs in `packages/config`, `packages/lib`, and `packages/common-ui` when reuse is likely.
+- Keep secrets in `.env.local` or managed secret stores. Never commit secrets.
+- Use structured logging in API routes and server-side flows.
+- Keep each app isolated by schema and route naming:
+  - schema: `app_<shortname>`
+  - routes: `/api/<shortname>/...`
 
-async function createProject() {
-  const mutation = `
-    mutation {
-      projectCreate(input: { name: "Insurance AI 30 Challenge", color: "#00A7E1" }) {
-        success
-        project { id name }
-      }
-    }
-  `;
+## Harness Engineering Expectations
 
-  const res = await fetch("https://api.linear.app/graphql", {
-    method: "POST",
-    headers,
-    body: JSON.stringify({ query: mutation }),
-  });
+Follow harness engineering strictly:
 
-  const data = await res.json();
-  return data.data.projectCreate.project.id;
-}
+- Keep the repository self-describing. Put decisions, docs, SQL, and acceptance criteria in-repo.
+- Favor layered structure:
+  - `types`
+  - `repositories`
+  - `services`
+  - route handlers
+  - UI
+- Make small, legible changes with obvious ownership.
+- Prefer shared abstractions when they reduce duplication without hiding behavior.
+- Avoid broad refactors unless the issue requires them.
 
-async function createEpic(projectId, name, description) {
-  const mutation = `
-    mutation ($projectId: String!, $name: String!, $description: String!) {
-      issueCreate(input: {
-        title: $name,
-        description: $description,
-        projectId: $projectId,
-        teamId: null,
-        assigneeId: null,
-        priority: 0,
-        labels: []
-      }) {
-        success
-        issue { id title }
-      }
-    }
-  `;
+## Delivery Workflow
 
-  const variables = { projectId, name, description };
-  const res = await fetch("https://api.linear.app/graphql", {
-    method: "POST",
-    headers,
-    body: JSON.stringify({ query: mutation, variables }),
-  });
+1. Read the issue and identify the smallest shippable slice.
+2. Inspect the relevant app and shared packages before coding.
+3. Write or update tests first for critical logic.
+4. Implement the feature with clear runtime validation and logging.
+5. Run the narrowest useful verification first, then broader checks.
+6. Update the app README or shared docs when behavior or setup changes.
 
-  return (await res.json()).data.issueCreate.issue.id;
-}
+## Execution Guardrails
 
-async function main() {
-  const projectId = await createProject();
-  const apps = [
-    {
-      name: "submission-triage-copilot",
-      description:
-        "Upload broker submission docs, extract key fields, and score against risk appetite.",
-    },
-    // Add other apps here.
-  ];
+- Do not pick up broad day-level issues directly when child tasks exist. Work one child issue at a time.
+- Limit initial repo reading to the files needed for the current slice. Avoid rereading unrelated apps or repo-wide docs after the first pass.
+- Start producing code by the first turn. If no relevant file has changed by the end of the first turn, stop and surface the blocker instead of continuing to reason.
+- Keep each issue to one coding objective:
+  - scaffold
+  - core service logic
+  - API integration
+  - UI wiring
+  - tests and docs
+  - sample data
+  - verification
+  - review
+- Keep verification narrow during implementation. Run app-local checks before repo-wide checks.
+- If dependency bootstrap fails, do not spend multiple turns recovering the environment. Record the blocker and stop.
+- Use separate child issues for builder, sample-data, tester, and reviewer work. Do not treat one large issue as a multi-role run.
 
-  for (const app of apps) {
-    await createEpic(projectId, app.name, app.description);
-  }
-}
+## Issue Template
 
-main().catch(console.error);
-```
+Every executable Linear child task should contain:
 
-This script demonstrates how to create a project and epics. You can extend it to create issues under each epic by adding more mutations. To speed up creation, you can batch multiple GraphQL mutations into a single request.
+- Scope: one concrete deliverable
+- In scope: the files or layers expected to change
+- Out of scope: adjacent work to avoid
+- Verification: the exact commands to run
+- Done when: 2 to 4 short acceptance bullets
 
-## 3. Working on an Issue
+Support-role issues should be explicit:
 
-1. Read the Linear issue description and the relevant portion of the roadmap. Understand the persona, problem statement, value proposition, and acceptance criteria.
-2. Identify affected packages. Determine whether you need to modify shared utilities in `packages/lib`, shared UI components in `packages/common-ui`, or files within a specific app under `apps/`.
-3. Write tests first. Create or update test files in the app's `tests/` directory. Use Vitest or Jest, and React Testing Library for frontend components. Mock external dependencies such as Supabase and OpenAI using shared test utilities.
-4. Implement code. Follow the layered architecture: types, repositories, services, and handlers or API routes. For UI changes, create components under `src/app` and reuse shared components when appropriate. Use structured logging in API routes.
-5. Run and fix tests. Run `pnpm test` or `pnpm --filter @apps/<shortname> test` and ensure tests pass before proceeding.
-6. Update documentation. Amend the app's README to include any new endpoints, configuration steps, or UI instructions. If shared abstractions change, update `ARCHITECTURE_OVERVIEW.md`.
-7. Commit and open a pull request. Use a descriptive commit message referencing the Linear issue ID, then push your branch and open a PR. Ensure the branch passes linting and type checking.
-8. Code review. A human reviewer should check correctness, adherence to architecture, and clarity before merge.
-9. Deploy to Vercel. Run `vercel --prod` from the app folder or trigger a deploy via the Vercel UI. Set required environment variables before deploying and verify the deployed app.
+- Sample-data issue: create realistic fixtures and edge cases for the day deliverable.
+- Tester issue: validate behavior with the specified commands and note failures precisely.
+- Reviewer issue: assess design, security, performance, and maintainability before final review.
 
-## 4. Logging and Observability
+## Issue-Specific Guidance
 
-- **Structured logging**: Use `packages/lib/logging.ts` to log JSON-formatted messages. Each log entry should include `appKey`, `requestId`, `level`, and `message`. Avoid logging sensitive information.
-- **Error handling**: Catch errors in API routes and respond with appropriate HTTP status codes. Log errors with stack traces and useful context. Use Zod or similar libraries for input validation.
-- **Metrics and KPIs**: For applications that calculate metrics, include instrumentation points so latency and throughput can be measured.
-- **Observability roadmap**: Route logging calls through the shared logger so the implementation can later be replaced by a more advanced observability tool.
+- If the issue is setup or platform work, prioritize reusable scaffolding over polish.
+- If the issue is app work, ship the core demo flow first, then improve fidelity.
+- If the issue is blocked by missing credentials or external systems, make the missing dependency explicit in code and docs rather than guessing.
 
-## 5. Model Selection and Cost Management
+## Linear and Notion
 
-In `packages/lib/ai.ts`, implement helper functions to call language models. The helper should accept a `model` parameter and use sensible defaults:
+When the required tools are available:
 
-- **Cheap models**: `gpt-5-nano`, `gpt-5-mini`, `gpt-4.1-mini` for simple classification, extraction, and summarization.
-- **Mid-range models**: `gpt-5.1`, `gpt-5.2`, `gpt-5.1-codex` for moderate reasoning, multi-step synthesis, or straightforward code generation.
-- **High-capacity models**: `gpt-5.3-codex`, `gpt-5.4`, `gpt-5.4-codex` for complex document analysis, diffing, or code generation that requires deep context.
+- Keep the Linear issue state accurate.
+- Add short progress comments for meaningful milestones or blockers.
+- Keep the Notion build log and decision log current when you make project-wide changes.
 
-Each app may override the default via `APP_<SHORTNAME>_MODEL`. If a cheaper model fails to meet acceptance criteria, fall back to a higher-capacity model. Cache results where practical to avoid repeated calls.
+If those tools are unavailable in the runtime, continue with local code and documentation updates.
 
-## 6. Pre-Production Checklist
+## Definition of Done
 
-Before a major deploy, run through this checklist:
+A task is ready for review when:
 
-1. **Tests passing**: All unit and integration tests pass across the monorepo, with sufficient coverage on critical paths.
-2. **Environment variables set**: Supabase credentials and app-specific keys are configured in Vercel. Secrets are not checked into GitHub.
-3. **Database migrations executed**: Run the app's `db/init_<shortname>.sql` script via Supabase or an automated bootstrap script. Use idempotent SQL such as `CREATE TABLE IF NOT EXISTS`.
-4. **Logging verified**: Check Vercel logs to ensure structured logging is working and sensitive data is not being printed.
-5. **Deployment tested**: Walk through the deployed app's main flow and confirm the output matches expectations.
+- the requested behavior is implemented,
+- the critical path is tested,
+- docs are updated where needed,
+- and the result is demoable or reviewable without extra explanation.
 
-## 7. Harness Engineering Guidance
+When the task is complete, prepare a concise summary of:
 
-Harness engineering is the practice of making the repository legible to agents and enforcing architectural discipline. Key points:
-
-1. **Store decisions in the repo**: Keep design documents, schemas, and example inputs and outputs in `docs/` or within each app folder. Avoid undocumented external context.
-2. **Layered structure**: Separate data access, business logic, routing, and UI layers. Keep files focused and small.
-3. **Custom linting**: Consider ESLint rules to enforce import boundaries and naming conventions. Use Prettier for consistent formatting.
-4. **Short PRs**: Encourage small, reviewable pull requests. Small PRs reduce reviewer load and make agent work easier to validate.
-5. **Agent legibility**: Use descriptive names, clear comments where needed, and straightforward code organization so future agents can navigate the repo efficiently.
-
-By following this workflow, the repo stays consistent, testable, maintainable, and easy to extend for both humans and AI agents.
+- what changed,
+- what was verified,
+- any remaining risk or follow-up,
+- and the next recommended issue.
