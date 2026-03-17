@@ -22,6 +22,7 @@
     "symphony:stop": "bash ./scripts/symphony-stop.sh",
     "deploy:day1": "bash ./scripts/deploy-vercel-app.sh submission-triage-copilot",
     "deploy:day2": "bash ./scripts/deploy-vercel-app.sh portfolio-mix-dashboard",
+    "deploy:day3": "bash ./scripts/deploy-vercel-app.sh risk-appetite-parser",
     "deploy:app": "bash ./scripts/deploy-vercel-app.sh",
     "rag:ingest": "node ./scripts/rag/ingest.mjs",
     "rag:query": "node ./scripts/rag/query.mjs",

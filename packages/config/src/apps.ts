@@ -23,3 +23,11 @@ export const portfolioMixApp: AppMetadata = {
   schema: `${SHARED_SCHEMA_PREFIX}portfoliomix`,
   devPort: 3002
 };
+
+export const riskAppetiteApp: AppMetadata = {
+  slug: "risk-appetite-parser",
+  shortName: "riskappetite",
+  displayName: "Risk Appetite Parser",
+  schema: `${SHARED_SCHEMA_PREFIX}riskappetite`,
+  devPort: 3001
+};

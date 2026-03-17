@@ -1,0 +1,21 @@
+Insured Name: Helios Engineering Group
+Class of Business: Property, Marine Cargo, Product Recall
+Territory: United Kingdom, Europe, Canada
+Max Line Size: GBP 5,000,000
+Currency: GBP
+Minimum Premium: GBP 125,000
+Inception Date: 2026-01-01
+Expiry Date: 2026-12-31
+
+Exclusions:
+- Coal mining operations
+- Sanctioned jurisdictions
+- Standalone cyber extortion
+
+Subjectivities:
+- Updated valuation report within 90 days
+- Cat model output from approved broker
+
+Referral Triggers:
+- Any one location over GBP 15,000,000 TIV
+- New territory outside agreed list

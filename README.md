@@ -15,6 +15,7 @@ This repository houses **30 small AI-powered applications** developed over a 30-
 ├── apps/                  # One folder per application (30 total)
 │   ├── submission-triage-copilot/
 │   ├── portfolio-mix-dashboard/
+│   ├── risk-appetite-parser/
 │   └── ...
 ├── packages/
 │   ├── lib/               # Shared utilities: logging, Supabase client, AI helper
@@ -29,6 +30,10 @@ This repository houses **30 small AI-powered applications** developed over a 30-
 ```
 
 Each app in `apps/` is intended to be a stand-alone **Next.js latest stable** project. As of **March 15, 2026**, the baseline stack is **Next.js 16.1.6**, **React 19.2.4**, **TypeScript 5.9.3**, and **Tailwind CSS 4.2.1**. Apps share common code via packages under `packages/`. A shared Supabase project can be used across all apps, with separate schemas and tables per app following the naming convention `app_<shortname>_*`.
+
+Current deployed app endpoints:
+
+- Day 3 `risk-appetite-parser`: `https://risk-appetite-parser.vercel.app`
 
 ## Prerequisites
 
@@ -67,7 +72,7 @@ Each app in `apps/` is intended to be a stand-alone **Next.js latest stable** pr
    pnpm --filter @ai-ops/submission-triage-copilot dev
    ```
 
-   Then visit `http://localhost:3000`.
+   Then visit `http://localhost:3001`.
 
 5. Deploy to Vercel. From the app folder, run:
 
@@ -82,6 +87,7 @@ Each app in `apps/` is intended to be a stand-alone **Next.js latest stable** pr
    ```sh
    pnpm deploy:day1
    pnpm deploy:day2
+   pnpm deploy:day3
    ```
 
    For new apps:

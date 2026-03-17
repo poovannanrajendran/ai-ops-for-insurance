@@ -18,3 +18,13 @@
 - For Docker-to-host Postgres connections, `host.docker.internal` works from containers, but host-shell `psql` should use `localhost`.
 - When creating a dedicated RAG app user, grant schema usage plus table and sequence privileges (including default privileges) or ingestion fails with `permission denied for table`.
 - Keep project registration in `docs/rag/projects.json` and run `rag:sync-all` to avoid stale memory across repositories.
+
+## 2026-03-16 - Day 3 risk appetite parser guardrails
+- Keep minimum required extraction gates explicit (`class_of_business`, `territory`, `max_line_size`) so incomplete statements fail fast in review.
+- For new Supabase schemas, apply broad runtime grants and default privileges at bootstrap time to avoid repeat `permission denied` churn.
+- If using PDF upload in-browser, include an extraction fallback message when no text layer is available.
+
+## 2026-03-17 - Day 3 deployment and symmetry follow-ups
+- In Vercel monorepos, the project `Root Directory` and CLI working directory must agree; mismatches can produce path duplication failures like `apps/<app>/apps/<app>/...`.
+- For Next.js workspace apps, ensure Vercel can see `pnpm-lock.yaml` and workspace manifests during install, otherwise build can fail with lockfile or framework detection errors.
+- Keep intake columns semantically symmetric: explicit top labels on both columns avoids perceived vertical misalignment and reduces UX confusion.

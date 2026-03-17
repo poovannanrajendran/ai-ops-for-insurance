@@ -70,3 +70,27 @@ export function PortfolioMixLogo(props: LogoProps) {
     </svg>
   );
 }
+
+export function RiskAppetiteLogo(props: LogoProps) {
+  return (
+    <svg fill="none" viewBox="0 0 96 96" {...props}>
+      <rect x="10" y="10" width="76" height="76" rx="24" fill="url(#riskappetite-bg)" />
+      <path
+        d="M31 31H65V65H31V31Z"
+        stroke="white"
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+      <path d="M38 42H58" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <path d="M38 50H54" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <path d="M38 58H49" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <path d="M58 58L62 62L69 54" stroke="#99F6E4" strokeWidth="4" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="riskappetite-bg" x1="16" y1="16" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0F766E" />
+          <stop offset="1" stopColor="#1E293B" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

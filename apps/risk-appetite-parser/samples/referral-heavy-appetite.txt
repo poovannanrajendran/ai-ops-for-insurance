@@ -1,0 +1,20 @@
+Insured: Northlake Food Manufacturing
+Classes: Property, Product Recall
+Territories: United States, Canada
+Maximum Line Size: USD 7,500,000
+Currency: USD
+Minimum Premium: USD 200,000
+Effective Date: 2026-04-01
+Expiration Date: 2027-03-31
+
+Out of appetite:
+- PFAS manufacturing exposure
+- Unprotected cold storage over 45 days
+
+Conditions:
+- Engineering survey is mandatory before bind
+- Formal crisis recall plan is required
+
+Referrals:
+- Limits above USD 7,500,000
+- Loss ratio above 55%

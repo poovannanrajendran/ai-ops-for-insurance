@@ -1,0 +1,10 @@
+Insured Name: Unknown
+Currency: GBP
+Minimum Premium: GBP 80,000
+Inception Date: 2026-07-01
+
+Exclusions:
+- None stated
+
+Subjectivities:
+- Signed proposal form required before bind
