@@ -108,10 +108,11 @@ Harbor Retail Group,Property,United States,5000000,USD`,
 
     expect(response.status).toBe(200);
     expect(body.persistence.status).toBe("stored");
-    expect(createSupabaseServerClient).toHaveBeenCalledTimes(1);
+    expect(createSupabaseServerClient.mock.calls.length).toBeGreaterThanOrEqual(2);
     expect(schema).toHaveBeenCalledWith("app_portfoliomix");
     expect(from).toHaveBeenCalledWith("app_portfoliomix_analysis_runs");
-    expect(insert).toHaveBeenCalledTimes(1);
+    expect(from).toHaveBeenCalledWith("app_portfoliomix_audit");
+    expect(insert.mock.calls.length).toBeGreaterThanOrEqual(2);
   });
 
   it("returns 400 when csv columns are missing", async () => {

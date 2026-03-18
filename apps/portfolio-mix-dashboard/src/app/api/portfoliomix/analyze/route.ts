@@ -82,6 +82,30 @@ async function persistAnalysis(
   }
 }
 
+async function persistAudit(
+  requestId: string,
+  stage: string,
+  payload: Record<string, unknown>
+) {
+  if (!hasSupabaseServerAccess()) {
+    return;
+  }
+
+  try {
+    const supabase = createSupabaseServerClient();
+    await supabase
+      .schema(portfolioMixApp.schema)
+      .from("app_portfoliomix_audit")
+      .insert({
+        request_id: requestId,
+        stage,
+        payload
+      });
+  } catch {
+    // Audit logging should never block the request.
+  }
+}
+
 export async function POST(request: Request) {
   const startedAt = Date.now();
   const requestId = crypto.randomUUID();
@@ -96,6 +120,10 @@ export async function POST(request: Request) {
   const parsed = requestSchema.safeParse(body);
 
   if (!parsed.success) {
+    await persistAudit(requestId, "validation_failed", {
+      issues: parsed.error.issues
+    });
+
     logger.warn("portfolio analysis rejected", {
       issues: parsed.error.issues
     });
@@ -109,6 +137,10 @@ export async function POST(request: Request) {
   }
 
   try {
+    await persistAudit(requestId, "request_received", {
+      sourceLabel: parsed.data.sourceLabel ?? null
+    });
+
     const analysis = buildPortfolioInsight(parsed.data.csvText);
     logger.info("portfolio analysis completed", {
       totalRecords: analysis.summary.totalRecords,
@@ -122,6 +154,12 @@ export async function POST(request: Request) {
       analysis
     );
 
+    await persistAudit(requestId, "analysis_completed", {
+      totalRecords: analysis.summary.totalRecords,
+      warningCount: analysis.warnings.length,
+      persistenceStatus: persistence.status
+    });
+
     return NextResponse.json({
       requestId,
       analysis,
@@ -130,6 +168,10 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Portfolio analysis failed.";
+    await persistAudit(requestId, "analysis_failed", {
+      error: message
+    });
+
     logger.warn("portfolio analysis failed", {
       error: message
     });

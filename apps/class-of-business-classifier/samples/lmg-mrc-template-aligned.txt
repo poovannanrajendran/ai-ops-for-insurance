@@ -1,0 +1,22 @@
+UNIQUE MARKET REFERENCE: B0500DEMO2026A
+TYPE: Insurance
+INSURED: Northlight Manufacturing Ltd
+BROKER: Example Placement Brokers Ltd
+PERIOD: From 01 April 2026 to 31 March 2027
+TERRITORIAL LIMITS: United Kingdom, European Union
+LIMIT OF LIABILITY: GBP 5,000,000 any one claim and in the annual aggregate
+RETENTION: GBP 100,000 each and every claim
+CURRENCY: GBP
+CLAIMS BASIS: Claims Made Basis - Retroactive Date: 01 April 2020
+NOTIFICATION OF CLAIMS TO: claims@placement-brokers.example
+
+EXCLUSIONS:
+- Sanction Limitation and Exclusion Clause
+- War and Terrorism Exclusion
+
+SUBJECTIVITIES:
+- External penetration testing report due within 60 days
+- Updated incident response plan required pre-bind
+
+CHOICE OF LAW: England and Wales
+CHOICE OF JURISDICTION: Courts of England and Wales

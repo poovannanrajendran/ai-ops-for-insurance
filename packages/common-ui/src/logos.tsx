@@ -94,3 +94,51 @@ export function RiskAppetiteLogo(props: LogoProps) {
     </svg>
   );
 }
+
+export function SlipReviewerLogo(props: LogoProps) {
+  return (
+    <svg fill="none" viewBox="0 0 96 96" {...props}>
+      <rect x="10" y="10" width="76" height="76" rx="24" fill="url(#slipreviewer-bg)" />
+      <path
+        d="M31 27H57L67 37V69H31V27Z"
+        fill="white"
+        fillOpacity="0.96"
+      />
+      <path d="M57 27V37H67" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M39 45H59M39 53H57M39 61H53" stroke="#1E293B" strokeWidth="3.5" strokeLinecap="round" />
+      <circle cx="62" cy="61" r="8" fill="none" stroke="#99F6E4" strokeWidth="4" />
+      <path d="M68 67L74 73" stroke="#99F6E4" strokeWidth="4" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="slipreviewer-bg" x1="16" y1="16" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0F766E" />
+          <stop offset="1" stopColor="#1E293B" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function ClassOfBusinessLogo(props: LogoProps) {
+  return (
+    <svg fill="none" viewBox="0 0 96 96" {...props}>
+      <rect x="10" y="10" width="76" height="76" rx="24" fill="url(#classofbusiness-bg)" />
+      <rect x="28" y="24" width="40" height="48" rx="10" fill="white" fillOpacity="0.96" />
+      <path d="M36 38H60M36 48H56M36 58H50" stroke="#1E293B" strokeWidth="4" strokeLinecap="round" />
+      <circle cx="63" cy="60" r="8" fill="none" stroke="#99F6E4" strokeWidth="4" />
+      <path d="M69 66L74 71" stroke="#99F6E4" strokeWidth="4" strokeLinecap="round" />
+      <defs>
+        <linearGradient
+          id="classofbusiness-bg"
+          x1="16"
+          y1="16"
+          x2="80"
+          y2="80"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#0F766E" />
+          <stop offset="1" stopColor="#1E293B" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

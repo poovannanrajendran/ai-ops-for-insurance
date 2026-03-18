@@ -119,10 +119,11 @@ Exclusions:
 
     expect(response.status).toBe(200);
     expect(body.persistence.status).toBe("stored");
-    expect(createSupabaseServerClient).toHaveBeenCalledTimes(1);
+    expect(createSupabaseServerClient.mock.calls.length).toBeGreaterThanOrEqual(2);
     expect(schema).toHaveBeenCalledWith("app_riskappetite");
     expect(from).toHaveBeenCalledWith("app_riskappetite_analysis_runs");
-    expect(insert).toHaveBeenCalledTimes(1);
+    expect(from).toHaveBeenCalledWith("app_riskappetite_audit");
+    expect(insert.mock.calls.length).toBeGreaterThanOrEqual(2);
   });
 
   it("returns 400 when statement is too short", async () => {

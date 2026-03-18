@@ -87,6 +87,30 @@ async function persistAnalysis(
   }
 }
 
+async function persistAudit(
+  requestId: string,
+  stage: string,
+  payload: Record<string, unknown>
+) {
+  if (!hasSupabaseServerAccess()) {
+    return;
+  }
+
+  try {
+    const supabase = createSupabaseServerClient();
+    await supabase
+      .schema(riskAppetiteApp.schema)
+      .from("app_riskappetite_audit")
+      .insert({
+        request_id: requestId,
+        stage,
+        payload
+      });
+  } catch {
+    // Audit logging should never block the request.
+  }
+}
+
 export async function POST(request: Request) {
   const startedAt = Date.now();
   const requestId = crypto.randomUUID();
@@ -101,6 +125,10 @@ export async function POST(request: Request) {
   const parsed = requestSchema.safeParse(body);
 
   if (!parsed.success) {
+    await persistAudit(requestId, "validation_failed", {
+      issues: parsed.error.issues
+    });
+
     logger.warn("risk appetite analysis rejected", {
       issues: parsed.error.issues
     });
@@ -114,6 +142,11 @@ export async function POST(request: Request) {
   }
 
   try {
+    await persistAudit(requestId, "request_received", {
+      sourceLabel: parsed.data.sourceLabel ?? null,
+      hasQuestion: Boolean(parsed.data.question)
+    });
+
     const analysis = buildRiskAppetiteInsight(parsed.data.statementText, parsed.data.question);
     logger.info("risk appetite analysis completed", {
       fieldCoverage: analysis.summary.fieldCoverage,
@@ -128,6 +161,12 @@ export async function POST(request: Request) {
       analysis
     );
 
+    await persistAudit(requestId, "analysis_completed", {
+      fieldCoverage: analysis.summary.fieldCoverage,
+      warningCount: analysis.warnings.length,
+      persistenceStatus: persistence.status
+    });
+
     return NextResponse.json({
       requestId,
       analysis,
@@ -136,6 +175,10 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Risk appetite analysis failed.";
+    await persistAudit(requestId, "analysis_failed", {
+      error: message
+    });
+
     logger.warn("risk appetite analysis failed", {
       error: message
     });

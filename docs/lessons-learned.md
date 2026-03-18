@@ -28,3 +28,21 @@
 - In Vercel monorepos, the project `Root Directory` and CLI working directory must agree; mismatches can produce path duplication failures like `apps/<app>/apps/<app>/...`.
 - For Next.js workspace apps, ensure Vercel can see `pnpm-lock.yaml` and workspace manifests during install, otherwise build can fail with lockfile or framework detection errors.
 - Keep intake columns semantically symmetric: explicit top labels on both columns avoids perceived vertical misalignment and reduces UX confusion.
+
+## 2026-03-17 - Day 4 slip reviewer implementation guardrails
+- Keep Day 4 required gate explicit on extracted fields (`insured_name`, `inception_date`, `expiry_date`, `limit`, `currency`) so incomplete slips fail fast for reviewer workflow.
+- Preserve intake symmetry with explicit top labels on both source and text columns; this avoids the double-box confusion seen in earlier Day 3 iterations.
+- When adding public sample documents, include a source-attribution file (`samples/SOURCES.md`) with URL and access date to avoid provenance ambiguity.
+- Standardized Day 2+ audit approach: each app should include an `<app>_audit` table and non-blocking audit writes in API routes to avoid silent loss of request lifecycle visibility.
+
+## 2026-03-18 - Local runtime guardrail for shared workstation services
+- On this machine, port `3000` is dedicated to OpenWebUI and should never be stopped or reused for app dev servers.
+- Run challenge apps on alternate fixed ports per app (for example Day 4 on `3001`, Day 5 on `3005`) to avoid disrupting shared local services.
+
+## 2026-03-18 - Day 5 Vercel deployment root-directory behavior
+- In monorepo projects, Vercel `Root Directory` must reflect the path inside the repo for Git-based builds (`apps/class-of-business-classifier`).
+- CLI deploy context and project root settings can conflict if deploying from a nested cwd; deploying from repository root avoids duplicate path resolution issues.
+- Day 5 deploy succeeded with:
+  - root directory: `apps/class-of-business-classifier`
+  - install command: `pnpm install --frozen-lockfile --dir ../..`
+  - build command: `pnpm --dir ../.. --filter @ai-ops/class-of-business-classifier build`

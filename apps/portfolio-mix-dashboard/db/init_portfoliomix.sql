@@ -16,8 +16,19 @@ create table if not exists app_portfoliomix.app_portfoliomix_analysis_runs (
   created_at timestamptz not null default timezone('utc', now())
 );
 
+create table if not exists app_portfoliomix.app_portfoliomix_audit (
+  id bigserial primary key,
+  request_id uuid not null,
+  stage text not null,
+  payload jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default timezone('utc', now())
+);
+
 create index if not exists idx_app_portfoliomix_analysis_runs_created_at
   on app_portfoliomix.app_portfoliomix_analysis_runs (created_at desc);
+
+create index if not exists idx_app_portfoliomix_audit_created_at
+  on app_portfoliomix.app_portfoliomix_audit (created_at desc);
 
 -- Required for Supabase Data API access:
 -- 1) Expose schema `app_portfoliomix` in Supabase Dashboard -> API -> Data API.

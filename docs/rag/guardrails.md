@@ -29,3 +29,8 @@
 - Keep Qdrant persistent volume enabled.
 - Keep RAG DB separate (`ai_ops_rag`) from application transactional schemas.
 - Use least-privilege DB users and explicit schema grants/default privileges.
+- Follow `docs/app-build-quality-checklist.md` as the default build and UI standard for every new day app.
+- For every new day app, create both:
+  - `<schema>.app_<shortname>_analysis_runs`
+  - `<schema>.app_<shortname>_audit`
+- Route handlers should write audit stages at minimum: `request_received`, `analysis_completed`, and failure stage (`validation_failed` or `analysis_failed`).

@@ -31,3 +31,19 @@ export const riskAppetiteApp: AppMetadata = {
   schema: `${SHARED_SCHEMA_PREFIX}riskappetite`,
   devPort: 3001
 };
+
+export const slipReviewerApp: AppMetadata = {
+  slug: "slip-reviewer",
+  shortName: "slipreviewer",
+  displayName: "Slip Reviewer",
+  schema: `${SHARED_SCHEMA_PREFIX}slipreviewer`,
+  devPort: 3001
+};
+
+export const classOfBusinessApp: AppMetadata = {
+  slug: "class-of-business-classifier",
+  shortName: "classofbusiness",
+  displayName: "Class of Business Classifier",
+  schema: `${SHARED_SCHEMA_PREFIX}classofbusiness`,
+  devPort: 3005
+};

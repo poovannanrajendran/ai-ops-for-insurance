@@ -1,0 +1,12 @@
+TYPE: Insurance
+INSURED: Example Sports Association
+BROKER: Sample Market Broker
+TERRITORIAL LIMITS: Europe
+CLAIMS BASIS: Claims Made Basis
+NOTIFICATION OF CLAIMS TO: claims@sample-broker.example
+
+EXCLUSIONS:
+- Cyber extortion standalone losses
+
+SUBJECTIVITIES:
+- Security questionnaire outstanding

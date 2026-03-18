@@ -16,6 +16,8 @@ This repository houses **30 small AI-powered applications** developed over a 30-
 │   ├── submission-triage-copilot/
 │   ├── portfolio-mix-dashboard/
 │   ├── risk-appetite-parser/
+│   ├── slip-reviewer/
+│   ├── class-of-business-classifier/
 │   └── ...
 ├── packages/
 │   ├── lib/               # Shared utilities: logging, Supabase client, AI helper
@@ -33,7 +35,11 @@ Each app in `apps/` is intended to be a stand-alone **Next.js latest stable** pr
 
 Current deployed app endpoints:
 
+- Day 1 `submission-triage-copilot`: `https://submission-triage-copilot.vercel.app`
+- Day 2 `portfolio-mix-dashboard`: `https://portfolio-mix-dashboard.vercel.app`
 - Day 3 `risk-appetite-parser`: `https://risk-appetite-parser.vercel.app`
+- Day 4 `slip-reviewer`: `https://slip-reviewer.vercel.app`
+- Day 5 `class-of-business-classifier`: `https://class-of-business-classifier.vercel.app`
 
 ## Prerequisites
 
@@ -88,6 +94,8 @@ Current deployed app endpoints:
    pnpm deploy:day1
    pnpm deploy:day2
    pnpm deploy:day3
+   pnpm deploy:day4
+   pnpm deploy:day5
    ```
 
    For new apps:
@@ -210,3 +218,6 @@ This challenge is structured for both human contributors and agentic coding assi
 ## Next Steps
 
 Refer to [WORKFLOW.md](WORKFLOW.md) for detailed guidelines on development, testing, and deployment. For a high-level view of the architecture and cross-cutting concerns, see [ARCHITECTURE_OVERVIEW.md](ARCHITECTURE_OVERVIEW.md).
+
+Default execution quality standard for all new apps:
+- [docs/app-build-quality-checklist.md](/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/docs/app-build-quality-checklist.md)
