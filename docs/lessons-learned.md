@@ -46,3 +46,8 @@
   - root directory: `apps/class-of-business-classifier`
   - install command: `pnpm install --frozen-lockfile --dir ../..`
   - build command: `pnpm --dir ../.. --filter @ai-ops/class-of-business-classifier build`
+
+## 2026-03-19 - Day 6 heatmap and deployment guardrails
+- A stylized SVG can look like an abstract diagram; Day 6 map quality improved only after switching to real world geometry (`world-atlas` + `d3-geo` + `topojson-client`).
+- Exposure maps should support subtle auto-zoom around reported locations, but must cap zoom to preserve global context (`<= 1.35x` used in Day 6).
+- Vercel project-level `Root Directory` must remain the monorepo path (`apps/exposure-accumulation-heatmap`) for Git builds; mismatched root settings produce `No Next.js version detected` even when the app package includes Next.js.

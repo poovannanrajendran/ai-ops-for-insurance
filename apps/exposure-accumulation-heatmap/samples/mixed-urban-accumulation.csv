@@ -1,0 +1,6 @@
+location_id,country,latitude,longitude,tiv,peril
+LOC-US-001,United States,40.7128,-74.0060,25000000,Windstorm
+LOC-US-002,United States,34.0522,-118.2437,18000000,Wildfire
+LOC-US-003,United States,29.7604,-95.3698,14000000,Hurricane
+LOC-CA-001,Canada,43.6532,-79.3832,6000000,Flood
+LOC-MX-001,Mexico,19.4326,-99.1332,4500000,Earthquake

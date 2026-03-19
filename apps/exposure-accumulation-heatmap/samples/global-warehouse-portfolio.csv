@@ -1,0 +1,6 @@
+location_id,country,latitude,longitude,tiv,peril
+LOC-UK-001,United Kingdom,51.5074,-0.1278,12000000,Windstorm
+LOC-UK-002,United Kingdom,52.4862,-1.8904,8000000,Flood
+LOC-NL-001,Netherlands,52.3676,4.9041,5000000,Flood
+LOC-DE-001,Germany,50.1109,8.6821,4500000,Hail
+LOC-FR-001,France,48.8566,2.3522,4000000,Windstorm

@@ -142,3 +142,22 @@ export function ClassOfBusinessLogo(props: LogoProps) {
     </svg>
   );
 }
+
+export function ExposureHeatmapLogo(props: LogoProps) {
+  return (
+    <svg fill="none" viewBox="0 0 96 96" {...props}>
+      <rect x="10" y="10" width="76" height="76" rx="24" fill="url(#exposureheatmap-bg)" />
+      <circle cx="36" cy="36" r="8" fill="#D1FAE5" />
+      <circle cx="52" cy="48" r="12" fill="#99F6E4" />
+      <circle cx="66" cy="34" r="7" fill="#5EEAD4" />
+      <circle cx="62" cy="62" r="10" fill="#14B8A6" />
+      <path d="M28 68L40 52L54 60L68 44" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="exposureheatmap-bg" x1="16" y1="16" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0F766E" />
+          <stop offset="1" stopColor="#155E75" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

@@ -25,6 +25,7 @@
     "deploy:day3": "bash ./scripts/deploy-vercel-app.sh risk-appetite-parser",
     "deploy:day4": "bash ./scripts/deploy-vercel-app.sh slip-reviewer",
     "deploy:day5": "bash ./scripts/deploy-vercel-app.sh class-of-business-classifier",
+    "deploy:day6": "bash ./scripts/deploy-vercel-app.sh exposure-accumulation-heatmap",
     "deploy:app": "bash ./scripts/deploy-vercel-app.sh",
     "rag:ingest": "node ./scripts/rag/ingest.mjs",
     "rag:query": "node ./scripts/rag/query.mjs",

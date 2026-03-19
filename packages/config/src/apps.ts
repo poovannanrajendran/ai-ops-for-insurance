@@ -47,3 +47,11 @@ export const classOfBusinessApp: AppMetadata = {
   schema: `${SHARED_SCHEMA_PREFIX}classofbusiness`,
   devPort: 3005
 };
+
+export const exposureHeatmapApp: AppMetadata = {
+  slug: "exposure-accumulation-heatmap",
+  shortName: "exposureheatmap",
+  displayName: "Exposure Accumulation Heatmap",
+  schema: `${SHARED_SCHEMA_PREFIX}exposureheatmap`,
+  devPort: 3006
+};
