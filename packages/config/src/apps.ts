@@ -55,3 +55,11 @@ export const exposureHeatmapApp: AppMetadata = {
   schema: `${SHARED_SCHEMA_PREFIX}exposureheatmap`,
   devPort: 3006
 };
+
+export const catEventBriefingApp: AppMetadata = {
+  slug: "cat-event-briefing",
+  shortName: "cateventbriefing",
+  displayName: "Cat Event Briefing",
+  schema: `${SHARED_SCHEMA_PREFIX}cateventbriefing`,
+  devPort: 3007
+};

@@ -1,0 +1,4 @@
+Event: Severe Atlantic Windstorm Iris
+Date: 2026-03-18
+Regions: United Kingdom, France, Netherlands
+Synopsis: A major windstorm made landfall overnight with sustained winds above 120 mph and widespread infrastructure outage across transport corridors. Authorities issued a state of emergency and evacuation orders in coastal zones. Early reports reference material losses to commercial property, prolonged power interruption, and supply-chain delays affecting ports and logistics hubs.

@@ -161,3 +161,22 @@ export function ExposureHeatmapLogo(props: LogoProps) {
     </svg>
   );
 }
+
+export function CatEventBriefingLogo(props: LogoProps) {
+  return (
+    <svg fill="none" viewBox="0 0 96 96" {...props}>
+      <rect x="10" y="10" width="76" height="76" rx="24" fill="url(#catevent-bg)" />
+      <path d="M27 58C33 49 40 43 49 39C57 35 64 31 71 24" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <path d="M27 62H70" stroke="#99F6E4" strokeWidth="4" strokeLinecap="round" />
+      <circle cx="37" cy="58" r="6" fill="#5EEAD4" />
+      <circle cx="50" cy="48" r="9" fill="#2DD4BF" />
+      <circle cx="63" cy="38" r="6" fill="#14B8A6" />
+      <defs>
+        <linearGradient id="catevent-bg" x1="16" y1="16" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0F766E" />
+          <stop offset="1" stopColor="#1E293B" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

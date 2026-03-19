@@ -1,0 +1,4 @@
+Event: Central Europe Flood Sequence
+Date: 2026-03-12
+Regions: Germany, Austria, Czech Republic
+Synopsis: Successive rainfall bands triggered river overflow and flash flood events across multiple industrial and logistics districts. Road and rail links were suspended for several days. Underwriters are seeing early signs of business interruption and contingent business interruption pressure where suppliers are concentrated along the affected river network.
