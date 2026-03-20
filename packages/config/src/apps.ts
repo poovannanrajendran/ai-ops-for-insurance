@@ -63,3 +63,35 @@ export const catEventBriefingApp: AppMetadata = {
   schema: `${SHARED_SCHEMA_PREFIX}cateventbriefing`,
   devPort: 3007
 };
+
+export const policyEndorsementDiffApp: AppMetadata = {
+  slug: "policy-endorsement-diff-checker",
+  shortName: "policyendorsementdiff",
+  displayName: "Policy Endorsement Diff Checker",
+  schema: `${SHARED_SCHEMA_PREFIX}policyendorsementdiff`,
+  devPort: 3008
+};
+
+export const referralPriorityQueueApp: AppMetadata = {
+  slug: "referral-priority-queue-scorer",
+  shortName: "referralqueuescorer",
+  displayName: "Referral Priority Queue Scorer",
+  schema: `${SHARED_SCHEMA_PREFIX}referralqueuescorer`,
+  devPort: 3009
+};
+
+export const claimsFnolTriageApp: AppMetadata = {
+  slug: "claims-fnol-triage-assistant",
+  shortName: "fnoltriage",
+  displayName: "Claims FNOL Triage Assistant",
+  schema: `${SHARED_SCHEMA_PREFIX}fnoltriage`,
+  devPort: 3010
+};
+
+export const binderCapacityMonitorApp: AppMetadata = {
+  slug: "binder-capacity-monitor",
+  shortName: "bindercapacity",
+  displayName: "Binder Capacity Monitor",
+  schema: `${SHARED_SCHEMA_PREFIX}bindercapacity`,
+  devPort: 3011
+};

@@ -1,0 +1,5 @@
+referral_id	insured_name	class_of_business	territory	quoted_premium_gbp	tiv_gbp	loss_ratio_pct	days_to_inception	missing_fields_count	new_business	claims_activity	sanctions_flag	referral_reason	broker_tier
+RQ-411	Harbour Foods Distribution	Property	United Kingdom	98000	14000000	42	34	1	false	false	false	renewal premium change above authority	Gold
+RQ-412	Willow Care Services	Casualty	Ireland	76000	6000000	28	41	0	false	false	false	minor wording clarification	Gold
+RQ-413	Deltawave Retail Group	Cyber	France; Belgium	118000	9000000	63	16	2	false	true	false	claims activity and ransomware controls question	Silver
+RQ-414	Aster Marine Logistics	Marine Cargo	Netherlands	88000	10000000	36	28	1	false	false	false	territorial extension sign-off	Gold

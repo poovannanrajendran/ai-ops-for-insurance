@@ -1,0 +1,19 @@
+Claim Reference: FNOL-24018
+Insured Name: Westbridge Apartments Ltd
+Class of Business: Property
+Loss Date: 2026-03-19
+Reported Date: 2026-03-20
+Location: Manchester, United Kingdom
+Cause of Loss: Minor escape of water from a kitchen pipe
+Estimated Reserve: GBP 7,500
+Currency: GBP
+Injury Count: 0
+Third Party Injury: no
+Fatality Indicator: no
+Police Report: no
+Fraud Indicator: no
+Claimant Represented: no
+Litigation Indicator: no
+Property Damage Severity: minor
+Business Interruption Days: 0
+Notes: Two flats affected. Photos received and contractor attendance booked.

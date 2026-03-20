@@ -1,0 +1,6 @@
+risk_id,insured_name,binder_name,class_of_business,territory,bound_amount_gbp,binder_capacity_gbp,forecast_additional_gbp,days_to_expiry,status
+R-101,Northlight Estates,Real Estate,Property,United Kingdom,6200000,12000000,400000,95,Bound
+R-102,Canal Foods,Real Estate,Property,Netherlands,1900000,12000000,350000,84,Bound
+R-103,Alpine Fabrication,Real Estate,Engineering,Germany,1200000,12000000,250000,63,Quoted
+R-104,Harbor Retail Group,Real Estate,Property,United Kingdom,900000,12000000,150000,47,Bound
+R-105,Sierra Cold Chain,Real Estate,Marine Cargo,Spain,750000,12000000,100000,31,Quoted

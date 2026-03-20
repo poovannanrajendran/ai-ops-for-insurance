@@ -1,0 +1,19 @@
+Claim Reference: FNOL-24044
+Insured Name: Norchester Retail Group
+Class of Business: Property
+Loss Date: 2026-03-18
+Reported Date: 2026-03-20
+Location: Birmingham, United Kingdom
+Cause of Loss: Overnight theft and forced entry to insured premises
+Estimated Reserve: GBP 42,000
+Currency: GBP
+Injury Count: 0
+Third Party Injury: no
+Fatality Indicator: no
+Police Report: no
+Fraud Indicator: no
+Claimant Represented: no
+Litigation Indicator: no
+Property Damage Severity: moderate
+Business Interruption Days: 6
+Notes: Stock list still pending and CCTV copy not yet received.

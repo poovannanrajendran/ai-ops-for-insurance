@@ -20,6 +20,10 @@ This repository houses **30 small AI-powered applications** developed over a 30-
 │   ├── class-of-business-classifier/
 │   ├── exposure-accumulation-heatmap/
 │   ├── cat-event-briefing/
+│   ├── policy-endorsement-diff-checker/
+│   ├── referral-priority-queue-scorer/
+│   ├── claims-fnol-triage-assistant/
+│   ├── binder-capacity-monitor/
 │   └── ...
 ├── packages/
 │   ├── lib/               # Shared utilities: logging, Supabase client, AI helper
@@ -43,7 +47,11 @@ Current deployed app endpoints:
 - Day 4 `slip-reviewer`: `https://slip-reviewer.vercel.app`
 - Day 5 `class-of-business-classifier`: `https://class-of-business-classifier.vercel.app`
 - Day 6 `exposure-accumulation-heatmap`: `https://exposure-accumulation-heatmap.vercel.app`
-- Day 7 `cat-event-briefing`: pending deployment
+- Day 7 `cat-event-briefing`: `https://cat-event-briefing.vercel.app`
+- Day 8 `policy-endorsement-diff-checker`: pending deployment
+- Day 9 `referral-priority-queue-scorer`: pending deployment
+- Day 10 `claims-fnol-triage-assistant`: pending deployment
+- Day 11 `binder-capacity-monitor`: pending deployment
 
 ## Prerequisites
 
@@ -102,6 +110,10 @@ Current deployed app endpoints:
    pnpm deploy:day5
    pnpm deploy:day6
    pnpm deploy:day7
+   pnpm deploy:day8
+   pnpm deploy:day9
+   pnpm deploy:day10
+   pnpm deploy:day11
    ```
 
    For new apps:

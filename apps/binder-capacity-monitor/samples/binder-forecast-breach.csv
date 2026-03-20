@@ -1,0 +1,6 @@
+risk_id,insured_name,binder_name,class_of_business,territory,bound_amount_gbp,binder_capacity_gbp,forecast_additional_gbp,days_to_expiry,status
+R-201,Atlas Foods Europe,Continental Trade,Property,France,5400000,10000000,600000,68,Bound
+R-202,Delta Components,Continental Trade,Property,Germany,2100000,10000000,300000,55,Bound
+R-203,Medline Wholesale,Continental Trade,Casualty,France,600000,10000000,850000,26,Quoted
+R-204,Orbital Logistics,Continental Trade,Marine Cargo,Belgium,550000,10000000,900000,19,Quoted
+R-205,Vega Mobility,Continental Trade,Property,France,450000,10000000,700000,12,Quoted

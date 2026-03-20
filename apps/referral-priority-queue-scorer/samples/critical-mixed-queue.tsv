@@ -1,0 +1,5 @@
+referral_id	insured_name	class_of_business	territory	quoted_premium_gbp	tiv_gbp	loss_ratio_pct	days_to_inception	missing_fields_count	new_business	claims_activity	sanctions_flag	referral_reason	broker_tier
+RQ-901	Northshore Tank Storage	Property	United Kingdom	285000	78000000	96	4	3	true	true	false	capacity reduction and aggregate pressure	Silver
+RQ-902	Orion Trade Holdings	Marine Cargo	UAE; Saudi Arabia	140000	24000000	72	9	5	true	false	false	new territory and bespoke wording request	Bronze
+RQ-903	Baltic Components Group	Casualty	Poland; Germany	92000	12000000	38	21	1	false	false	false	loss record clarification pending	Gold
+RQ-904	Atlas Engineering LLC	Energy	Kazakhstan	410000	95000000	88	6	4	true	true	true	sanctions screening hit and claims deterioration	Silver

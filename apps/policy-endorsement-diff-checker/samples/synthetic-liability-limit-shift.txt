@@ -1,0 +1,19 @@
+Expiring wording:
+Policy Reference: CAS-10294
+Class: General Liability
+Territory: United Kingdom, Europe
+Limit of Liability: GBP 5,000,000 any one claim
+Aggregate Limit: GBP 10,000,000
+Sanctions Clause: Standard market sanctions wording
+Contractual Liability: Included where assumed under written contract
+Jurisdiction: United Kingdom and European Union
+
+Renewal wording:
+Policy Reference: CAS-10294
+Class: General Liability
+Territory: United Kingdom, Europe
+Limit of Liability: GBP 2,500,000 any one claim
+Aggregate Limit: GBP 5,000,000
+Sanctions Clause: Broadened sanctions wording including immediate suspension rights
+Contractual Liability: Included where assumed under written contract
+Jurisdiction: United Kingdom only

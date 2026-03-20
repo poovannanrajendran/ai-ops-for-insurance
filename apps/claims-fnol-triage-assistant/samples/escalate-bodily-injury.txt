@@ -1,0 +1,19 @@
+Claim Reference: FNOL-24102
+Insured Name: Arrowline Logistics Ltd
+Class of Business: Motor Fleet
+Loss Date: 2026-03-17
+Reported Date: 2026-03-20
+Location: M25 Junction 10, United Kingdom
+Cause of Loss: Multi vehicle collision with bodily injury and road closure
+Estimated Reserve: GBP 325,000
+Currency: GBP
+Injury Count: 2
+Third Party Injury: yes
+Fatality Indicator: no
+Police Report: yes
+Fraud Indicator: no
+Claimant Represented: yes
+Litigation Indicator: yes
+Property Damage Severity: severe
+Business Interruption Days: 12
+Notes: Claimant solicitor has written to insured. External counsel and senior casualty oversight requested.
