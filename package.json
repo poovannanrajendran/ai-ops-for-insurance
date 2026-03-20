@@ -32,6 +32,8 @@
     "deploy:day10": "bash ./scripts/deploy-vercel-app.sh claims-fnol-triage-assistant",
     "deploy:day11": "bash ./scripts/deploy-vercel-app.sh binder-capacity-monitor",
     "deploy:app": "bash ./scripts/deploy-vercel-app.sh",
+    "predeploy:check": "bash ./scripts/predeploy-check.sh",
+    "scaffold:day-app": "bash ./scripts/new-day-app.sh",
     "rag:ingest": "node ./scripts/rag/ingest.mjs",
     "rag:query": "node ./scripts/rag/query.mjs",
     "rag:sync-all": "node ./scripts/rag/sync-all.mjs",
