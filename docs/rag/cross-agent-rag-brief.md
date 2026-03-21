@@ -1,6 +1,6 @@
 # Cross-Agent RAG Brief (Codex / Claude / Claude Code / Perplexity)
 
-Last updated: 2026-03-20
+Last updated: 2026-03-21
 Project: `ai-ops-for-insurance`
 
 ## Purpose
@@ -45,6 +45,8 @@ For each app:
 - Production env vars:
   - `NEXT_PUBLIC_SUPABASE_URL`
   - `SUPABASE_SERVICE_ROLE_KEY`
+  - `NEXT_PUBLIC_STATCOUNTER_PROJECT` (optional override; defaults set in shared component)
+  - `NEXT_PUBLIC_STATCOUNTER_SECURITY` (optional override; defaults set in shared component)
 
 ## Supabase standards
 For each app schema `app_<shortname>`:
@@ -66,6 +68,19 @@ For each app schema `app_<shortname>`:
 - Day 9: `referral-priority-queue-scorer` deployed and verified
 - Day 10: `claims-fnol-triage-assistant` deployed and verified
 - Day 11: implementation completed and integrated
+- Day 12: `treaty-structure-explainer` implemented with deterministic parsing + persistence + audit
+- Day 13: `exposure-clash-detector` implemented with overlap severity + persistence + audit
+- Day 14: `claims-leakage-flagger` implemented with leakage rules + persistence + audit
+
+## Analytics rollout
+- Statcounter rollout completed on 2026-03-21 across all app layouts via official `@statcounter/nextjs`.
+- Shared implementation:
+  - `packages/common-ui/src/statcounter-analytics.tsx`
+  - exported via `packages/common-ui/src/index.ts`
+- Included in every app root layout (`apps/*/src/app/layout.tsx`) in production mode.
+- Default Statcounter credentials currently configured in shared component:
+  - project id: `13211903`
+  - security code: `72173381`
 
 ## Social content pack status
 - LinkedIn pack generated in `content/`:

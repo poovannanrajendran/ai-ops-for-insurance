@@ -9,3 +9,20 @@
 - 2026-03-19: Day 6 map uses real basemap geometry from `world-atlas` and applies capped auto-zoom to location clusters for readable but still global context.
 - 2026-03-20: A complete LinkedIn content pack (32 posts, images, app screenshots, and short animations) is generated under `content/` with UK-English copy. Master browser page: `content/index.html`.
 - 2026-03-20: Publishing sequence decision: launch burst includes `P01`, `P02`, `P03`, `P04`, `P08`, `D01` on 2026-03-20, followed by daily `D02..D10`; section start/wrap posts inserted around related bucket runs.
+- 2026-03-21: Statcounter analytics is now integrated across all app layouts (Day 1-14) using the official `@statcounter/nextjs` plugin through shared component `packages/common-ui/src/statcounter-analytics.tsx`; production-only injection in each `apps/*/src/app/layout.tsx`.
+- 2026-03-21: Statcounter defaults are set to project `13211903` / security code `72173381`, with optional override via `NEXT_PUBLIC_STATCOUNTER_PROJECT` and `NEXT_PUBLIC_STATCOUNTER_SECURITY`.
+- 2026-03-21: Canonical live URLs to register in Statcounter Website Addresses:
+  - `https://submission-triage-copilot.vercel.app`
+  - `https://portfolio-mix-dashboard.vercel.app`
+  - `https://risk-appetite-parser.vercel.app`
+  - `https://slip-reviewer.vercel.app`
+  - `https://class-of-business-classifier.vercel.app`
+  - `https://exposure-accumulation-heatmap.vercel.app`
+  - `https://cat-event-briefing.vercel.app`
+  - `https://policy-endorsement-diff-checker.vercel.app`
+  - `https://referral-priority-queue-scorer.vercel.app`
+  - `https://claims-fnol-triage-assistant.vercel.app`
+  - `https://binder-capacity-monitor.vercel.app`
+  - `https://treaty-structure-explainer.vercel.app`
+  - `https://exposure-clash-detector.vercel.app`
+  - `https://claims-leakage-flagger.vercel.app`
