@@ -7,3 +7,5 @@
 - 2026-03-18: Day 5 (`class-of-business-classifier`) is live at `https://class-of-business-classifier.vercel.app` with schema `app_classofbusiness`; verify Data API exposure and use schema profile headers for direct REST checks.
 - 2026-03-19: Day 6 (`exposure-accumulation-heatmap`) local dev/test runs on port `3006`; keep port `3000` untouched for OpenWebUI.
 - 2026-03-19: Day 6 map uses real basemap geometry from `world-atlas` and applies capped auto-zoom to location clusters for readable but still global context.
+- 2026-03-20: A complete LinkedIn content pack (32 posts, images, app screenshots, and short animations) is generated under `content/` with UK-English copy. Master browser page: `content/index.html`.
+- 2026-03-20: Publishing sequence decision: launch burst includes `P01`, `P02`, `P03`, `P04`, `P08`, `D01` on 2026-03-20, followed by daily `D02..D10`; section start/wrap posts inserted around related bucket runs.

@@ -1,6 +1,6 @@
 # Cross-Agent RAG Brief (Codex / Claude / Claude Code / Perplexity)
 
-Last updated: 2026-03-19
+Last updated: 2026-03-20
 Project: `ai-ops-for-insurance`
 
 ## Purpose
@@ -60,7 +60,21 @@ For each app schema `app_<shortname>`:
 - Day 3: `risk-appetite-parser` deployed
 - Day 4: `slip-reviewer` deployed
 - Day 5: `class-of-business-classifier` deployed and DB/audit verified
-- Day 6: `exposure-accumulation-heatmap` implemented with real world basemap + subtle auto-zoom, tests/visual checks passed, DB/audit verified; deployment needs Vercel root-directory confirmation
+- Day 6: `exposure-accumulation-heatmap` deployed with real world basemap + subtle auto-zoom
+- Day 7: `cat-event-briefing` deployed and verified
+- Day 8: `policy-endorsement-diff-checker` deployed and verified
+- Day 9: `referral-priority-queue-scorer` deployed and verified
+- Day 10: `claims-fnol-triage-assistant` deployed and verified
+- Day 11: implementation completed and integrated
+
+## Social content pack status
+- LinkedIn pack generated in `content/`:
+  - `content/index.html` master browser page
+  - `content/posts.json` canonical post dataset
+  - `content/posts/` per-post HTML + Markdown
+  - `content/assets/` diagrams, animations (`.gif` + `.mp4`), logos, and Day 1-10 screenshots
+- Copy standard: UK English only.
+- Current publishing strategy: post initial foundations plus Day 0 and Day 1 first, then continue with daily day-app posts and section posts as needed.
 
 ## Key file references
 - Global checklist: `docs/app-build-quality-checklist.md`

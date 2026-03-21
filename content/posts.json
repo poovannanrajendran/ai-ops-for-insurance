@@ -1,0 +1,753 @@
+[
+  {
+    "id": "P01",
+    "title": "Why I'm doing a 30-day insurance AI challenge",
+    "hooks": [
+      "I'm building 30 insurance AI apps in 30 days, end to end.",
+      "Not concept slides. Production-style tools for underwriting, claims, and operations."
+    ],
+    "body": "The goal is simple: ship small, useful products that solve real market problems and can be demoed in minutes. This challenge is designed to turn AI from a slide-deck topic into repeatable operating value across the London Market.",
+    "cta": "Follow the series if you want the build notes and lessons as each app ships.",
+    "hashtags": [
+      "#InsuranceAI",
+      "#LloydsMarket",
+      "#Underwriting",
+      "#ClaimsOps",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/purpose-hero.png",
+      "assets/animations/flow-core.gif"
+    ],
+    "category": "series",
+    "file": "p01-why-i-m-doing-a-30-day-insurance-ai-challenge.html"
+  },
+  {
+    "id": "P02",
+    "title": "How we are building it: the architecture behind the insurance AI monorepo",
+    "hooks": [
+      "Every app starts with the same backbone: a shared platform, not a pile of one-off demos.",
+      "The point is to make 30 apps feel like one system, with clear boundaries and reusable parts."
+    ],
+    "body": "We're building this as a monorepo with shared packages, app-specific schemas, and a consistent layered architecture. Data flows in a straight line: upload or API request -> validation -> repository -> service logic -> AI helper where needed -> response -> structured logs -> persistence in Supabase. That structure keeps each app demoable in minutes and scalable in code quality.",
+    "cta": "If you were reviewing this architecture, where would you pressure-test it first?",
+    "hashtags": [
+      "#InsuranceAI",
+      "#SoftwareArchitecture",
+      "#NextJS",
+      "#Supabase",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/architecture-business.png",
+      "assets/animations/flow-core.mp4",
+      "assets/logos/vercel.svg",
+      "assets/logos/supabase.svg",
+      "assets/logos/nextdotjs.svg",
+      "assets/logos/typescript.svg"
+    ],
+    "category": "architecture",
+    "file": "p02-how-we-are-building-it-the-architecture-behind-the-insurance-ai-monorepo.html"
+  },
+  {
+    "id": "P03",
+    "title": "How we are building it (the complete nerdy version)",
+    "hooks": [
+      "This is the nerdy version: schemas, services, logs, AI routing, and test harnesses all wired together.",
+      "If you care about maintainability, the data flow is the product."
+    ],
+    "body": "A request enters a Next.js API route, gets validated, and is routed to a deterministic service. The service calls typed repositories, optionally invokes AI extract/classify/summarise helpers, writes to app-specific Supabase schemas, and emits structured audit stages. Every app has requestId + appKey logs and explicit persistence status semantics: stored, skipped, failed.",
+    "cta": "Comment “nerdy” if you want a per-layer walkthrough with example route + schema contracts.",
+    "hashtags": [
+      "#InsuranceAI",
+      "#AIEngineering",
+      "#DataFlow",
+      "#NextJS",
+      "#Supabase"
+    ],
+    "media": [
+      "assets/diagrams/architecture-nerdy.png",
+      "assets/animations/flow-underwriting.mp4",
+      "assets/logos/github.svg",
+      "assets/logos/docker.svg",
+      "assets/logos/openai.svg"
+    ],
+    "category": "architecture",
+    "file": "p03-how-we-are-building-it-the-complete-nerdy-version.html"
+  },
+  {
+    "id": "P04",
+    "title": "What is coming next: grouped roadmap by insurance workflow",
+    "hooks": [
+      "The next phase is not random app shipping. It's grouped by problem space and operating rhythm.",
+      "That way the series tells a coherent story instead of a scattered list of builds."
+    ],
+    "body": "We are sequencing by business value and workflow adjacency. The spine stays the same (capture -> extract -> decide -> explain -> audit), while the domain shifts by bucket priority.\n\nBucket priorities:\n1. Lloyd's / Specialty Underwriting | Highest | 8 days | 27%\n2. Exposure Management | High | 4 days | 13%\n3. Claims Ops | High | 4 days | 13%\n4. Broking / Placement | Medium | 4 days | 13%\n5. Productivity & Automation | Medium | 5 days | 17%\n6. Leadership / Team Ops | Lower | 2 days | 7%\n7. General Insurance / Compliance | Lower | 3 days | 10%",
+    "cta": "Which bucket should we accelerate first for your team?",
+    "hashtags": [
+      "#InsuranceAI",
+      "#ProductStrategy",
+      "#Roadmap",
+      "#Underwriting",
+      "#ClaimsOps"
+    ],
+    "media": [
+      "assets/diagrams/roadmap-buckets.png",
+      "assets/animations/flow-claims.gif"
+    ],
+    "category": "roadmap",
+    "file": "p04-what-is-coming-next-grouped-roadmap-by-insurance-workflow.html"
+  },
+  {
+    "id": "P08",
+    "title": "Day 0 plan: build once, scale 30 times",
+    "hooks": [
+      "Day 0 is not for features.",
+      "It's for building the foundation that makes 29 future apps faster."
+    ],
+    "body": "The first step is a clean monorepo, shared packages, consistent testing, Supabase conventions, and a deployment pattern that works once and scales cleanly. That upfront work reduces friction and keeps quality consistent.",
+    "cta": "If you are building at pace, start with the operating system, not the first feature.",
+    "hashtags": [
+      "#ProductEngineering",
+      "#Monorepo",
+      "#NextJS",
+      "#Supabase",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/day0-plan.png"
+    ],
+    "category": "milestone",
+    "file": "p08-day-0-plan-build-once-scale-30-times.html"
+  },
+  {
+    "id": "P09",
+    "title": "Improvements done until Day 3",
+    "hooks": [
+      "By Day 3, the value was no longer just in shipping.",
+      "It was in tightening the workflow around every build."
+    ],
+    "body": "The first few apps exposed important guardrails: clearer extraction gates, cleaner schema permissions, stronger deployment patterns, and better handoff discipline. Each improvement reduced repeated mistakes in the next app.",
+    "cta": "Every day should improve the next day. What guardrail gave your team the highest leverage?",
+    "hashtags": [
+      "#BuildInPublic",
+      "#InsuranceInnovation",
+      "#DeliveryExcellence",
+      "#Supabase",
+      "#NextJS"
+    ],
+    "media": [
+      "assets/diagrams/day3-improvements.png",
+      "assets/screenshots/day1.png",
+      "assets/screenshots/day2.png",
+      "assets/screenshots/day3.png"
+    ],
+    "category": "milestone",
+    "file": "p09-improvements-done-until-day-3.html"
+  },
+  {
+    "id": "P10",
+    "title": "Improvements done until Day 10",
+    "hooks": [
+      "Ten days in, the stack had started to compound.",
+      "The apps were becoming more repeatable, more testable, and more useful."
+    ],
+    "body": "The workflow moved from isolated prototypes to a repeatable delivery system: deterministic scoring, audit trails, shared UI patterns, predeploy checks, and cleaner Vercel conventions. This turns speed into something sustainable.",
+    "cta": "If you want speed without chaos, standardise the hard parts early.",
+    "hashtags": [
+      "#DigitalTransformation",
+      "#EngineeringLeadership",
+      "#ClaimsAI",
+      "#Underwriting",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/day10-improvements.png",
+      "assets/screenshots/day8.png",
+      "assets/screenshots/day9.png",
+      "assets/screenshots/day10.png"
+    ],
+    "category": "milestone",
+    "file": "p10-improvements-done-until-day-10.html"
+  },
+  {
+    "id": "P11",
+    "title": "Overall lessons learnt until Day 10 and efficiency gains",
+    "hooks": [
+      "The biggest lesson so far is simple.",
+      "Speed comes from standards, not shortcuts."
+    ],
+    "body": "Shared foundations, explicit rules, and reusable patterns reduced setup time and improved consistency across underwriting and claims workflows. Efficiency gains came from fewer avoidable decisions, cleaner handoffs, and faster debugging.",
+    "cta": "I'll keep sharing what worked, what broke, and what we standardised next.",
+    "hashtags": [
+      "#LessonsLearned",
+      "#OperatingModel",
+      "#InsuranceTechnology",
+      "#Productivity",
+      "#AI"
+    ],
+    "media": [
+      "assets/diagrams/lessons-efficiency.png"
+    ],
+    "category": "milestone",
+    "file": "p11-overall-lessons-learnt-until-day-10-and-efficiency-gains.html"
+  },
+  {
+    "id": "P20",
+    "title": "Lloyd's/Specialty Underwriting - Section Start",
+    "hooks": [
+      "Specialty underwriting wins before the quote is written.",
+      "The best teams make complexity look controlled."
+    ],
+    "body": "In Lloyd's and specialty markets, edge comes from disciplined appetite, clear referral paths, and fast context.",
+    "cta": "Where does your underwriting flow lose the most time today: intake, appetite checks, or referrals?",
+    "hashtags": [
+      "#Insurance",
+      "#LloydsMarket",
+      "#Underwriting",
+      "#InsuranceAI",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-underwriting.png"
+    ],
+    "category": "section",
+    "file": "p20-lloyd-s-specialty-underwriting-section-start.html"
+  },
+  {
+    "id": "P21",
+    "title": "Exposure Management - Section Start",
+    "hooks": [
+      "Exposure management is where assumptions get tested.",
+      "If you cannot see it, you cannot control it."
+    ],
+    "body": "Exposure management is the control tower for accumulation, concentration, and steering decisions.",
+    "cta": "Where is your biggest blind spot today: concentration by geography, class, or limit size?",
+    "hashtags": [
+      "#Insurance",
+      "#ExposureManagement",
+      "#AccumulationRisk",
+      "#InsuranceAnalytics",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-exposure.png"
+    ],
+    "category": "section",
+    "file": "p21-exposure-management-section-start.html"
+  },
+  {
+    "id": "P22",
+    "title": "Claims Ops - Section Start",
+    "hooks": [
+      "Claims operations shape trust at the moment it matters most.",
+      "Speed matters. So does consistency."
+    ],
+    "body": "Claims teams protect retention, brand, and capital through timely, documented, defensible decisions.",
+    "cta": "What is the first claims handoff you would automate without reducing control?",
+    "hashtags": [
+      "#Insurance",
+      "#ClaimsOps",
+      "#Claims",
+      "#InsuranceAI",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-claims.png"
+    ],
+    "category": "section",
+    "file": "p22-claims-ops-section-start.html"
+  },
+  {
+    "id": "P23",
+    "title": "Broking / Placement - Section Start",
+    "hooks": [
+      "Placement is part market strategy, part execution discipline.",
+      "The right submission still needs the right market path."
+    ],
+    "body": "Broking teams win by combining market knowledge with clean execution and sharper narratives.",
+    "cta": "Where do placements stall most for your team: market mapping, wording quality, or referral loops?",
+    "hashtags": [
+      "#Insurance",
+      "#Broking",
+      "#Placement",
+      "#InsuranceAI",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p23-broking-placement-section-start.html"
+  },
+  {
+    "id": "P24",
+    "title": "Productivity & Automation - Section Start",
+    "hooks": [
+      "Productivity gains come from removing friction, not adding dashboards.",
+      "Automation should free time for judgment work."
+    ],
+    "body": "Best automation removes repetitive handoffs and improves data quality at intake.",
+    "cta": "Which repetitive task should be removed first to release frontline capacity?",
+    "hashtags": [
+      "#Insurance",
+      "#Productivity",
+      "#Automation",
+      "#AIOps",
+      "#InsuranceTechnology"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p24-productivity-automation-section-start.html"
+  },
+  {
+    "id": "P25",
+    "title": "Leadership / Team Ops - Section Start",
+    "hooks": [
+      "Team performance is built in the operating rhythm.",
+      "Leadership is mostly systems, not slogans."
+    ],
+    "body": "High-performing teams share explicit priorities, visible ownership, and clear operating cadence.",
+    "cta": "Which operating rhythm would improve outcomes fastest: clearer priorities, better handovers, or tighter feedback loops?",
+    "hashtags": [
+      "#Insurance",
+      "#Leadership",
+      "#TeamOps",
+      "#OperatingModel",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p25-leadership-team-ops-section-start.html"
+  },
+  {
+    "id": "P26",
+    "title": "General Insurance / Compliance - Section Start",
+    "hooks": [
+      "Compliance is not a side constraint. It is part of the product.",
+      "Best controls reduce risk without slowing business."
+    ],
+    "body": "Governance works best when designed into daily workflows, not bolted on after.",
+    "cta": "Which control is currently the most manual and could be designed into workflow?",
+    "hashtags": [
+      "#Insurance",
+      "#Compliance",
+      "#Governance",
+      "#RegulatoryCompliance",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p26-general-insurance-compliance-section-start.html"
+  },
+  {
+    "id": "D01",
+    "title": "Day 1: From broker submission to triage decision in minutes",
+    "hooks": [
+      "Underwriters do not need more PDFs. They need a fast way to decide what deserves attention.",
+      "Day 1 turns messy broker submissions into a clear accept, refer, or decline recommendation."
+    ],
+    "body": "Problem: Submission packs arrive as inconsistent documents with missing fields and too much manual reading. That slows first-pass triage.\n\nMVP achieved: Text-first intake that extracts key fields, scores appetite fit, returns a decision with reasoning, and stores results for auditability.\n\nScale path: Multi-document ingestion, broker workspace integration, class-specific rule libraries, and human-in-the-loop borderline queues.",
+    "cta": "If you were building this for an underwriting team, what would you want surfaced first?",
+    "hashtags": [
+      "#InsuranceAI",
+      "#Underwriting",
+      "#LloydsMarket",
+      "#RiskSelection",
+      "#AIProduct"
+    ],
+    "media": [
+      "assets/screenshots/day1.png",
+      "assets/app-logos/day1.svg"
+    ],
+    "category": "day-app",
+    "day": 1,
+    "app": "submission-triage-copilot",
+    "file": "d01-day-1-from-broker-submission-to-triage-decision-in-minutes.html"
+  },
+  {
+    "id": "D02",
+    "title": "Day 2: Portfolio concentration risk should be visible before it becomes a loss",
+    "hooks": [
+      "Good portfolios fail quietly when concentration builds in the wrong place.",
+      "Day 2 makes mix, territory, and limit pressure visible before the next bind."
+    ],
+    "body": "Problem: Static spreadsheets hide accumulation and class/territory skew until someone spots the pattern late.\n\nMVP achieved: CSV workflow that analyses mix, flags concentration warnings, and adds plain-English commentary.\n\nScale path: Live monitoring, scenario overlays, threshold alerts, steering dashboards, syndicate governance reporting.",
+    "cta": "Would you use this as daily monitoring or pre-bind decision aid?",
+    "hashtags": [
+      "#PortfolioManagement",
+      "#InsuranceAnalytics",
+      "#UnderwritingOps",
+      "#RiskAccumulation",
+      "#DataViz"
+    ],
+    "media": [
+      "assets/screenshots/day2.png",
+      "assets/app-logos/day2.svg"
+    ],
+    "category": "day-app",
+    "day": 2,
+    "app": "portfolio-mix-dashboard",
+    "file": "d02-day-2-portfolio-concentration-risk-should-be-visible-before-it-becomes-a-loss.html"
+  },
+  {
+    "id": "D03",
+    "title": "Day 3: Risk appetite documents should be machine-readable",
+    "hooks": [
+      "Most appetite statements are written for humans, but triage needs structure.",
+      "Day 3 converts policy text into actionable underwriting rules."
+    ],
+    "body": "Problem: Appetite guidance buried in prose makes consistent decisions hard.\n\nMVP achieved: Parser converts statements into structured classes, territories, limits, exclusions, with Q&A lookup.\n\nScale path: Versioned appetite knowledge base with approvals, rule sync, and change tracking.",
+    "cta": "How do you manage appetite drift today: manually or with a rules layer?",
+    "hashtags": [
+      "#RiskAppetite",
+      "#Underwriting",
+      "#InsuranceTech",
+      "#LLM",
+      "#Governance"
+    ],
+    "media": [
+      "assets/screenshots/day3.png",
+      "assets/app-logos/day3.svg"
+    ],
+    "category": "day-app",
+    "day": 3,
+    "app": "risk-appetite-parser",
+    "file": "d03-day-3-risk-appetite-documents-should-be-machine-readable.html"
+  },
+  {
+    "id": "D04",
+    "title": "Day 4: Lloyd's slips need a faster first read",
+    "hooks": [
+      "A slip can hide the issue in plain sight if every clause is manual.",
+      "Day 4 surfaces key terms, unusual clauses, and coverage gaps in one pass."
+    ],
+    "body": "Problem: Reviewers spend too much time extracting terms and too little on material clauses.\n\nMVP achieved: Slip review flow extracts terms, flags unusual wording/gaps, and produces reviewer-ready output.\n\nScale path: Clause library comparisons, benchmark wording checks, endorsement awareness, specialist routing.",
+    "cta": "What clause type should be auto-highlighted first in a real market review?",
+    "hashtags": [
+      "#Lloyds",
+      "#SlipReview",
+      "#InsuranceAI",
+      "#ClauseAnalysis",
+      "#Broking"
+    ],
+    "media": [
+      "assets/screenshots/day4.png",
+      "assets/app-logos/day4.svg"
+    ],
+    "category": "day-app",
+    "day": 4,
+    "app": "slip-reviewer",
+    "file": "d04-day-4-lloyd-s-slips-need-a-faster-first-read.html"
+  },
+  {
+    "id": "D05",
+    "title": "Day 5: Free-text risk descriptions should map to a clear class",
+    "hooks": [
+      "When class coding is wrong, everything downstream gets harder.",
+      "Day 5 maps unstructured risk text to class-of-business with confidence."
+    ],
+    "body": "Problem: Vague descriptions are hard to categorise consistently.\n\nMVP achieved: Classifier returns top class + alternatives, explains signal mix, warns on low confidence.\n\nScale path: Taxonomy normalisation, broker validation, DA checks, feedback loops for classifier quality.",
+    "cta": "Would you trust this as underwriter assistant or front-door validation?",
+    "hashtags": [
+      "#Classification",
+      "#UnderwritingOps",
+      "#InsuranceData",
+      "#DecisionSupport",
+      "#AIInInsurance"
+    ],
+    "media": [
+      "assets/screenshots/day5.png",
+      "assets/app-logos/day5.svg"
+    ],
+    "category": "day-app",
+    "day": 5,
+    "app": "class-of-business-classifier",
+    "file": "d05-day-5-free-text-risk-descriptions-should-map-to-a-clear-class.html"
+  },
+  {
+    "id": "D06",
+    "title": "Day 6: Accumulation risk is easier to manage when you can see it",
+    "hooks": [
+      "Spreadsheet totals do not reveal hotspots until they are crowded.",
+      "Day 6 turns location data into an accumulation heatmap with warnings."
+    ],
+    "body": "Problem: Teams need fast visibility of insured value clustering before crossing tolerance lines.\n\nMVP achieved: CSV-driven heatmap validates locations, aggregates TIV, highlights hotspots, and adds commentary.\n\nScale path: Multi-peril overlays, cat scenario layering, near-real-time surveillance.",
+    "cta": "What would make this production-ready first: validation, map fidelity, or scenarios?",
+    "hashtags": [
+      "#ExposureManagement",
+      "#AccumulationRisk",
+      "#GeoAnalytics",
+      "#InsuranceTech",
+      "#Heatmap"
+    ],
+    "media": [
+      "assets/screenshots/day6.png",
+      "assets/app-logos/day6.svg"
+    ],
+    "category": "day-app",
+    "day": 6,
+    "app": "exposure-accumulation-heatmap",
+    "file": "d06-day-6-accumulation-risk-is-easier-to-manage-when-you-can-see-it.html"
+  },
+  {
+    "id": "D07",
+    "title": "Day 7: Cat event updates should become action, not noise",
+    "hooks": [
+      "When an event breaks, teams need a briefing that says what changed and what to do.",
+      "Day 7 turns catastrophe bulletins into impact summaries and actions."
+    ],
+    "body": "Problem: Dense bulletins slow understanding of impacted classes and likely loss bands.\n\nMVP achieved: Tool classifies event, estimates severity, identifies impacted classes, outputs concise actions.\n\nScale path: Multi-feed ingestion, timeline tracking, exposure overlays, escalation workflows.",
+    "cta": "Should cat briefing optimise for speed, depth, or strict one-page operations?",
+    "hashtags": [
+      "#CatRisk",
+      "#ExposureManagement",
+      "#InsuranceAnalytics",
+      "#EventBriefing",
+      "#RiskOps"
+    ],
+    "media": [
+      "assets/screenshots/day7.png",
+      "assets/app-logos/day7.svg"
+    ],
+    "category": "day-app",
+    "day": 7,
+    "app": "cat-event-briefing",
+    "file": "d07-day-7-cat-event-updates-should-become-action-not-noise.html"
+  },
+  {
+    "id": "D08",
+    "title": "Day 8: Endorsement changes can hide material risk",
+    "hooks": [
+      "A renewal can look familiar until one clause changes the story.",
+      "Day 8 compares expiring vs renewal wording to surface material differences fast."
+    ],
+    "body": "Problem: Manual endorsement comparison misses subtle but material wording shifts.\n\nMVP achieved: Diff checker flags material changes by severity with executive brief and audit trail.\n\nScale path: Wording intelligence, clause libraries, benchmark comparisons, specialist referral routing.",
+    "cta": "Where would this save most time: underwriting, broking, or claims review?",
+    "hashtags": [
+      "#PolicyWordings",
+      "#Renewals",
+      "#InsuranceAI",
+      "#ClauseDiff",
+      "#RiskReview"
+    ],
+    "media": [
+      "assets/screenshots/day8.png",
+      "assets/app-logos/day8.svg"
+    ],
+    "category": "day-app",
+    "day": 8,
+    "app": "policy-endorsement-diff-checker",
+    "file": "d08-day-8-endorsement-changes-can-hide-material-risk.html"
+  },
+  {
+    "id": "D09",
+    "title": "Day 9: Referral queues need ranking, not just backlog",
+    "hooks": [
+      "Not every referral deserves the same urgency.",
+      "Day 9 scores the queue so reviewers work highest-risk items first."
+    ],
+    "body": "Problem: Without consistent ranking, queues are driven by inbox order not risk/urgency.\n\nMVP achieved: TSV scorer ranks referrals with weighted factors, critical warnings, and persisted analysis.\n\nScale path: Live queue orchestration, SLA tracking, team routing, capacity balancing.",
+    "cta": "Would you replace queue order or use it as reviewer guidance first?",
+    "hashtags": [
+      "#WorkflowAutomation",
+      "#UnderwritingReferral",
+      "#InsuranceOps",
+      "#Prioritization",
+      "#DecisionIntelligence"
+    ],
+    "media": [
+      "assets/screenshots/day9.png",
+      "assets/app-logos/day9.svg"
+    ],
+    "category": "day-app",
+    "day": 9,
+    "app": "referral-priority-queue-scorer",
+    "file": "d09-day-9-referral-queues-need-ranking-not-just-backlog.html"
+  },
+  {
+    "id": "D10",
+    "title": "Day 10: FNOL triage should start with a decision, not an inbox",
+    "hooks": [
+      "The first notice of loss is where speed matters most.",
+      "Day 10 classifies FNOLs into fast-track, manual-review, or escalate with factor-level reasoning."
+    ],
+    "body": "Problem: FNOL emails are messy and routing is inconsistent.\n\nMVP achieved: Deterministic FNOL triage with reasoning factors and audit-friendly persistence.\n\nScale path: Inbox integrations, guided chat intake, policy lookups, fraud/severity signals, auto-routing.",
+    "cta": "If you could automate one handoff tomorrow, which one is it?",
+    "hashtags": [
+      "#ClaimsOps",
+      "#FNOL",
+      "#InsuranceAI",
+      "#ClaimsTriage",
+      "#Automation"
+    ],
+    "media": [
+      "assets/screenshots/day10.png",
+      "assets/app-logos/day10.svg"
+    ],
+    "category": "day-app",
+    "day": 10,
+    "app": "claims-fnol-triage-assistant",
+    "file": "d10-day-10-fnol-triage-should-start-with-a-decision-not-an-inbox.html"
+  },
+  {
+    "id": "P27",
+    "title": "Lloyd's/Specialty Underwriting - Section Wrap",
+    "hooks": [
+      "Strong specialty underwriting is built on repeatable judgment.",
+      "That only works when process supports people."
+    ],
+    "body": "Best-performing teams balance appetite, speed, and consistency with clear control boundaries.",
+    "cta": "If you improved one lever this quarter, would it be appetite clarity, referral speed, or wording quality?",
+    "hashtags": [
+      "#Insurance",
+      "#LloydsMarket",
+      "#Underwriting",
+      "#InsuranceAI",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-underwriting.png"
+    ],
+    "category": "section",
+    "file": "p27-lloyd-s-specialty-underwriting-section-wrap.html"
+  },
+  {
+    "id": "P28",
+    "title": "Exposure Management - Section Wrap",
+    "hooks": [
+      "Exposure management turns uncertainty into action.",
+      "Goal is not perfect data. Goal is better decisions."
+    ],
+    "body": "Shared accumulation visibility helps leaders decide earlier and avoid surprises later.",
+    "cta": "Which metric should drive weekly action first: top hotspots, accumulation trend, or tail exposure?",
+    "hashtags": [
+      "#Insurance",
+      "#ExposureManagement",
+      "#AccumulationRisk",
+      "#InsuranceAnalytics",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-exposure.png"
+    ],
+    "category": "section",
+    "file": "p28-exposure-management-section-wrap.html"
+  },
+  {
+    "id": "P29",
+    "title": "Claims Ops - Section Wrap",
+    "hooks": [
+      "Claims operations are where process meets promise.",
+      "If the model is weak, customers feel it immediately."
+    ],
+    "body": "Fast, consistent handling depends on ownership, documentation, and escalation clarity.",
+    "cta": "What should be your lead KPI here: cycle time, leakage reduction, or consistency of triage outcomes?",
+    "hashtags": [
+      "#Insurance",
+      "#ClaimsOps",
+      "#Claims",
+      "#InsuranceAI",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-claims.png"
+    ],
+    "category": "section",
+    "file": "p29-claims-ops-section-wrap.html"
+  },
+  {
+    "id": "P30",
+    "title": "Broking / Placement - Section Wrap",
+    "hooks": [
+      "Placement is won in details before market sees the risk.",
+      "Better preparation improves both speed and outcomes."
+    ],
+    "body": "Operational discipline plus market intelligence drives better placement execution.",
+    "cta": "What would lift placement outcomes more right now: better risk narratives or cleaner market execution?",
+    "hashtags": [
+      "#Insurance",
+      "#Broking",
+      "#Placement",
+      "#InsuranceAI",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p30-broking-placement-section-wrap.html"
+  },
+  {
+    "id": "P31",
+    "title": "Productivity & Automation - Section Wrap",
+    "hooks": [
+      "Automation should create capacity, not convenience.",
+      "Right systems make good habits easier to keep."
+    ],
+    "body": "The biggest gains come from removing low-value manual work and standardising frequent rework points.",
+    "cta": "Which workflow should be standardised next to remove avoidable rework?",
+    "hashtags": [
+      "#Insurance",
+      "#Productivity",
+      "#Automation",
+      "#AIOps",
+      "#InsuranceTechnology"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p31-productivity-automation-section-wrap.html"
+  },
+  {
+    "id": "P32",
+    "title": "Leadership / Team Ops - Section Wrap",
+    "hooks": [
+      "Leadership is visible in team behaviour when no one is watching.",
+      "Consistency beats intensity over the long run."
+    ],
+    "body": "Performance improves when priorities are explicit and accountability is routine.",
+    "cta": "What one operating change would raise team consistency over the next 90 days?",
+    "hashtags": [
+      "#Insurance",
+      "#Leadership",
+      "#TeamOps",
+      "#OperatingModel",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p32-leadership-team-ops-section-wrap.html"
+  },
+  {
+    "id": "P33",
+    "title": "General Insurance / Compliance - Section Wrap",
+    "hooks": [
+      "Compliance works best when built into work.",
+      "Rules alone do not reduce risk. Good design does."
+    ],
+    "body": "Practical and proportionate controls reduce friction while strengthening assurance.",
+    "cta": "How would you simplify assurance while keeping controls proportionate and effective?",
+    "hashtags": [
+      "#Insurance",
+      "#Compliance",
+      "#Governance",
+      "#RegulatoryCompliance",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/diagrams/section-operations.png"
+    ],
+    "category": "section",
+    "file": "p33-general-insurance-compliance-section-wrap.html"
+  }
+]

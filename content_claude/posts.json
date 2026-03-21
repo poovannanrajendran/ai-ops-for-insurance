@@ -1,0 +1,453 @@
+[
+  {
+    "id": "P01",
+    "title": "Why I'm Building 30 Insurance AI Apps in 30 Days",
+    "hooks": [
+      "I spent 19 years watching insurance teams drown in PDFs.",
+      "So I set myself a challenge: build 30 working AI tools for the London Market in 30 days."
+    ],
+    "cta": "What workflow would you want an AI tool to handle first — intake triage, document review, or exposure monitoring?",
+    "hashtags": ["#InsuranceAI", "#LloydsMarket", "#BuildInPublic", "#Underwriting", "#ClaimsOps", "#AIOps", "#SpecialtyInsurance", "#30DayChallenge"],
+    "category": "series",
+    "file": "p01-why-im-building-30-insurance-ai-apps-in-30-days.md",
+    "publishOrder": 1
+  },
+  {
+    "id": "P02",
+    "title": "The Architecture That Makes 30 Apps Feel Like One System",
+    "hooks": [
+      "Most AI demos die because they were built to impress, not to maintain.",
+      "When I designed the architecture for 30 insurance AI apps, I started with one question: what would make app number 30 as fast to build as app number 3?"
+    ],
+    "cta": "If you were reviewing this architecture for a production insurance team, where would you pressure-test it first?",
+    "hashtags": ["#SoftwareArchitecture", "#InsuranceAI", "#NextJS", "#Supabase", "#Monorepo", "#TypeScript", "#AIOps", "#EngineeringLeadership"],
+    "category": "architecture",
+    "file": "p02-the-architecture-that-makes-30-apps-feel-like-one-system.md",
+    "publishOrder": 2
+  },
+  {
+    "id": "P03",
+    "title": "The Nerdy Version: How Every Request Flows Through the Stack",
+    "hooks": [
+      "This one is for the engineers.",
+      "I am building 30 insurance AI apps in 30 days and shipping every one publicly. Here is exactly how the data moves."
+    ],
+    "cta": "Comment \"nerdy\" if you want me to walk through a specific layer.",
+    "hashtags": ["#AIEngineering", "#BuildInPublic", "#NextJS", "#Supabase", "#TypeScript", "#InsuranceAI", "#TDD", "#DataFlow"],
+    "category": "architecture",
+    "file": "p03-the-nerdy-version-how-every-request-flows-through-the-stack.md",
+    "publishOrder": 3
+  },
+  {
+    "id": "P04",
+    "title": "The Roadmap: 30 Apps Grouped by Insurance Workflow",
+    "hooks": [
+      "I did not pick 30 random AI use cases.",
+      "I mapped every app to a specific insurance workflow, weighted by where I have seen the most operational friction."
+    ],
+    "cta": "Which bucket would create the most value for your team this quarter?",
+    "hashtags": ["#InsuranceAI", "#ProductStrategy", "#Roadmap", "#LloydsMarket", "#Underwriting", "#ClaimsOps", "#ExposureManagement", "#AIOps"],
+    "category": "roadmap",
+    "file": "p04-the-roadmap-30-apps-grouped-by-insurance-workflow.md",
+    "publishOrder": 4
+  },
+  {
+    "id": "P08",
+    "title": "Day Zero: The Most Important App I Never Shipped",
+    "hooks": [
+      "Before I built a single feature, I spent a full day building nothing visible.",
+      "Day Zero was about answering one question: when I am on Day 22, will the platform still make it easy to ship?"
+    ],
+    "cta": "If you are building at pace, start with the operating system, not the first feature. What does your Day Zero look like?",
+    "hashtags": ["#ProductEngineering", "#Monorepo", "#NextJS", "#Supabase", "#AIOps", "#BuildInPublic", "#InfrastructureFirst", "#InsuranceAI"],
+    "category": "milestone",
+    "file": "p08-day-zero-the-most-important-app-i-never-shipped.md",
+    "publishOrder": 5
+  },
+  {
+    "id": "D01",
+    "title": "Day 1: From Broker Submission to Triage Decision in Minutes",
+    "hooks": [
+      "An underwriter I worked with once told me: \"I spend 70% of my time on submissions I'll decline.\"",
+      "Day 1 of my 30-day challenge tackles this head-on."
+    ],
+    "cta": "If you were building this for an underwriting team, what field would you want surfaced first?",
+    "hashtags": ["#InsuranceAI", "#Underwriting", "#LloydsMarket", "#RiskSelection", "#SubmissionTriage", "#AIProduct", "#SpecialtyInsurance"],
+    "category": "day-app",
+    "day": 1,
+    "app": "submission-triage-copilot",
+    "file": "d01-day-1-from-broker-submission-to-triage-in-minutes.md",
+    "publishOrder": 6
+  },
+  {
+    "id": "P20",
+    "title": "Section Start: Lloyd's and Specialty Underwriting",
+    "hooks": [
+      "The best underwriting teams I have worked with share one trait.",
+      "They are not the ones with the most data. They are the ones who reach the right decision fastest."
+    ],
+    "cta": "Where does your underwriting flow lose the most time today?",
+    "hashtags": ["#Insurance", "#LloydsMarket", "#Underwriting", "#InsuranceAI", "#SpecialtyInsurance", "#AIOps", "#RiskSelection"],
+    "category": "section",
+    "file": "p20-section-start-lloyds-specialty-underwriting.md",
+    "publishOrder": 7
+  },
+  {
+    "id": "D02",
+    "title": "Day 2: Portfolio Concentration Should Be Visible Before It Becomes a Loss",
+    "hooks": [
+      "Good portfolios fail quietly.",
+      "Concentration builds in the wrong class, the wrong territory — and nobody notices until the loss event reveals the pattern."
+    ],
+    "cta": "Would you use this as a daily monitoring tool or a pre-bind decision aid?",
+    "hashtags": ["#PortfolioManagement", "#InsuranceAnalytics", "#UnderwritingOps", "#RiskAccumulation", "#DataVisualization", "#LloydsMarket", "#AIOps"],
+    "category": "day-app",
+    "day": 2,
+    "app": "portfolio-mix-dashboard",
+    "file": "d02-day-2-portfolio-concentration-visible-before-its-a-loss.md",
+    "publishOrder": 8
+  },
+  {
+    "id": "D03",
+    "title": "Day 3: Your Risk Appetite Document Is Probably Useless to Your Systems",
+    "hooks": [
+      "Every syndicate has a risk appetite statement. Most of them are PDFs that sit in SharePoint.",
+      "Day 3 converts policy text into actionable underwriting rules."
+    ],
+    "cta": "How do you manage appetite drift today — manually, with a rules layer, or not at all?",
+    "hashtags": ["#RiskAppetite", "#Underwriting", "#InsuranceTech", "#LloydsMarket", "#LLM", "#Governance", "#Blueprint2", "#AIOps"],
+    "category": "day-app",
+    "day": 3,
+    "app": "risk-appetite-parser",
+    "file": "d03-day-3-risk-appetite-documents-should-be-machine-readable.md",
+    "publishOrder": 9
+  },
+  {
+    "id": "D04",
+    "title": "Day 4: A Lloyd's Slip Can Hide the Issue in Plain Sight",
+    "hooks": [
+      "If you have ever reviewed a Market Reform Contract slip, you know the feeling.",
+      "Forty pages. Somewhere in there is the clause that matters."
+    ],
+    "cta": "What clause type would you auto-highlight first in a real market review?",
+    "hashtags": ["#LloydsMarket", "#SlipReview", "#InsuranceAI", "#MRC", "#ClauseAnalysis", "#Underwriting", "#SpecialtyInsurance"],
+    "category": "day-app",
+    "day": 4,
+    "app": "slip-reviewer",
+    "file": "d04-day-4-lloyds-slips-need-a-faster-first-read.md",
+    "publishOrder": 10
+  },
+  {
+    "id": "D05",
+    "title": "Day 5: When the Class Code Is Wrong, Everything Downstream Breaks",
+    "hooks": [
+      "\"Professional indemnity for a software consultancy providing AI advisory services to financial institutions.\"",
+      "What class of business is that? PI? Technology E&O? Financial institutions?"
+    ],
+    "cta": "Would you trust this as an underwriter assistant or a front-door validation gate?",
+    "hashtags": ["#Classification", "#UnderwritingOps", "#InsuranceData", "#DataQuality", "#LloydsMarket", "#AIInInsurance", "#DecisionSupport"],
+    "category": "day-app",
+    "day": 5,
+    "app": "class-of-business-classifier",
+    "file": "d05-day-5-free-text-risk-descriptions-need-a-class-code.md",
+    "publishOrder": 11
+  },
+  {
+    "id": "P27",
+    "title": "Section Wrap: Five Underwriting Tools — What I Learned",
+    "hooks": [
+      "Five tools. Five underwriting bottlenecks. One week.",
+      "The hardest problems are not technical. They are domain problems."
+    ],
+    "cta": "If you improved one lever in underwriting this quarter, would it be appetite clarity, triage speed, or portfolio visibility?",
+    "hashtags": ["#LloydsMarket", "#Underwriting", "#InsuranceAI", "#SpecialtyInsurance", "#AIOps", "#BuildInPublic"],
+    "category": "section",
+    "file": "p27-section-wrap-lloyds-specialty-underwriting.md",
+    "publishOrder": 12
+  },
+  {
+    "id": "P21",
+    "title": "Section Start: Exposure Management — If You Cannot See It, You Cannot Control It",
+    "hooks": [
+      "I once sat in a board meeting where someone asked: \"What is our total insured value within 50 miles of the Florida coastline?\"",
+      "The room went quiet."
+    ],
+    "cta": "Where is your biggest exposure blind spot today?",
+    "hashtags": ["#ExposureManagement", "#AccumulationRisk", "#CatRisk", "#InsuranceAnalytics", "#LloydsMarket", "#AIOps", "#RiskManagement"],
+    "category": "section",
+    "file": "p21-section-start-exposure-management.md",
+    "publishOrder": 13
+  },
+  {
+    "id": "D06",
+    "title": "Day 6: The Spreadsheet Said $200M Exposure. The Map Said \"All in One Postcode.\"",
+    "hooks": [
+      "This is a real pattern I have seen.",
+      "Spreadsheet totals hide spatial concentration. Maps reveal it."
+    ],
+    "cta": "What would make this production-ready first for your team?",
+    "hashtags": ["#ExposureManagement", "#AccumulationRisk", "#GeoAnalytics", "#InsuranceTech", "#Heatmap", "#LloydsMarket", "#CatRisk"],
+    "category": "day-app",
+    "day": 6,
+    "app": "exposure-accumulation-heatmap",
+    "file": "d06-day-6-accumulation-risk-is-easier-to-manage-when-you-can-see-it.md",
+    "publishOrder": 14
+  },
+  {
+    "id": "D07",
+    "title": "Day 7: When a Cat Event Breaks, Your Team Needs a Briefing — Not a News Feed",
+    "hooks": [
+      "Hurricane makes landfall. Earthquake in Turkey. Flooding across Northern Europe.",
+      "Within hours, every reinsurer is scrambling for the same information."
+    ],
+    "cta": "Should a cat briefing tool optimise for speed, depth, or strict one-page format?",
+    "hashtags": ["#CatRisk", "#ExposureManagement", "#InsuranceAnalytics", "#EventBriefing", "#RiskOps", "#LloydsMarket", "#Reinsurance"],
+    "category": "day-app",
+    "day": 7,
+    "app": "cat-event-briefing",
+    "file": "d07-day-7-cat-event-briefings-should-drive-action-not-noise.md",
+    "publishOrder": 15
+  },
+  {
+    "id": "P28",
+    "title": "Section Wrap: Exposure Management — From Spreadsheets to Spatial Intelligence",
+    "hooks": [
+      "Two tools. Two perspectives on the same problem.",
+      "One is proactive surveillance. The other is reactive response."
+    ],
+    "cta": "Which metric should drive weekly exposure action first?",
+    "hashtags": ["#ExposureManagement", "#AccumulationRisk", "#CatRisk", "#InsuranceAnalytics", "#LloydsMarket", "#AIOps"],
+    "category": "section",
+    "file": "p28-section-wrap-exposure-management.md",
+    "publishOrder": 16
+  },
+  {
+    "id": "P22",
+    "title": "Section Start: Claims Ops — Where Process Meets Promise",
+    "hooks": [
+      "The moment a policyholder files a claim is the moment your product is actually tested.",
+      "Everything before that is a promise. Claims is where the promise gets kept or broken."
+    ],
+    "cta": "What is the first claims handoff you would improve without reducing control?",
+    "hashtags": ["#ClaimsOps", "#InsuranceAI", "#FNOL", "#ClaimsManagement", "#LloydsMarket", "#AIOps", "#CustomerExperience"],
+    "category": "section",
+    "file": "p22-section-start-claims-ops.md",
+    "publishOrder": 17
+  },
+  {
+    "id": "D08",
+    "title": "Day 8: The Renewal Looked Identical Until I Diffed the Endorsement",
+    "hooks": [
+      "Renewal season. The slip comes back marked \"as expiring.\" The broker says nothing has changed.",
+      "Then six months later, a claim is declined because a sub-limit was halved."
+    ],
+    "cta": "Where would this save the most time in your organisation?",
+    "hashtags": ["#PolicyWordings", "#Renewals", "#InsuranceAI", "#Endorsements", "#RiskReview", "#LloydsMarket", "#ClauseAnalysis"],
+    "category": "day-app",
+    "day": 8,
+    "app": "policy-endorsement-diff-checker",
+    "file": "d08-day-8-endorsement-changes-can-hide-material-risk.md",
+    "publishOrder": 18
+  },
+  {
+    "id": "D09",
+    "title": "Day 9: Your Referral Queue Is Lying to You About Priority",
+    "hooks": [
+      "\"Work the queue in order.\"",
+      "A $500K PI referral gets the same queue position as a $15M construction liability with three coverage flags."
+    ],
+    "cta": "Would you replace queue order entirely or use scored priority as reviewer guidance?",
+    "hashtags": ["#WorkflowAutomation", "#UnderwritingReferral", "#InsuranceOps", "#Prioritisation", "#DecisionIntelligence", "#AIOps"],
+    "category": "day-app",
+    "day": 9,
+    "app": "referral-priority-queue-scorer",
+    "file": "d09-day-9-referral-queues-need-ranking-not-just-backlog.md",
+    "publishOrder": 19
+  },
+  {
+    "id": "D10",
+    "title": "Day 10: The First Notice of Loss Is Where Speed and Accuracy Collide",
+    "hooks": [
+      "A claims handler opens their inbox on Monday morning. Fourteen new FNOLs.",
+      "Without triage, all fourteen get the same treatment."
+    ],
+    "cta": "If you could automate one claims handoff tomorrow without reducing control, which one would it be?",
+    "hashtags": ["#ClaimsOps", "#FNOL", "#InsuranceAI", "#ClaimsTriage", "#Automation", "#LloydsMarket", "#InsuranceClaims"],
+    "category": "day-app",
+    "day": 10,
+    "app": "claims-fnol-triage-assistant",
+    "file": "d10-day-10-fnol-triage-should-start-with-a-decision-not-an-inbox.md",
+    "publishOrder": 20
+  },
+  {
+    "id": "D11",
+    "title": "Day 11: A Reserve Number Without Reasoning Is Just a Guess with Authority",
+    "hooks": [
+      "\"Set initial reserve at $750K.\"",
+      "Every claims handler has written a sentence like this. But the real question is: why $750K?"
+    ],
+    "cta": "Should initial reserve suggestions come with confidence bands or point estimates?",
+    "hashtags": ["#ClaimsOps", "#Reserves", "#InsuranceAI", "#ClaimsManagement", "#LloydsMarket", "#RiskOps", "#Governance"],
+    "category": "day-app",
+    "day": 11,
+    "app": "claims-reserve-advisor",
+    "file": "d11-day-11-claims-reserves-need-reasoning-not-just-numbers.md",
+    "publishOrder": 21
+  },
+  {
+    "id": "P29",
+    "title": "Section Wrap: Claims Ops — Four Tools Across the Claims Lifecycle",
+    "hooks": [
+      "Endorsement diff. Referral scoring. FNOL triage. Reserve reasoning.",
+      "Four tools. One design principle: enhance the handler's judgment, do not replace it."
+    ],
+    "cta": "What is your lead KPI in claims: cycle time, leakage reduction, or consistency of triage outcomes?",
+    "hashtags": ["#ClaimsOps", "#InsuranceAI", "#FNOL", "#ClaimsManagement", "#LloydsMarket", "#AIOps"],
+    "category": "section",
+    "file": "p29-section-wrap-claims-ops.md",
+    "publishOrder": 22
+  },
+  {
+    "id": "P09",
+    "title": "What Broke and What I Fixed by Day 3",
+    "hooks": [
+      "Three days in. Three apps shipped. And a growing list of things that nearly derailed each one.",
+      "Building at pace is a stress test for your infrastructure."
+    ],
+    "cta": "What guardrail gave your team the highest leverage early in a build cycle?",
+    "hashtags": ["#BuildInPublic", "#LessonsLearned", "#InsuranceInnovation", "#DeliveryExcellence", "#Supabase", "#NextJS", "#DevOps"],
+    "category": "milestone",
+    "file": "p09-what-broke-and-what-improved-by-day-3.md",
+    "publishOrder": 23
+  },
+  {
+    "id": "P10",
+    "title": "Ten Days In: The System Is Compounding",
+    "hooks": [
+      "Day 1 took an entire weekend.",
+      "Day 10 shipped in under four hours — including tests, deployment, database setup, and visual QA."
+    ],
+    "cta": "If you want speed without chaos, standardise the hard parts early. What did you standardise?",
+    "hashtags": ["#DigitalTransformation", "#EngineeringLeadership", "#BuildInPublic", "#InsuranceAI", "#AIOps", "#Productivity", "#CompoundingGains"],
+    "category": "milestone",
+    "file": "p10-ten-days-in-the-system-is-compounding.md",
+    "publishOrder": 24
+  },
+  {
+    "id": "P11",
+    "title": "Ten Lessons from Ten Days: Speed Comes from Standards, Not Shortcuts",
+    "hooks": [
+      "I shipped 11 insurance AI apps in 10 days.",
+      "Here is what actually worked, what did not, and what I would tell someone starting a similar challenge."
+    ],
+    "cta": "Which of these resonates most with how your team builds?",
+    "hashtags": ["#LessonsLearned", "#OperatingModel", "#InsuranceTechnology", "#BuildInPublic", "#AI", "#EngineeringLeadership", "#Productivity"],
+    "category": "milestone",
+    "file": "p11-lessons-learned-speed-comes-from-standards-not-shortcuts.md",
+    "publishOrder": 25
+  },
+  {
+    "id": "P23",
+    "title": "Section Start: Broking and Placement — The Right Risk Still Needs the Right Market Path",
+    "hooks": [
+      "A broker once told me the hardest part of placement is not finding a market.",
+      "It is telling the right story to the right market at the right time."
+    ],
+    "cta": "Where do placements stall most for your team?",
+    "hashtags": ["#Insurance", "#Broking", "#Placement", "#LloydsMarket", "#MarketReform", "#InsuranceAI", "#AIOps"],
+    "category": "section",
+    "file": "p23-section-start-broking-placement.md",
+    "publishOrder": 26
+  },
+  {
+    "id": "P30",
+    "title": "Section Wrap: Broking and Placement — Preparation Wins Markets",
+    "hooks": [
+      "The best placement outcomes I have seen never came from the fastest broker.",
+      "They came from the best-prepared broker."
+    ],
+    "cta": "What would lift placement outcomes more: better risk narratives or cleaner market execution?",
+    "hashtags": ["#Broking", "#Placement", "#LloydsMarket", "#MarketReform", "#InsuranceAI", "#AIOps"],
+    "category": "section",
+    "file": "p30-section-wrap-broking-placement.md",
+    "publishOrder": 27
+  },
+  {
+    "id": "P24",
+    "title": "Section Start: Productivity — Remove Friction, Not Judgment",
+    "hooks": [
+      "Every insurance team I have worked with has the same problem disguised as ten different symptoms.",
+      "These are not ten problems. They are one problem: too much manual work between receiving information and acting on it."
+    ],
+    "cta": "Which repetitive task in your team should be removed first?",
+    "hashtags": ["#Insurance", "#Productivity", "#Automation", "#AIOps", "#InsuranceTechnology", "#OperationalExcellence"],
+    "category": "section",
+    "file": "p24-section-start-productivity-automation.md",
+    "publishOrder": 28
+  },
+  {
+    "id": "P31",
+    "title": "Section Wrap: Productivity — The Gains Come from Removing Friction",
+    "hooks": [
+      "The biggest productivity improvements I have seen in insurance did not come from new software.",
+      "They came from removing one unnecessary handoff."
+    ],
+    "cta": "Which workflow should be standardised next to remove avoidable rework?",
+    "hashtags": ["#Productivity", "#Automation", "#Insurance", "#AIOps", "#OperationalExcellence"],
+    "category": "section",
+    "file": "p31-section-wrap-productivity-automation.md",
+    "publishOrder": 29
+  },
+  {
+    "id": "P25",
+    "title": "Section Start: Leadership — The Operating Rhythm Is the Strategy",
+    "hooks": [
+      "I have worked with leaders who had brilliant strategies and teams that could not execute them.",
+      "The problem was never talent. It was operating rhythm."
+    ],
+    "cta": "Which operating rhythm would improve outcomes fastest?",
+    "hashtags": ["#Leadership", "#TeamOps", "#OperatingModel", "#Insurance", "#AIOps", "#ManagementTools"],
+    "category": "section",
+    "file": "p25-section-start-leadership-team-ops.md",
+    "publishOrder": 30
+  },
+  {
+    "id": "P32",
+    "title": "Section Wrap: Leadership Tools — Systems Over Slogans",
+    "hooks": [
+      "The best leaders I have worked with did not have the most charismatic presence.",
+      "They had the clearest operating rhythms."
+    ],
+    "cta": "Which operating rhythm would improve outcomes fastest?",
+    "hashtags": ["#Leadership", "#TeamOps", "#OperatingModel", "#Insurance", "#AIOps", "#ManagementTools"],
+    "category": "section",
+    "file": "p32-section-wrap-leadership-team-ops.md",
+    "publishOrder": 31
+  },
+  {
+    "id": "P26",
+    "title": "Section Start: Compliance — The Best Controls Do Not Slow the Business",
+    "hooks": [
+      "Compliance gets a bad reputation in insurance.",
+      "Because the controls were bolted on after the workflow was designed, not built into it."
+    ],
+    "cta": "Which control could be redesigned from a separate process into an integrated workflow step?",
+    "hashtags": ["#Insurance", "#Compliance", "#Governance", "#RegulatoryCompliance", "#AIOps", "#InsuranceTechnology", "#RiskManagement"],
+    "category": "section",
+    "file": "p26-section-start-general-insurance-compliance.md",
+    "publishOrder": 32
+  },
+  {
+    "id": "P33",
+    "title": "Section Wrap: Compliance — Built In, Not Bolted On",
+    "hooks": [
+      "Three tools. Three compliance workflows. One design principle.",
+      "The control should be invisible to the user."
+    ],
+    "cta": "Which compliance control could be redesigned from a separate process into an integrated workflow step?",
+    "hashtags": ["#Compliance", "#Governance", "#Insurance", "#RegulatoryCompliance", "#AIOps", "#InsuranceTechnology"],
+    "category": "section",
+    "file": "p33-section-wrap-general-insurance-compliance.md",
+    "publishOrder": 33
+  }
+]
