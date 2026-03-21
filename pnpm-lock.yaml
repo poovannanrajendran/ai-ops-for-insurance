@@ -158,6 +158,9 @@ importers:
 
   apps/claims-fnol-triage-assistant:
     dependencies:
+      '@ai-ops/common-ui':
+        specifier: workspace:*
+        version: link:../../packages/common-ui
       '@supabase/supabase-js':
         specifier: ^2.99.1
         version: 2.99.1
@@ -725,6 +728,9 @@ importers:
 
   packages/common-ui:
     dependencies:
+      '@statcounter/nextjs':
+        specifier: ^0.1.5
+        version: 0.1.5(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -1286,6 +1292,12 @@ packages:
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  '@statcounter/nextjs@0.1.5':
+    resolution: {integrity: sha512-TuGijZ6fxF+tS/3tz/Uh5VKWMqvbqxaBKPPeJesTwquxfIuu3KozqiTHWu2LU6nBj0qYElBFZu5/D4RB/ftaIQ==}
+    peerDependencies:
+      next: '>=13.0.0'
+      react: '>=18.0.0'
 
   '@supabase/auth-js@2.99.1':
     resolution: {integrity: sha512-x7lKKTvKjABJt/FYcRSPiTT01Xhm2FF8RhfL8+RHMkmlwmRQ88/lREupIHKwFPW0W6pTCJqkZb7Yhpw/EZ+fNw==}
@@ -3034,6 +3046,11 @@ snapshots:
   '@rolldown/pluginutils@1.0.0-rc.9': {}
 
   '@standard-schema/spec@1.1.0': {}
+
+  '@statcounter/nextjs@0.1.5(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      next: 16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
 
   '@supabase/auth-js@2.99.1':
     dependencies:

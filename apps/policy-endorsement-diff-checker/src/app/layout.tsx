@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StatcounterAnalytics } from "@ai-ops/common-ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        {process.env.NODE_ENV === "production" ? (
+          <StatcounterAnalytics
+            project={process.env.NEXT_PUBLIC_STATCOUNTER_PROJECT ?? ""}
+            security={process.env.NEXT_PUBLIC_STATCOUNTER_SECURITY ?? ""}
+          />
+        ) : null}
+      </body>
     </html>
   );
 }
