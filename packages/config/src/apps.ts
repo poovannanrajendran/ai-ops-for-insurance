@@ -95,3 +95,27 @@ export const binderCapacityMonitorApp: AppMetadata = {
   schema: `${SHARED_SCHEMA_PREFIX}bindercapacity`,
   devPort: 3011
 };
+
+export const treatyStructureExplainerApp: AppMetadata = {
+  slug: "treaty-structure-explainer",
+  shortName: "treatystructure",
+  displayName: "Treaty Structure Explainer",
+  schema: `${SHARED_SCHEMA_PREFIX}treatystructure`,
+  devPort: 3012
+};
+
+export const exposureClashDetectorApp: AppMetadata = {
+  slug: "exposure-clash-detector",
+  shortName: "exposureclash",
+  displayName: "Exposure Clash Detector",
+  schema: `${SHARED_SCHEMA_PREFIX}exposureclash`,
+  devPort: 3013
+};
+
+export const claimsLeakageFlaggerApp: AppMetadata = {
+  slug: "claims-leakage-flagger",
+  shortName: "claimsleakage",
+  displayName: "Claims Leakage Flagger",
+  schema: `${SHARED_SCHEMA_PREFIX}claimsleakage`,
+  devPort: 3014
+};

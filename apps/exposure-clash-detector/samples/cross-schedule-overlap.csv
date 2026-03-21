@@ -1,0 +1,5 @@
+schedule_id,policy_id,insured_name,location,country,peril,period_start,period_end,tiv_gbp,limit_gbp
+SCHED-A,POL-001,Atlas Warehousing Ltd,Rotterdam Terminal,Netherlands,Flood,2026-01-01,2026-12-31,8500000,5000000
+SCHED-B,POL-774,Atlas Warehousing Ltd,Rotterdam Terminal,Netherlands,Flood,2026-03-01,2026-11-30,7200000,4500000
+SCHED-B,POL-778,Delta Cold Chain,Hamburg Hub,Germany,Fire,2026-01-01,2026-12-31,3100000,1800000
+SCHED-C,POL-921,Atlas Warehousing Ltd,Rotterdam Terminal,Netherlands,Storm,2026-01-01,2026-12-31,5400000,3000000

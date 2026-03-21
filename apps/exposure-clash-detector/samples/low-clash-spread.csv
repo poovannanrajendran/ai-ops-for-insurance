@@ -1,0 +1,4 @@
+schedule_id,policy_id,insured_name,location,country,peril,period_start,period_end,tiv_gbp,limit_gbp
+SCHED-A,POL-101,Northlight Foods,Leeds Plant,United Kingdom,Fire,2026-01-01,2026-12-31,4200000,2000000
+SCHED-B,POL-404,Northlight Foods,Leeds Plant,United Kingdom,Fire,2026-06-01,2026-12-31,2500000,1200000
+SCHED-C,POL-555,Bluewater Cargo,Felixstowe,United Kingdom,Flood,2026-01-01,2026-12-31,3900000,1800000

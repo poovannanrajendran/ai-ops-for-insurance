@@ -1,0 +1,5 @@
+claim_id,policy_id,claimant_name,cause_of_loss,loss_date,notified_date,reserve_gbp,incurred_gbp,paid_gbp,status
+CLM-1001,POL-778,Helios Engineering,Water Damage,2026-01-05,2026-03-10,95000,162000,88000,Open
+CLM-1002,POL-778,Helios Engineering,Water Damage,2026-01-05,2026-03-12,82000,140000,73000,Open
+CLM-2004,POL-410,Northstar Logistics,Third-party Injury,2026-02-14,2026-02-20,240000,315000,150000,Reopened
+CLM-2005,POL-410,Northstar Logistics,Third-party Injury,2026-02-14,2026-02-21,180000,212000,92000,Open

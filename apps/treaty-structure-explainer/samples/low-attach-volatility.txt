@@ -1,0 +1,8 @@
+Treaty Type: Excess of Loss
+Subject Business: Global marine cargo
+Territory: Global excluding sanctioned territories
+Attachment: GBP 500,000
+Limit: GBP 3,000,000
+Ceding Commission: 8%
+Signed Share: 85%
+Reinstatements: 0

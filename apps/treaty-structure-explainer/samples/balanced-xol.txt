@@ -1,0 +1,8 @@
+Treaty Type: Excess of Loss
+Subject Business: UK commercial property
+Territory: United Kingdom
+Attachment: GBP 2,500,000
+Limit: GBP 7,500,000
+Ceding Commission: 12.5%
+Signed Share: 100%
+Reinstatements: 1
