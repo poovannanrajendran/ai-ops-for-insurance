@@ -26,7 +26,7 @@ if [ -e "$APP_DIR" ]; then
   exit 1
 fi
 
-mkdir -p "$APP_DIR"/db "$APP_DIR"/samples "$APP_DIR"/src/app/api/$SHORT_NAME/analyze "$APP_DIR"/src/app "$APP_DIR"/tests
+mkdir -p "$APP_DIR"/db "$APP_DIR"/samples "$APP_DIR"/src/app/api/$SHORT_NAME/analyze "$APP_DIR"/src/app "$APP_DIR"/src/services "$APP_DIR"/tests
 
 cat > "$APP_DIR/.gitignore" <<'EOF'
 .next
@@ -149,16 +149,47 @@ cat > "$APP_DIR/src/app/globals.css" <<'EOF'
 @import "tailwindcss";
 
 :root {
-  --background: #eef4f6;
-  --foreground: #0f172a;
+  --page-bg: #e8eef3;
+  --page-ink: #0f172a;
+  --accent: #0f5f66;
+  --accent-soft: #dbeff0;
+  --accent-strong: #0b3b47;
+  --panel-subtle: rgba(255, 255, 255, 0.82);
+  --panel-border: rgba(71, 85, 105, 0.18);
+  --hero-border: rgba(255, 255, 255, 0.72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(15, 95, 102, 0.14), transparent 26%),
+    radial-gradient(circle at top right, rgba(30, 64, 175, 0.12), transparent 24%),
+    linear-gradient(180deg, #f4f7fa 0%, var(--page-bg) 100%);
 }
 
 body {
   margin: 0;
+  color: var(--page-ink);
+  font-family:
+    "Avenir Next",
+    "Segoe UI",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
   min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "Inter", "Segoe UI", sans-serif;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.44), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(15, 23, 42, 0));
+}
+
+button,
+input,
+textarea {
+  font: inherit;
 }
 EOF
 
@@ -167,7 +198,7 @@ export default function Page() {
   return (
     <main style={{ padding: 24 }}>
       <h1>$DISPLAY_NAME</h1>
-      <p>Day $DAY_NUM scaffold created. Implement intake, analysis route, and result cards.</p>
+      <p>Day $DAY_NUM scaffold created. Implement intake, analysis route, and result cards with symmetric layout.</p>
     </main>
   );
 }
@@ -180,24 +211,125 @@ cat > "$APP_DIR/src/app/icon.svg" <<'EOF'
 </svg>
 EOF
 
+cat > "$APP_DIR/src/services/analyze-$SHORT_NAME.ts" <<EOF
+export interface ${SHORT_NAME^}Insight {
+  summary: string;
+  queryHits: string[];
+}
+
+export function analyze${SHORT_NAME^}(inputText: string, question?: string): {
+  missing: string[];
+  insight: ${SHORT_NAME^}Insight;
+} {
+  const missing = inputText.trim().length < 80 ? ["inputText"] : [];
+  const trimmedQuestion = question?.trim() ?? "";
+  const queryHits = trimmedQuestion
+    ? inputText
+        .split(/[\r\n]+/)
+        .filter((line) => line.toLowerCase().includes(trimmedQuestion.toLowerCase()))
+        .slice(0, 3)
+    : [];
+
+  return {
+    missing,
+    insight: {
+      summary: missing.length > 0 ? "Input too short for deterministic analysis." : "Scaffold analysis passed.",
+      queryHits
+    }
+  };
+}
+EOF
+
 cat > "$APP_DIR/src/app/api/$SHORT_NAME/analyze/route.ts" <<EOF
 import { NextResponse } from "next/server";
+import { z } from "zod";
 
-export async function POST() {
+import { analyze${SHORT_NAME^} } from "@/services/analyze-$SHORT_NAME";
+
+const requestSchema = z.object({
+  inputText: z.string().min(10, "Provide input text."),
+  sourceLabel: z.string().max(160).optional(),
+  question: z.string().max(280).optional()
+});
+
+export async function POST(request: Request) {
+  const startedAt = Date.now();
+  const requestId = crypto.randomUUID();
+  const body = await request.json().catch(() => null);
+  const parsed = requestSchema.safeParse(body);
+
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0]?.message ?? "Invalid payload." }, { status: 400 });
+  }
+
+  const { missing, insight } = analyze${SHORT_NAME^}(parsed.data.inputText, parsed.data.question);
+  if (missing.length > 0) {
+    return NextResponse.json({ error: "Missing required fields: inputText." }, { status: 400 });
+  }
+
   return NextResponse.json({
-    requestId: crypto.randomUUID(),
-    processingTimeMs: 0,
-    persistence: { status: "skipped", reason: "Implement route logic and Supabase persistence." }
+    requestId,
+    analysis: insight,
+    processingTimeMs: Date.now() - startedAt,
+    persistence: { status: "skipped", reason: "Implement Supabase persistence and audit stages." }
   });
 }
 EOF
 
-cat > "$APP_DIR/tests/smoke.test.ts" <<'EOF'
-import { describe, expect, it } from "vitest";
+cat > "$APP_DIR/tests/analyze-$SHORT_NAME.test.ts" <<EOF
+import { describe, expect, test } from "vitest";
 
-describe("scaffold", () => {
-  it("is initialized", () => {
-    expect(true).toBe(true);
+import { analyze${SHORT_NAME^} } from "@/services/analyze-$SHORT_NAME";
+
+describe("analyze${SHORT_NAME^}", () => {
+  test("returns insight for valid input (positive case)", () => {
+    const result = analyze${SHORT_NAME^}(
+      "This scaffold input is intentionally long enough to pass the required deterministic minimum length gate for analysis."
+    );
+
+    expect(result.missing).toEqual([]);
+    expect(result.insight.summary).toContain("passed");
+  });
+
+  test("returns missing field when input is too short (negative case)", () => {
+    const result = analyze${SHORT_NAME^}("short input");
+    expect(result.missing).toContain("inputText");
+  });
+});
+EOF
+
+cat > "$APP_DIR/tests/analyze-route.test.ts" <<EOF
+import { describe, expect, test } from "vitest";
+
+import { POST } from "@/app/api/$SHORT_NAME/analyze/route";
+
+describe("POST /api/$SHORT_NAME/analyze", () => {
+  test("returns 200 for valid payload (positive case)", async () => {
+    const response = await POST(
+      new Request("http://localhost:$PORT/api/$SHORT_NAME/analyze", {
+        method: "POST",
+        body: JSON.stringify({
+          inputText:
+            "This scaffold request payload is intentionally long enough to pass deterministic validation and return a successful analysis response.",
+          sourceLabel: "sample.txt"
+        })
+      })
+    );
+
+    expect(response.status).toBe(200);
+  });
+
+  test("returns 400 for invalid payload (negative case)", async () => {
+    const response = await POST(
+      new Request("http://localhost:$PORT/api/$SHORT_NAME/analyze", {
+        method: "POST",
+        body: JSON.stringify({
+          inputText: "short"
+        })
+      })
+    );
+
+    expect(response.status).toBe(400);
   });
 });
 EOF
@@ -269,6 +401,8 @@ Then expose schema in Supabase Data API:
 - Implement analyzer + Zod contract
 - Implement non-blocking audit logging stages
 - Pass lint/test/typecheck/build
+- Run full QA gate:
+  - \`pnpm qa:app $APP_FOLDER $PKG_NAME $PORT\`
 EOF
 
 if [ ! -f "$DOC_PLAN" ]; then
@@ -295,3 +429,4 @@ echo "Next actions:"
 echo "1) Add metadata in packages/config/src/apps.ts"
 echo "2) Add deploy alias in package.json (deploy:day$DAY_NUM)"
 echo "3) Run: bash scripts/predeploy-check.sh $APP_FOLDER"
+echo "4) Run: pnpm qa:app $APP_FOLDER $PKG_NAME $PORT"

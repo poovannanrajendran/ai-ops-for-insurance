@@ -88,10 +88,16 @@ Applies to: Day 5 onward and retrofits to existing apps when touched
 ## 8. Test and quality gates (required)
 
 - Unit tests for core analyzer/service.
+- Unit tests must include both positive and negative cases.
 - Route tests for:
   - valid request
   - validation/gate failure
   - persistence stored/skipped/failed paths
+- Route tests must assert `200` and `400` explicitly.
+- Run test contract verifier:
+  - `node scripts/qa/verify-app-tests.mjs <app-folder>`
+- Run Playwright visual smoke:
+  - `bash scripts/qa/run-app-visual.sh <app-folder> @ai-ops/<app-folder> <port>`
 - Run and pass:
   - `lint`
   - `test`
@@ -140,8 +146,12 @@ Applies to: Day 5 onward and retrofits to existing apps when touched
 - [ ] Analysis table writes verified in Supabase.
 - [ ] Audit table writes verified for success and failure paths.
 - [ ] Unit tests pass.
+- [ ] Unit tests include positive + negative scenarios.
 - [ ] API route tests pass.
+- [ ] API route tests include explicit `200` + `400` assertions.
 - [ ] `lint`, `test`, `typecheck`, `build` all pass locally.
+- [ ] `node scripts/qa/verify-app-tests.mjs <app-folder>` passes.
+- [ ] `bash scripts/qa/run-app-visual.sh <app-folder> @ai-ops/<app-folder> <port>` passes.
 - [ ] Visual screenshots captured for desktop/mobile and analyzed/error states.
 - [ ] Vercel settings verified (root directory, build/install commands, env vars).
 - [ ] Production smoke test returns expected class/result and `persistence.status=stored`.

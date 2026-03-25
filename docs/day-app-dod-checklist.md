@@ -9,6 +9,8 @@ Applies to: Every day app from Day 11 onward (and retrofits when existing apps a
 - [ ] `pnpm --filter <pkg> test` passes
 - [ ] `pnpm --filter <pkg> typecheck` passes
 - [ ] `pnpm --filter <pkg> build` passes
+- [ ] Positive and negative unit tests exist for analyzer/service logic
+- [ ] Positive and negative route tests exist (`200` success + `400` validation/gate failure)
 - [ ] Route-level request validation is implemented with explicit error messages
 - [ ] Required-field or minimum-input gate exists and is tested
 
@@ -32,6 +34,7 @@ Applies to: Every day app from Day 11 onward (and retrofits when existing apps a
 - [ ] Warning visuals are obvious and consistent (amber warning state)
 - [ ] Desktop and mobile screenshots captured
 - [ ] Result state screenshot captured
+- [ ] Playwright visual smoke check passes (border + intake visibility baseline)
 
 ## 4. Deployment and runtime gates
 
@@ -50,10 +53,12 @@ Applies to: Every day app from Day 11 onward (and retrofits when existing apps a
 bash scripts/predeploy-check.sh <app-folder>
 
 # 2) Build/test quality gates
+node scripts/qa/verify-app-tests.mjs <app-folder>
 pnpm --filter @ai-ops/<app-folder> lint
 pnpm --filter @ai-ops/<app-folder> test
 pnpm --filter @ai-ops/<app-folder> typecheck
 pnpm --filter @ai-ops/<app-folder> build
+bash scripts/qa/run-app-visual.sh <app-folder> @ai-ops/<app-folder> <port>
 
 # 3) Deploy (CLI mode; works with Hobby 10-project Git connection cap)
 vercel link --cwd <repo-root> --project <vercel-project-name> --yes
@@ -68,4 +73,7 @@ bash scripts/new-day-app.sh <day-number> <app-folder> <short-name> "<display-nam
 
 # Example
 bash scripts/new-day-app.sh 12 treaty-renewal-tracker treatyrenewal "Treaty Renewal Tracker" 3012
+
+# Full per-app gate runner
+pnpm qa:app <app-folder> @ai-ops/<app-folder> <port>
 ```

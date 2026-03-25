@@ -45,6 +45,8 @@
     "lint:md": "markdownlint --ignore node_modules \"**/*.md\"",
     "test:ui:common": "pnpm --filter @ai-ops/common-ui test",
     "test:visual:day12-14": "bash ./scripts/qa/run-day12-14-visual.sh",
+    "test:visual:app": "bash ./scripts/qa/run-app-visual.sh",
+    "qa:app": "bash ./scripts/qa/run-app-quality-gates.sh",
     "supabase:bootstrap:schema": "bash ./scripts/supabase/bootstrap-schema.sh",
     "supabase:bootstrap:all": "bash ./scripts/supabase/bootstrap-all-schemas.sh"
   },

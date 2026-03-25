@@ -159,3 +159,20 @@ RAG sync:
   - `pnpm test:ui:common` passed
   - `pnpm test:visual:day12-14` passed (3/3)
   - Day 12 persistence now returns `stored` after Data API refresh.
+
+## 2026-03-25 quality-gate standardization (all future apps)
+- New reusable QA gates to enforce lessons learned on every implementation:
+  - `scripts/qa/verify-app-tests.mjs`
+    - validates positive + negative unit tests
+    - validates route tests include explicit `200` + `400` assertions
+  - `scripts/qa/run-app-visual.sh`
+    - starts app dev server, runs Playwright intake/border smoke test, captures screenshot artifact
+  - `scripts/qa/run-app-quality-gates.sh`
+    - predeploy checks + test contract verification + lint/test/typecheck/build + visual smoke
+- Scaffold upgraded:
+  - `scripts/new-day-app.sh` now generates:
+    - standard theme tokens
+    - analyzer/service template
+    - positive/negative unit tests
+    - positive/negative route tests
+    - QA command guidance (`pnpm qa:app <app-folder> @ai-ops/<app-folder> <port>`)
