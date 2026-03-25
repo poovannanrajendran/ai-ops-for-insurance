@@ -42,10 +42,15 @@
     "rag:sync-all": "node ./scripts/rag/sync-all.mjs",
     "format": "prettier --write .",
     "format:md": "prettier --write \"**/*.md\"",
-    "lint:md": "markdownlint --ignore node_modules \"**/*.md\""
+    "lint:md": "markdownlint --ignore node_modules \"**/*.md\"",
+    "test:ui:common": "pnpm --filter @ai-ops/common-ui test",
+    "test:visual:day12-14": "bash ./scripts/qa/run-day12-14-visual.sh",
+    "supabase:bootstrap:schema": "bash ./scripts/supabase/bootstrap-schema.sh",
+    "supabase:bootstrap:all": "bash ./scripts/supabase/bootstrap-all-schemas.sh"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",

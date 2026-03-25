@@ -181,8 +181,8 @@ export default function Page() {
                 </button>
                 <p className="text-sm text-slate-500">Runs deterministic treaty parsing and loss-flow explanation checks through the app route.</p>
               </div>
-              {error ? <p className="text-sm font-semibold text-red-600">{error}</p> : null}
-              {result?.persistence.reason ? <p className="text-sm text-amber-700">{result.persistence.reason}</p> : null}
+              {error ? <StatusLine tone="issue" text={error} /> : null}
+              {result?.persistence.reason ? <StatusLine tone="warn" text={result.persistence.reason} /> : null}
             </div>
           </div>
         </Card>
@@ -236,7 +236,7 @@ export default function Page() {
               result.analysis.warnings.length > 0 ? (
                 <WarningList warnings={result.analysis.warnings} />
               ) : (
-                <p className="text-sm text-emerald-700">No structure warnings were raised for this treaty input.</p>
+                <StatusLine tone="ok" text="No structure warnings were raised for this treaty input." />
               )
             ) : (
               <p className="text-sm text-slate-500">Warnings appear after analysis.</p>
@@ -266,12 +266,29 @@ function WarningList({ warnings }: { warnings: TreatyWarning[] }) {
     <ul className="space-y-2 text-sm leading-6 text-slate-700">
       {warnings.map((warning) => (
         <li key={warning.code} className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2">
-          <p className="font-semibold text-amber-700">{warning.severity.toUpperCase()} · {warning.code.replace(/_/g, " ")}</p>
+          <p className="flex items-center gap-2 font-semibold text-amber-700">
+            <StatusDot tone="warn" />
+            <span>{warning.severity.toUpperCase()} · {warning.code.replace(/_/g, " ")}</span>
+          </p>
           <p>{warning.message}</p>
         </li>
       ))}
     </ul>
   );
+}
+
+function StatusLine({ tone, text }: { tone: "ok" | "warn" | "issue"; text: string }) {
+  return (
+    <p className={`flex items-start gap-2 text-sm ${tone === "ok" ? "text-emerald-700" : tone === "warn" ? "text-amber-700" : "text-red-600"}`}>
+      <StatusDot tone={tone} />
+      <span>{text}</span>
+    </p>
+  );
+}
+
+function StatusDot({ tone }: { tone: "ok" | "warn" | "issue" }) {
+  const palette = tone === "ok" ? "bg-emerald-500" : tone === "warn" ? "bg-amber-500" : "bg-red-500";
+  return <span aria-hidden className={`mt-1 inline-block h-2.5 w-2.5 shrink-0 rounded-full ${palette}`} />;
 }
 
 function LayerTable({ layers }: { layers: LayerBand[] }) {

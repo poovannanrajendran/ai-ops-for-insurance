@@ -135,3 +135,27 @@ RAG sync:
 - Treat this project as implementation-first with deterministic behavior over speculative LLM output.
 - Do not propose UI changes that break symmetry and spacing rhythm established in Day 3-6.
 - Do not remove audit logging; extend it consistently for new apps.
+
+## 2026-03-25 hardening update (Day 12-14)
+- Design consistency correction:
+  - Day 12-14 now use the same card border style cues as earlier apps via shared component update:
+    - `packages/common-ui/src/card.tsx`
+  - Day 12-14 status messaging now uses consistent small indicators:
+    - green = no issues, amber = warning, red = issue/error.
+- Automated guardrails added:
+  - Unit test for shared border contract:
+    - `packages/common-ui/tests/card.test.tsx`
+  - Playwright visual smoke for Day 12-14:
+    - `tests/playwright/day12-14-visual.spec.ts`
+    - `playwright.config.ts`
+    - `scripts/qa/run-day12-14-visual.sh`
+    - package script: `pnpm test:visual:day12-14`
+- Supabase bootstrap/Data API automation added:
+  - `scripts/supabase/bootstrap-schema.sh <app-slug>`
+  - `scripts/supabase/bootstrap-all-schemas.sh`
+  - docs: `docs/supabase-bootstrap-and-data-api.md`
+  - behavior: run init SQL, ensure `pgrst.db_schemas` includes app schema, reload config, verify REST with `Accept-Profile`.
+- Validation snapshots:
+  - `pnpm test:ui:common` passed
+  - `pnpm test:visual:day12-14` passed (3/3)
+  - Day 12 persistence now returns `stored` after Data API refresh.

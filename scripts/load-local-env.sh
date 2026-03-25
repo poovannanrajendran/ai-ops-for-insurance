@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 for env_file in "$REPO_ROOT/.env.local" "$REPO_ROOT/.env.symphony.local"; do
   if [ -f "$env_file" ]; then

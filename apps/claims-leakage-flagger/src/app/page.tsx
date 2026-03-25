@@ -261,10 +261,8 @@ export default function Page() {
                   Runs deterministic leakage checks and governance scoring through the app route.
                 </p>
               </div>
-              {error ? <p className="text-sm font-semibold text-red-600">{error}</p> : null}
-              {result?.persistence.reason ? (
-                <p className="text-sm text-amber-700">{result.persistence.reason}</p>
-              ) : null}
+              {error ? <StatusLine tone="issue" text={error} /> : null}
+              {result?.persistence.reason ? <StatusLine tone="warn" text={result.persistence.reason} /> : null}
             </div>
           </div>
         </Card>
@@ -288,12 +286,16 @@ export default function Page() {
                 {result.analysis.warnings.length > 0 ? (
                   result.analysis.warnings.map((warning) => (
                     <li key={warning}>
-                      <span className="mr-2">⚠️</span>
-                      {warning}
+                      <span className="flex items-start gap-2">
+                        <StatusDot tone="warn" />
+                        <span>{warning}</span>
+                      </span>
                     </li>
                   ))
                 ) : (
-                  <li>No warnings triggered in this run.</li>
+                  <li>
+                    <StatusLine tone="ok" text="No warnings triggered in this run." />
+                  </li>
                 )}
               </ul>
             ) : (
@@ -395,6 +397,20 @@ function RulePill({ rule }: { rule: RuleCount }) {
       <p className="mt-1 text-lg font-semibold text-slate-900">{rule.count}</p>
     </div>
   );
+}
+
+function StatusLine({ tone, text }: { tone: "ok" | "warn" | "issue"; text: string }) {
+  return (
+    <p className={`flex items-start gap-2 text-sm ${tone === "ok" ? "text-emerald-700" : tone === "warn" ? "text-amber-700" : "text-red-600"}`}>
+      <StatusDot tone={tone} />
+      <span>{text}</span>
+    </p>
+  );
+}
+
+function StatusDot({ tone }: { tone: "ok" | "warn" | "issue" }) {
+  const palette = tone === "ok" ? "bg-emerald-500" : tone === "warn" ? "bg-amber-500" : "bg-red-500";
+  return <span aria-hidden className={`mt-1 inline-block h-2.5 w-2.5 shrink-0 rounded-full ${palette}`} />;
 }
 
 function LeakageRow({ finding }: { finding: LeakageFinding }) {
