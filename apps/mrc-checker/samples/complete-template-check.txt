@@ -1,0 +1,24 @@
+UNIQUE MARKET REFERENCE: B0500DEMO2026A
+TYPE: Insurance
+INSURED: Northlight Manufacturing Ltd
+BROKER: Example Placement Brokers Ltd
+PERIOD: From 01 April 2026 to 31 March 2027
+INTEREST: Global manufacturers product liability and recall exposures
+TERRITORIAL LIMITS: United Kingdom, European Union, Canada
+LIMIT OF LIABILITY: USD 5,000,000 any one occurrence and in the annual aggregate
+RETENTION: USD 100,000 each and every claim
+CURRENCY: USD
+NOTIFICATION OF CLAIMS TO: claims@placement-brokers.example
+PAYMENT TERMS: Premium due within 45 days of inception
+
+CLAUSES:
+- Sanction Limitation and Exclusion Clause
+- Product recall endorsement
+- Minimum earned premium clause
+
+SUBJECTIVITIES:
+- Updated loss runs to be provided before final signing
+- Local admitted paper confirmation required for Canada
+
+CHOICE OF LAW: New York law
+CHOICE OF JURISDICTION: New York courts

@@ -1,0 +1,6 @@
+placement_id,account_name,broker,market_name,status,target_share_pct,signed_share_pct,quoted_share_pct,line_size_gbp,premium_gbp,follow_up_age_days,capacity_change_pct,class_of_business,territory
+PL-401,Northbank Logistics,Broking Partners,Lead Syndicate,Placed,30,30,30,12000000,540000,1,2,Property,United Kingdom
+PL-401,Northbank Logistics,Broking Partners,Harbor Mutual,Quoted,20,0,16,12000000,540000,6,-18,Property,United Kingdom
+PL-401,Northbank Logistics,Broking Partners,Summit Re,Open,20,0,8,12000000,540000,4,-6,Property,United Kingdom
+PL-401,Northbank Logistics,Broking Partners,Atlas Specialty,Placed,15,15,15,12000000,540000,1,5,Property,United Kingdom
+PL-401,Northbank Logistics,Broking Partners,Canal Insurance,Follow Up,15,0,10,12000000,540000,7,-12,Property,United Kingdom

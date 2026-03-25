@@ -1,0 +1,10 @@
+Policy Schedule: PROP-72144
+Coverage:
+Territory: United Kingdom and Ireland only
+Limit of Liability: GBP 7,500,000 any one occurrence
+Deductible: GBP 100,000 each and every loss
+Cyber Exclusion: Absolute cyber exclusion applies with no carve-back
+Claims Notification: Notify all losses within 14 days
+Conditions:
+- Sprinkler impairment to be reported within 7 days
+- Vacant premises subject to daily inspection and prior insurer approval

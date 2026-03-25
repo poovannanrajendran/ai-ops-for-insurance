@@ -1,0 +1,5 @@
+Broker: Example Wholesale
+Insured Name: Example Manufacturing Ltd
+Class of Business: Property
+Requested Limit: GBP 3,000,000
+Narrative: Short note only.

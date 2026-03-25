@@ -1,0 +1,6 @@
+exposure_id,account_name,country,peril,segment,tiv_gbp,attachment_gbp,limit_gbp
+EXP-3301,Vertex Payments,United Kingdom,Cyber,Cyber,2800000,100000,1800000
+EXP-3302,Vertex Payments,Ireland,Cyber,Cyber,2600000,100000,1700000
+EXP-3303,Helios Estates,Spain,Windstorm,Property,5400000,250000,3000000
+EXP-3304,Helios Estates,Portugal,Flood,Property,4700000,250000,2400000
+EXP-3305,Nova Distribution,Italy,Fire,Property,3500000,150000,1900000

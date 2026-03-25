@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --page-bg: #e7ecef;
+  --page-ink: #172033;
+  --accent: #0f766e;
+  --accent-soft: #dff4ef;
+  --accent-strong: #153348;
+  --hero-border: rgba(255, 255, 255, 0.7);
+  --panel-border: rgba(23, 32, 51, 0.1);
+  --good: #047857;
+  --warn: #b45309;
+  --bad: #b91c1c;
+  --muted: #64748b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(180, 83, 9, 0.12), transparent 20%),
+    linear-gradient(180deg, #f8fbfb 0%, var(--page-bg) 100%);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--page-ink);
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    Georgia,
+    serif;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.54), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(23, 32, 51, 0));
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

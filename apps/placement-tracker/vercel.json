@@ -1,0 +1,5 @@
+{
+  "framework": "nextjs",
+  "installCommand": "pnpm install --frozen-lockfile --dir ../..",
+  "buildCommand": "pnpm --dir ../.. --filter @ai-ops/placement-tracker build"
+}

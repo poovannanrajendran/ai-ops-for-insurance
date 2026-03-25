@@ -16,6 +16,11 @@ APPS=(
   "treaty-structure-explainer"
   "exposure-clash-detector"
   "claims-leakage-flagger"
+  "broker-submission-builder"
+  "exposure-scenario-modeller"
+  "mrc-checker"
+  "placement-tracker"
+  "wording-risk-diff-checker"
 )
 
 for app in "${APPS[@]}"; do
@@ -28,4 +33,3 @@ done
 
 echo
 echo "All app schemas bootstrapped and Data API-verified."
-

@@ -1,0 +1,6 @@
+exposure_id,account_name,country,peril,segment,tiv_gbp,attachment_gbp,limit_gbp
+EXP-1001,Northshore Logistics,United Kingdom,Windstorm,Property,6200000,250000,3200000
+EXP-1002,Northshore Logistics,Netherlands,Flood,Property,4800000,250000,2600000
+EXP-1003,Alpine Components,Germany,Fire,Property,3900000,100000,2100000
+EXP-1004,Baltic Retail Group,Poland,Windstorm,Property,3100000,150000,1700000
+EXP-1005,Meridian Foods,France,Flood,Property,4400000,200000,2300000

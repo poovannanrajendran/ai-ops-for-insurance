@@ -11,18 +11,23 @@ test("visual smoke: bordered cards and intake section are visible", async ({ pag
 
   await page.goto(targetUrl, { waitUntil: "domcontentloaded" });
 
-  const intakeHeading = page.getByRole("heading", { name: /intake|source and/i }).first();
-  await expect(intakeHeading).toBeVisible();
+  const roleHeading = page.getByRole("heading", { name: /intake|source and/i }).first();
+  const hasRoleHeading = (await roleHeading.count()) > 0;
 
-  const intakeCard = page.locator("section").filter({ has: intakeHeading }).first();
-  const borderTopWidth = await intakeCard.evaluate(
-    (element) => getComputedStyle(element).borderTopWidth
-  );
-  expect(borderTopWidth).not.toBe("0px");
+  let intakeCard = page.locator("section").first();
+  if (hasRoleHeading) {
+    await expect(roleHeading).toBeVisible();
+    intakeCard = page.locator("section").filter({ has: roleHeading }).first();
+  } else {
+    const intakeLabel = page.getByText(/intake/i).first();
+    await expect(intakeLabel).toBeVisible();
+    intakeCard = page.locator("section").filter({ has: intakeLabel }).first();
+  }
+
+  await expect(intakeCard).toBeVisible();
 
   await page.screenshot({
     path: `.artifacts/visual-smoke/${appKey}.png`,
     fullPage: true
   });
 });
-

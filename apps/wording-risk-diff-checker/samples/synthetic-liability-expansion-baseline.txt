@@ -1,0 +1,8 @@
+Policy Reference: CAS-88201
+Coverage:
+Jurisdiction: United Kingdom only
+Limit of Liability: GBP 2,500,000 any one claim
+Aggregate Limit: GBP 5,000,000
+Contractual Liability: Included where assumed under written contract
+Exclusions:
+Sanctions Clause: Standard market sanctions wording
