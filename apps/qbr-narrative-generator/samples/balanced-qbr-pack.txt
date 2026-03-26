@@ -1,0 +1,8 @@
+gwp_gbp=12500000
+loss_ratio_pct=54
+ntu_rate_pct=12
+combined_ratio_pct=94
+premium_delta_pct=8
+renewal_retention_pct=87
+open_claims_count=23
+broker_mix_note=Property and marine book remains diversified across UK and Benelux brokers.

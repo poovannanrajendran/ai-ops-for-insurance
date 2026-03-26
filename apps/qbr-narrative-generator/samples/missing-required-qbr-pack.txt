@@ -1,0 +1,4 @@
+gwp_gbp=
+loss_ratio_pct=
+ntu_rate_pct=15
+broker_mix_note=Limited fields supplied from draft prep.

@@ -1,0 +1,8 @@
+gwp_gbp=9800000
+loss_ratio_pct=73
+ntu_rate_pct=19
+combined_ratio_pct=107
+premium_delta_pct=-4
+renewal_retention_pct=71
+open_claims_count=41
+broker_mix_note=Casualty-heavy broker flow concentrated in two distributors with late bordereaux submissions.
