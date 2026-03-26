@@ -1,0 +1,13 @@
+
+> @ai-ops/treaty-structure-explainer@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/treaty-structure-explainer
+> next dev --port 3012
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3012
+- Network:       http://192.168.1.86:3012
+
+✓ Starting...
+✓ Ready in 685ms
+ GET / 200 in 813ms (compile: 740ms, render: 73ms)
+ GET / 200 in 48ms (compile: 3ms, render: 45ms)
+[?25h

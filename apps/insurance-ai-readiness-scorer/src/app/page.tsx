@@ -40,6 +40,19 @@ function readinessAppearance(state: AiReadinessInsight["summary"]["status"] | nu
   return { dotClass: "bg-slate-400", label: "Not run yet" };
 }
 
+function severityDotForLine(line: string, mode: "strength" | "blocker"): string {
+  const normalized = line.toLowerCase();
+  const hasHigh = /\b(high|critical|blocked|major|severe|urgent|gap|risk)\b/.test(normalized);
+  const hasMedium = /\b(medium|watch|partial|improve|limited|needs)\b/.test(normalized);
+  if (mode === "strength") {
+    if (hasHigh) return "bg-emerald-600";
+    if (hasMedium) return "bg-amber-500";
+    return "bg-emerald-500";
+  }
+  if (hasHigh) return "bg-red-600";
+  return "bg-amber-500";
+}
+
 export default function Page() {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const [selectedSampleId, setSelectedSampleId] = useState(demoSamples[0].id);
@@ -202,11 +215,12 @@ export default function Page() {
 
         <div className="grid gap-5 xl:grid-cols-2">
           <Card eyebrow="Summary" title="Readiness overview">
+            <ReadinessBar score={result?.analysis.summary.readinessScore ?? null} />
             <div className="grid gap-3 sm:grid-cols-2">
-              <MetricTile label="Readiness score" value={result ? String(result.analysis.summary.readinessScore) : "-"} />
               <MetricTile label="Band" value={result ? result.analysis.summary.readinessBand : "-"} />
               <MetricTile label="Completeness" value={result ? `${result.analysis.summary.completenessPct}%` : "-"} />
               <MetricTile label="Confidence" value={result ? result.analysis.summary.confidence : "-"} />
+              <MetricTile label="Readiness score" value={result ? String(result.analysis.summary.readinessScore) : "-"} />
             </div>
           </Card>
           <Card eyebrow="Query" title="Prompt match snippets">
@@ -221,6 +235,49 @@ export default function Page() {
             )}
           </Card>
         </div>
+
+        <div className="grid gap-5 xl:grid-cols-2">
+          <Card eyebrow="Strengths" title="Current enablers">
+            {result?.analysis.strengths.length ? (
+              <ul className="space-y-2 text-sm leading-6 text-slate-700">
+                {result.analysis.strengths.map((line, index) => (
+                  <li className="flex items-start gap-2" key={`${line}-${index}`}>
+                    <span className={`mt-2 h-2.5 w-2.5 rounded-full ${severityDotForLine(line, "strength")}`} />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-slate-500">No strengths extracted yet.</p>
+            )}
+          </Card>
+          <Card eyebrow="Blockers" title="Delivery blockers">
+            {result?.analysis.blockers.length ? (
+              <ul className="space-y-2 text-sm leading-6 text-slate-700">
+                {result.analysis.blockers.map((line, index) => (
+                  <li className="flex items-start gap-2" key={`${line}-${index}`}>
+                    <span className={`mt-2 h-2.5 w-2.5 rounded-full ${severityDotForLine(line, "blocker")}`} />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-slate-500">No blockers extracted yet.</p>
+            )}
+          </Card>
+        </div>
+
+        <Card eyebrow="Plan" title="Ninety-day implementation plan">
+          {result?.analysis.ninetyDayPlan.length ? (
+            <ul className="space-y-2 text-sm leading-6 text-slate-700">
+              {result.analysis.ninetyDayPlan.map((line, index) => (
+                <li key={`${line}-${index}`}>- {line}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-slate-500">Run an analysis to generate the 90-day plan.</p>
+          )}
+        </Card>
 
         <Card eyebrow="Whitespace" title="Whitespace wording table">
           <div className="overflow-hidden rounded-[16px] border border-slate-200 bg-white">
@@ -249,43 +306,6 @@ export default function Page() {
             {!result ? <p className="px-4 py-3 text-sm text-slate-500">Run an analysis to view extracted whitespace fields.</p> : null}
           </div>
         </Card>
-
-        <div className="grid gap-5 xl:grid-cols-2">
-          <Card eyebrow="Strengths" title="Current enablers">
-            {result?.analysis.strengths.length ? (
-              <ul className="space-y-2 text-sm leading-6 text-slate-700">
-                {result.analysis.strengths.map((line, index) => (
-                  <li key={`${line}-${index}`}>- {line}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-slate-500">No strengths extracted yet.</p>
-            )}
-          </Card>
-          <Card eyebrow="Blockers" title="Delivery blockers">
-            {result?.analysis.blockers.length ? (
-              <ul className="space-y-2 text-sm leading-6 text-slate-700">
-                {result.analysis.blockers.map((line, index) => (
-                  <li key={`${line}-${index}`}>- {line}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-slate-500">No blockers extracted yet.</p>
-            )}
-          </Card>
-        </div>
-
-        <Card eyebrow="Plan" title="Ninety-day implementation plan">
-          {result?.analysis.ninetyDayPlan.length ? (
-            <ul className="space-y-2 text-sm leading-6 text-slate-700">
-              {result.analysis.ninetyDayPlan.map((line, index) => (
-                <li key={`${line}-${index}`}>- {line}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-slate-500">Run an analysis to generate the 90-day plan.</p>
-          )}
-        </Card>
       </div>
     </main>
   );
@@ -308,6 +328,33 @@ function MetricTile({ label, value }: { label: string; value: string }) {
     <div className="rounded-[16px] border border-slate-200 bg-white px-4 py-3">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{label}</p>
       <p className="mt-2 text-lg font-semibold text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+function ReadinessBar({ score }: { score: number | null }) {
+  const safeScore = score == null ? 0 : Math.max(0, Math.min(100, score));
+  const markerLeft = `${safeScore}%`;
+  const label = score == null ? "Not run yet" : safeScore < 40 ? "Low readiness" : safeScore < 70 ? "Average readiness" : "Good readiness";
+  return (
+    <div className="mb-3 rounded-[16px] border border-slate-200 bg-white px-4 py-3">
+      <div className="flex items-center justify-between">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Readiness score bar</p>
+        <p className="text-sm font-semibold text-slate-800">{label}</p>
+      </div>
+      <div className="relative mt-3 h-3 w-full overflow-hidden rounded-full bg-slate-100">
+        <div className="h-full w-[40%] bg-red-400/80" />
+        <div className="absolute left-[40%] top-0 h-full w-[30%] bg-amber-400/85" />
+        <div className="absolute left-[70%] top-0 h-full w-[30%] bg-emerald-500/85" />
+        {score != null ? (
+          <span className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-slate-900 bg-white" style={{ left: markerLeft }} />
+        ) : null}
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-4 text-xs font-medium text-slate-600">
+        <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-red-500" />Low (0-39)</span>
+        <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-amber-500" />Average (40-69)</span>
+        <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-emerald-600" />Good (70-100)</span>
+      </div>
     </div>
   );
 }

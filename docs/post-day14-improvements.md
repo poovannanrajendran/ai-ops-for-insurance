@@ -106,3 +106,35 @@ Scope: Improvements introduced after Day 14 implementation completion.
 - Reduced Supabase onboarding/configuration error rate via automation.
 - Improved repeatability for Day 15 onward delivery.
 
+## 9. Codex-specific token-efficiency workflow
+
+- Added a Codex-focused tiered context model to reduce unnecessary context loading:
+  - Tier 1 (always read): `docs/codex/context-core.md`
+  - Tier 2 (load on demand): `docs/codex/context-index.md`
+  - Tier 3 (reference only): full historical docs unless needed
+- Added Codex resume and brief scripts:
+  - `scripts/codex/context-brief.sh`
+  - `scripts/codex/resume.sh`
+- Added package shortcuts:
+  - `pnpm codex:brief`
+  - `pnpm codex:resume`
+- Added handoff standardisation template:
+  - `docs/codex/handoff-template.md`
+- Updated repo guidance:
+  - `.codex/README.md`
+  - `README.md` (Codex Context Efficiency section)
+
+## 10. Vercel monorepo deployment lessons (Day 12-19)
+
+- CLI deployment reliability improved by enforcing per-project monorepo settings:
+  - `rootDirectory = apps/<app-folder>`
+  - `installCommand = pnpm install --frozen-lockfile --dir ../..`
+  - `buildCommand = pnpm --dir ../.. --filter @ai-ops/<app-package> build`
+- Root cause addressed:
+  - incorrect local `.vercel` links and missing `rootDirectory` caused cross-project deployments and wrong app builds.
+- New operational rule:
+  - relink explicitly to the intended project before each deployment and verify project linkage before build/deploy.
+- Environment variable standardisation:
+  - `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are now enforced in each day-app project before production deploy.
+- Validation outcome:
+  - Day 12-19 projects now deployed as separate Vercel projects with correct project-level aliases.

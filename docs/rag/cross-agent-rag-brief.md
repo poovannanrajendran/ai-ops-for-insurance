@@ -1,6 +1,6 @@
 # Cross-Agent RAG Brief (Codex / Claude / Claude Code / Perplexity)
 
-Last updated: 2026-03-21
+Last updated: 2026-03-25
 Project: `ai-ops-for-insurance`
 
 ## Purpose
@@ -176,3 +176,15 @@ RAG sync:
     - positive/negative unit tests
     - positive/negative route tests
     - QA command guidance (`pnpm qa:app <app-folder> @ai-ops/<app-folder> <port>`)
+
+## 2026-03-25 deployment hardening (Day 12-19)
+- Vercel projects from Day 12 onward are now managed as dedicated projects with explicit monorepo settings.
+- Required per-project deployment config:
+  - `rootDirectory = apps/<app-folder>`
+  - `installCommand = pnpm install --frozen-lockfile --dir ../..`
+  - `buildCommand = pnpm --dir ../.. --filter @ai-ops/<app-package> build`
+- Known pitfall:
+  - incorrect `.vercel` linkage can deploy the wrong app/project. Always relink target project before deploy.
+- Required env vars set per project before deployment:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `SUPABASE_SERVICE_ROLE_KEY`

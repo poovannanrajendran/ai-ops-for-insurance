@@ -20,6 +20,11 @@ const WATCHLIST = [
   { listName: "EU Restrictive Measures", entity: "Harborline Logistics GmbH", risk: "low" as Severity }
 ];
 
+interface AnalyzeOptions {
+  watchlist?: Array<{ listName: string; entity: string; risk: Severity }>;
+  sanctionsDataUpdatedAtDisplay?: string;
+}
+
 function parsePairs(input: string) {
   const pairs = input
     .split(/\r?\n/)
@@ -54,7 +59,8 @@ function screeningStateFrom(matches: SanctionsMatch[]) {
   return "clear" as const;
 }
 
-export function analyzeSanctionsScreening(screeningText: string, question?: string) {
+export function analyzeSanctionsScreening(screeningText: string, question?: string, options?: AnalyzeOptions) {
+  const activeWatchlist = options?.watchlist?.length ? options.watchlist : WATCHLIST;
   const map = parsePairs(screeningText);
   const missing = REQUIRED_FIELDS.filter((field) => !map.get(field));
 
@@ -65,7 +71,8 @@ export function analyzeSanctionsScreening(screeningText: string, question?: stri
         highRiskMatches: 0,
         mediumRiskMatches: 0,
         lowRiskMatches: 0,
-        screeningState: "block"
+        screeningState: "block",
+        sanctionsDataUpdatedAtDisplay: options?.sanctionsDataUpdatedAtDisplay
       },
       matches: [],
       recommendedActions: [],
@@ -85,7 +92,7 @@ export function analyzeSanctionsScreening(screeningText: string, question?: stri
   const matches: SanctionsMatch[] = [];
 
   for (const inputEntity of entities) {
-    for (const watch of WATCHLIST) {
+    for (const watch of activeWatchlist) {
       const score = similarity(inputEntity, watch.entity);
       if (score >= 28) {
         matches.push({
@@ -155,7 +162,8 @@ export function analyzeSanctionsScreening(screeningText: string, question?: stri
       highRiskMatches,
       mediumRiskMatches,
       lowRiskMatches,
-      screeningState
+      screeningState,
+      sanctionsDataUpdatedAtDisplay: options?.sanctionsDataUpdatedAtDisplay
     },
     matches,
     recommendedActions,

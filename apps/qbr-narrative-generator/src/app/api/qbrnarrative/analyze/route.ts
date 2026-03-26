@@ -130,7 +130,7 @@ export async function POST(request: Request) {
       3000
     );
 
-    const missing = insight.whitespaceRows.filter((row) => row.status === "MISSING").map((row) => row.fieldWording);
+    const missing = insight.whitespaceRows.filter((row) => row.status === "MISSING" && !row.optional).map((row) => row.fieldWording);
     if (missing.length > 0) {
       await persistAudit(requestId, "validation_failed", { missing });
       return NextResponse.json({ error: `Missing required fields: ${missing.join(", ")}.` }, { status: 400 });

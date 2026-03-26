@@ -597,6 +597,231 @@
     "file": "d10-day-10-fnol-triage-should-start-with-a-decision-not-an-inbox.html"
   },
   {
+    "id": "D11",
+    "title": "Day 11: Binder capacity pressure should be visible before authority is breached",
+    "hooks": [
+      "Binder drift is rarely one big event. It is small movements that compound quietly.",
+      "Day 11 monitors capacity utilisation and flags placement pressure before limits are crossed."
+    ],
+    "body": "Problem: Teams discover utilisation stress late when multiple placements consume authority at once.\n\nMVP achieved: Capacity monitor calculates utilisation bands, warning levels, and referral-ready commentary with persistence and audit.\n\nScale path: Real-time bordereaux ingestion, broker views, threshold alerts, and automated authority controls.",
+    "cta": "Which capacity threshold should trigger first action in your workflow?",
+    "hashtags": [
+      "#BinderManagement",
+      "#Underwriting",
+      "#InsuranceAI",
+      "#DelegatedAuthority",
+      "#RiskOps"
+    ],
+    "media": [
+      "assets/screenshots/day11.png",
+      "assets/app-logos/day11.svg"
+    ],
+    "category": "day-app",
+    "day": 11,
+    "app": "binder-capacity-monitor",
+    "file": "d11-day-11-binder-capacity-pressure-should-be-visible-before-authority-is-breached.html"
+  },
+  {
+    "id": "D12",
+    "title": "Day 12: Treaty layers are easier to govern when loss flow is explicit",
+    "hooks": [
+      "Reinsurance wording is clear only when someone can explain who pays at each band.",
+      "Day 12 parses treaty terms and shows deterministic payer flow across loss levels."
+    ],
+    "body": "Problem: Teams spend too much time manually interpreting attachment/limit interactions.\n\nMVP achieved: Treaty parser extracts structure, validates required fields, and returns loss-band payer explanations with auditability.\n\nScale path: Multi-layer programmes, reinstatement cost modelling, and scenario overlays for placement and reserving teams.",
+    "cta": "Would your team use this more for underwriting review or claims scenario validation?",
+    "hashtags": [
+      "#Reinsurance",
+      "#Treaty",
+      "#Underwriting",
+      "#InsuranceAI",
+      "#RiskAnalysis"
+    ],
+    "media": [
+      "assets/screenshots/day12.png",
+      "assets/app-logos/day12.svg"
+    ],
+    "category": "day-app",
+    "day": 12,
+    "app": "treaty-structure-explainer",
+    "file": "d12-day-12-treaty-layers-are-easier-to-govern-when-loss-flow-is-explicit.html"
+  },
+  {
+    "id": "D13",
+    "title": "Day 13: Schedule overlap should be flagged before accumulation surprises emerge",
+    "hooks": [
+      "Two schedules can look independent while carrying the same risk concentration.",
+      "Day 13 detects cross-schedule clashes and prioritises them by severity."
+    ],
+    "body": "Problem: Overlaps across policy schedules are hard to spot manually at portfolio scale.\n\nMVP achieved: Clash detector matches location/peril/period collisions and produces ranked clash alerts with persistence and audit trails.\n\nScale path: Network graph views, clash trend tracking, and automated referral orchestration across underwriting teams.",
+    "cta": "Which clash dimension matters most for you: location, peril, period, or all three?",
+    "hashtags": [
+      "#ExposureManagement",
+      "#AccumulationRisk",
+      "#UnderwritingOps",
+      "#InsuranceAI",
+      "#PortfolioRisk"
+    ],
+    "media": [
+      "assets/screenshots/day13.png",
+      "assets/app-logos/day13.svg"
+    ],
+    "category": "day-app",
+    "day": 13,
+    "app": "exposure-clash-detector",
+    "file": "d13-day-13-schedule-overlap-should-be-flagged-before-accumulation-surprises-emerge.html"
+  },
+  {
+    "id": "D14",
+    "title": "Day 14: Leakage signals should be surfaced before reserve drift becomes expensive",
+    "hooks": [
+      "Claims leakage usually starts with weak early signals, not a single obvious error.",
+      "Day 14 scores claims rows for leakage pressure and governance follow-up."
+    ],
+    "body": "Problem: Late notifications, duplicate patterns, and reserve/paid drift are buried in large claims ledgers.\n\nMVP achieved: Leakage flagger calculates deterministic risk scores, highlights drivers, and outputs reviewer-ready actions with audit logging.\n\nScale path: SIU integrations, workflow routing, recovery tracking, and continuous leakage surveillance.",
+    "cta": "Which leakage signal would you prioritise first in your operation?",
+    "hashtags": [
+      "#ClaimsOps",
+      "#ClaimsLeakage",
+      "#InsuranceAI",
+      "#Governance",
+      "#ClaimsAnalytics"
+    ],
+    "media": [
+      "assets/screenshots/day14.png",
+      "assets/app-logos/day14.svg"
+    ],
+    "category": "day-app",
+    "day": 14,
+    "app": "claims-leakage-flagger",
+    "file": "d14-day-14-leakage-signals-should-be-surfaced-before-reserve-drift-becomes-expensive.html"
+  },
+  {
+    "id": "D15",
+    "title": "Day 15: Broker notes should become market-ready submission summaries in one pass",
+    "hooks": [
+      "Placement speed improves when submission quality is consistent from the start.",
+      "Day 15 converts broker notes into structured market-ready summaries with referral cues."
+    ],
+    "body": "Problem: Long narrative notes create uneven submission quality and manual rework before market release.\n\nMVP achieved: Submission builder extracts whitespace fields, referral triggers, and readiness board outputs with persistence and audit.\n\nScale path: Template governance, class-specific playbooks, and collaborative broker-underwriter iteration loops.",
+    "cta": "What is your single biggest blocker in turning broker notes into release-ready submissions?",
+    "hashtags": [
+      "#Broking",
+      "#Placement",
+      "#Underwriting",
+      "#InsuranceAI",
+      "#SubmissionQuality"
+    ],
+    "media": [
+      "assets/screenshots/day15.png",
+      "assets/app-logos/day15.svg"
+    ],
+    "category": "day-app",
+    "day": 15,
+    "app": "broker-submission-builder",
+    "file": "d15-day-15-broker-notes-should-become-market-ready-submission-summaries-in-one-pass.html"
+  },
+  {
+    "id": "D16",
+    "title": "Day 16: Scenario views should show baseline and stress in one decision frame",
+    "hooks": [
+      "Portfolio stress discussions fail when baseline and stressed views are split across tools.",
+      "Day 16 models baseline versus stress outcomes from the same exposure dataset."
+    ],
+    "body": "Problem: Teams cannot quickly compare concentration drift and peril uplifts under stress assumptions.\n\nMVP achieved: Scenario modeller computes baseline/stressed loss metrics, concentration warnings, and query snippets with audit persistence.\n\nScale path: Configurable scenario libraries, portfolio segment drill-down, and automated stress reporting packs.",
+    "cta": "Which stress assumption drives most board-level discussion in your book today?",
+    "hashtags": [
+      "#ScenarioAnalysis",
+      "#ExposureManagement",
+      "#PortfolioRisk",
+      "#InsuranceAI",
+      "#RiskModelling"
+    ],
+    "media": [
+      "assets/screenshots/day16.png",
+      "assets/app-logos/day16.svg"
+    ],
+    "category": "day-app",
+    "day": 16,
+    "app": "exposure-scenario-modeller",
+    "file": "d16-day-16-scenario-views-should-show-baseline-and-stress-in-one-decision-frame.html"
+  },
+  {
+    "id": "D17",
+    "title": "Day 17: Market reform contract checks should be machine-speed and audit-friendly",
+    "hooks": [
+      "MRC compliance reviews are high-value judgement work buried under repetitive checks.",
+      "Day 17 validates required fields and clause signals with deterministic outputs."
+    ],
+    "body": "Problem: Manual MRC checks are time-consuming and inconsistent across reviewers.\n\nMVP achieved: MRC checker runs required-field gates, clause checks, warnings, and full whitespace extraction status with persisted audit.\n\nScale path: Clause benchmark libraries, broker feedback loops, and automated exception routing to specialist reviewers.",
+    "cta": "Which MRC check consumes most reviewer effort in your current process?",
+    "hashtags": [
+      "#LloydsMarket",
+      "#MRC",
+      "#UnderwritingOps",
+      "#InsuranceAI",
+      "#ContractGovernance"
+    ],
+    "media": [
+      "assets/screenshots/day17.png",
+      "assets/app-logos/day17.svg"
+    ],
+    "category": "day-app",
+    "day": 17,
+    "app": "mrc-checker",
+    "file": "d17-day-17-market-reform-contract-checks-should-be-machine-speed-and-audit-friendly.html"
+  },
+  {
+    "id": "D18",
+    "title": "Day 18: Placement progress should be visible as a governed operating board",
+    "hooks": [
+      "Placement teams need one source of truth, not status updates scattered across channels.",
+      "Day 18 tracks market responses, bind pressure, and next actions in a deterministic flow."
+    ],
+    "body": "Problem: Progress tracking across markets is fragmented, making escalation timing inconsistent.\n\nMVP achieved: Placement tracker structures status, market actions, and governance cues with stored outputs and audit stages.\n\nScale path: Market API integrations, team workflow handoffs, SLA monitoring, and leadership-level placement dashboards.",
+    "cta": "Would this help more in day-to-day broking execution or placement governance reviews?",
+    "hashtags": [
+      "#Broking",
+      "#PlacementTracker",
+      "#InsuranceOps",
+      "#InsuranceAI",
+      "#Workflow"
+    ],
+    "media": [
+      "assets/screenshots/day18.png",
+      "assets/app-logos/day18.svg"
+    ],
+    "category": "day-app",
+    "day": 18,
+    "app": "placement-tracker",
+    "file": "d18-day-18-placement-progress-should-be-visible-as-a-governed-operating-board.html"
+  },
+  {
+    "id": "D19",
+    "title": "Day 19: Wording risk needs a severity-led diff, not a redline wall of text",
+    "hooks": [
+      "Teams do not need every wording change. They need materiality-first decisions.",
+      "Day 19 scores wording deltas by risk severity and highlights actionable differences."
+    ],
+    "body": "Problem: Traditional diff reviews create noise and bury material changes in volume.\n\nMVP achieved: Risk diff checker classifies wording changes by severity, surfaces critical snippets, and persists analysis plus audit trail.\n\nScale path: Clause ontology, historical precedent matching, and automatic routing for legal/underwriting review.",
+    "cta": "If you had one severity threshold for auto-escalation, where would you set it?",
+    "hashtags": [
+      "#PolicyWordings",
+      "#InsuranceAI",
+      "#RiskReview",
+      "#Underwriting",
+      "#Governance"
+    ],
+    "media": [
+      "assets/screenshots/day19.png",
+      "assets/app-logos/day19.svg"
+    ],
+    "category": "day-app",
+    "day": 19,
+    "app": "wording-risk-diff-checker",
+    "file": "d19-day-19-wording-risk-needs-a-severity-led-diff-not-a-redline-wall-of-text.html"
+  },
+  {
     "id": "P27",
     "title": "Lloyd's/Specialty Underwriting - Section Wrap",
     "hooks": [

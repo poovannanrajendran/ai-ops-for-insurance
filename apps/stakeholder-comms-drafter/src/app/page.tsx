@@ -222,6 +222,25 @@ export default function Page() {
           </Card>
         </div>
 
+        <div className="grid gap-5 xl:grid-cols-2">
+          <Card eyebrow="Draft" title="Generated communication">
+            <pre className="whitespace-pre-wrap rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm leading-7 text-slate-700">
+              {result?.analysis.draft ?? "Run an analysis to generate deterministic stakeholder communication draft."}
+            </pre>
+          </Card>
+          <Card eyebrow="Actions" title="Follow-up tasks">
+            {result?.analysis.actions.length ? (
+              <ul className="space-y-2 text-sm leading-6 text-slate-700">
+                {result.analysis.actions.map((line, index) => (
+                  <li key={`${line}-${index}`}>- {line}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-slate-500">No actions extracted yet.</p>
+            )}
+          </Card>
+        </div>
+
         <Card eyebrow="Whitespace" title="Whitespace wording table">
           <div className="overflow-hidden rounded-[16px] border border-slate-200 bg-white">
             <table className="w-full border-collapse text-left text-sm">
@@ -249,25 +268,6 @@ export default function Page() {
             {!result ? <p className="px-4 py-3 text-sm text-slate-500">Run an analysis to view extracted whitespace fields.</p> : null}
           </div>
         </Card>
-
-        <div className="grid gap-5 xl:grid-cols-2">
-          <Card eyebrow="Draft" title="Generated communication">
-            <pre className="whitespace-pre-wrap rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm leading-7 text-slate-700">
-              {result?.analysis.draft ?? "Run an analysis to generate deterministic stakeholder communication draft."}
-            </pre>
-          </Card>
-          <Card eyebrow="Actions" title="Follow-up tasks">
-            {result?.analysis.actions.length ? (
-              <ul className="space-y-2 text-sm leading-6 text-slate-700">
-                {result.analysis.actions.map((line, index) => (
-                  <li key={`${line}-${index}`}>- {line}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-slate-500">No actions extracted yet.</p>
-            )}
-          </Card>
-        </div>
       </div>
     </main>
   );

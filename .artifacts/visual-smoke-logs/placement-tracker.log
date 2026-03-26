@@ -1,0 +1,18 @@
+
+> @ai-ops/placement-tracker@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/placement-tracker
+> next dev --port 3018
+
+⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3018
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::3018)
+    at new Promise (<anonymous>) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3018
+}
+[?25h
+/Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/placement-tracker:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @ai-ops/placement-tracker@0.0.0 dev: `next dev --port 3018`
+Exit status 1

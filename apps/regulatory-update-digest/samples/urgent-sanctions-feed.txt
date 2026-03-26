@@ -1,0 +1,20 @@
+SOURCE: OFSI Notice
+TITLE: Financial sanctions designation update
+DATE: 2026-03-08
+CLASS: Marine Cargo; Trade Credit
+UPDATE: Immediate sanctions designation update introduces additional restricted entities for shipping and trade finance routes.
+ACTION: Run sanctions screening refresh, pause in-scope binding activity, and escalate matches to compliance immediately.
+---
+SOURCE: FCA Dear CEO Letter
+TITLE: Claims handling timeliness and fair value follow-up
+DATE: 2026-03-11
+CLASS: Motor; Liability
+UPDATE: FCA expects firms to evidence prompt claims progression and root-cause remediation for delayed settlement cohorts.
+ACTION: Produce delayed-claims MI pack, agree remediation plan, and set board oversight dates.
+---
+SOURCE: Lloyd's Bulletin
+TITLE: Delegated authority control deadline
+DATE: 2026-03-14
+CLASS: Property; Liability
+UPDATE: Managing agents are required to complete delegated authority control remediation before 30 April 2026 deadline.
+ACTION: Confirm remediation owner and submit signed completion tracker before deadline.

@@ -333,54 +333,37 @@ export default function Page() {
           )}
         </Card>
 
-        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-          <Card eyebrow="Ledger" title="Clause change ledger">
-            {result ? (
-              result.analysis.clauseDiffs.length > 0 ? (
-                <div className="space-y-3">
-                  {result.analysis.clauseDiffs.map((diff) => (
-                    <ClauseCard diff={diff} key={`${diff.clauseKey}-${diff.changeType}`} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm leading-6 text-slate-600">No clause-level diffs were detected.</p>
-              )
+        <Card eyebrow="Query" title="Prompt match snippets">
+          {result ? (
+            result.analysis.queryHits.length > 0 ? (
+              <ul className="space-y-3 text-sm leading-6 text-slate-700">
+                {result.analysis.queryHits.map((hit) => (
+                  <li key={hit}>- {hit}</li>
+                ))}
+              </ul>
             ) : (
-              <p className="text-sm leading-6 text-slate-600">Each detected clause delta is listed here with severity, rationale, and before/after wording.</p>
-            )}
-          </Card>
+              <p className="text-sm leading-6 text-slate-600">No direct matches for the current prompt.</p>
+            )
+          ) : (
+            <p className="text-sm leading-6 text-slate-600">Prompt-matched ledger lines will appear here.</p>
+          )}
+        </Card>
 
-          <div className="grid gap-6">
-            <Card eyebrow="Query" title="Prompt match snippets">
-              {result ? (
-                result.analysis.queryHits.length > 0 ? (
-                  <ul className="space-y-3 text-sm leading-6 text-slate-700">
-                    {result.analysis.queryHits.map((hit) => (
-                      <li key={hit}>- {hit}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-sm leading-6 text-slate-600">No direct matches for the current prompt.</p>
-                )
-              ) : (
-                <p className="text-sm leading-6 text-slate-600">Prompt-matched ledger lines will appear here.</p>
-              )}
-            </Card>
-
-            <Card eyebrow="Persistence" title="Storage status">
-              <div className="flex items-start gap-3">
-                <span className={`mt-1 h-3 w-3 rounded-full ${storage.dotClass}`} />
-                <p className="text-sm leading-6 text-slate-600">
-                  {result
-                    ? result.persistence.status === "stored"
-                      ? "Result stored in Supabase."
-                      : `Storage ${result.persistence.status}. ${result.persistence.reason ?? ""}`.trim()
-                    : "Supabase storage is optional. If server credentials are present, analysis and audit stages are written to the Day 19 schema."}
-                </p>
+        <Card eyebrow="Ledger" title="Clause change ledger">
+          {result ? (
+            result.analysis.clauseDiffs.length > 0 ? (
+              <div className="grid gap-3 lg:grid-cols-2">
+                {result.analysis.clauseDiffs.map((diff) => (
+                  <ClauseCard diff={diff} key={`${diff.clauseKey}-${diff.changeType}`} />
+                ))}
               </div>
-            </Card>
-          </div>
-        </div>
+            ) : (
+              <p className="text-sm leading-6 text-slate-600">No clause-level diffs were detected.</p>
+            )
+          ) : (
+            <p className="text-sm leading-6 text-slate-600">Each detected clause delta is listed here with severity, rationale, and before/after wording.</p>
+          )}
+        </Card>
       </div>
     </main>
   );

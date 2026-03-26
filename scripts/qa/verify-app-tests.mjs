@@ -15,10 +15,26 @@ if (!appFolder) {
 }
 
 const repoRoot = process.cwd();
+const appRoot = path.join(repoRoot, "apps", appFolder);
 const testsDir = path.join(repoRoot, "apps", appFolder, "tests");
 
 if (!fs.existsSync(testsDir)) {
   fail(`Missing tests directory: ${testsDir}`);
+}
+
+const postcssConfig = path.join(appRoot, "postcss.config.mjs");
+if (!fs.existsSync(postcssConfig)) {
+  fail(`Missing postcss config: ${postcssConfig}`);
+}
+
+const globalsCss = path.join(appRoot, "src", "app", "globals.css");
+if (!fs.existsSync(globalsCss)) {
+  fail(`Missing globals.css: ${globalsCss}`);
+}
+
+const globalsText = fs.readFileSync(globalsCss, "utf8");
+if (!globalsText.includes('@import "tailwindcss";')) {
+  fail(`globals.css must include @import \"tailwindcss\"; for ${appFolder}`);
 }
 
 const testFiles = fs
@@ -38,10 +54,18 @@ if (!routeTest) {
 const routeText = fs.readFileSync(routeTest, "utf8");
 const hasPositiveRoute = /toBe\(200\)|status:\s*200/.test(routeText);
 const hasNegativeRoute = /toBe\(400\)|status:\s*400/.test(routeText);
+const hasTimeoutCoverage = /AbortController|withTimeout|timeout/i.test(routeText);
+const enforceTimeoutCoverage = process.env.VERIFY_TIMEOUT_COVERAGE === "1";
 
 if (!hasPositiveRoute || !hasNegativeRoute) {
   fail(
     "Route tests must include both positive and negative assertions (200 and 400 paths)."
+  );
+}
+
+if (enforceTimeoutCoverage && !hasTimeoutCoverage) {
+  fail(
+    "Route tests must include timeout coverage markers (AbortController/withTimeout/timeout)."
   );
 }
 

@@ -58,6 +58,43 @@ function storageLabel(status?: string): string {
   return "Awaiting run";
 }
 
+function toWhitespaceRows(
+  fields: BrokerSubmissionInsight["fields"]
+): Array<{ label: string; value: string; status: "EXTRACTED" | "MISSING" }> {
+  const mapRow = (label: string, raw: string | number, value: string) => {
+    const hasValue =
+      typeof raw === "number"
+        ? Number.isFinite(raw)
+        : raw.trim().length > 0 && raw.trim().toLowerCase() !== "n/a";
+    return {
+      label,
+      value,
+      status: hasValue ? ("EXTRACTED" as const) : ("MISSING" as const)
+    };
+  };
+
+  return [
+    mapRow("Broker", fields.broker, fields.broker),
+    mapRow("Insured Name", fields.insuredName, fields.insuredName),
+    mapRow("Class Of Business", fields.classOfBusiness, fields.classOfBusiness),
+    mapRow("Territory", fields.territory, fields.territory),
+    mapRow("Inception Date", fields.inceptionDate, fields.inceptionDate),
+    mapRow("Requested Limit (GBP)", fields.requestedLimitGbp, formatCurrency(fields.requestedLimitGbp)),
+    mapRow("Attachment (GBP)", fields.attachmentGbp, formatCurrency(fields.attachmentGbp)),
+    mapRow(
+      "Estimated Premium (GBP)",
+      fields.estimatedPremiumGbp,
+      formatCurrency(fields.estimatedPremiumGbp)
+    ),
+    mapRow("Revenue (GBP)", fields.revenueGbp, formatCurrency(fields.revenueGbp)),
+    mapRow("Occupancies", fields.occupancies, fields.occupancies),
+    mapRow("Claims Summary", fields.claimsSummary, fields.claimsSummary),
+    mapRow("Security Requirements", fields.securityRequirements, fields.securityRequirements),
+    mapRow("Target Quote By", fields.targetQuoteBy, fields.targetQuoteBy),
+    mapRow("Narrative", fields.narrative, fields.narrative)
+  ];
+}
+
 export default function Page() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedSampleId, setSelectedSampleId] = useState(initialSample.id);
@@ -387,8 +424,8 @@ export default function Page() {
             {result ? (
               result.analysis.queryHits.length > 0 ? (
                 <ul className="space-y-2 text-sm leading-6 text-slate-700">
-                  {result.analysis.queryHits.map((hit) => (
-                    <li key={hit}>{hit}</li>
+                  {result.analysis.queryHits.map((hit, index) => (
+                    <li key={`${hit}-${index}`}>{hit}</li>
                   ))}
                 </ul>
               ) : (
@@ -403,8 +440,8 @@ export default function Page() {
         <Card eyebrow="Build output" title="Submission sections">
           {result ? (
             <div className="grid gap-4 xl:grid-cols-2">
-              {result.analysis.sections.map((section) => (
-                <SectionCard key={section.title} section={section} />
+              {result.analysis.sections.map((section, index) => (
+                <SectionCard key={`${section.title}-${index}`} section={section} />
               ))}
             </div>
           ) : (
@@ -452,6 +489,55 @@ export default function Page() {
               ? result.analysis.commentary
               : "Upload a broker note and run the builder to generate the executive submission readout."}
           </p>
+        </Card>
+
+        <Card eyebrow="Whitespace" title="Whitespace fields/columns table">
+          {result ? (
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-collapse rounded-2xl border border-slate-200 bg-white/80">
+                <thead>
+                  <tr className="bg-slate-50">
+                    <th className="border-b border-slate-200 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                      Field wording
+                    </th>
+                    <th className="border-b border-slate-200 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                      Extraction status
+                    </th>
+                    <th className="border-b border-slate-200 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                      Extracted value
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {toWhitespaceRows(result.analysis.fields).map((row) => (
+                    <tr key={row.label} className="align-top">
+                      <td className="w-[28%] border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700">
+                        {row.label}
+                      </td>
+                      <td className="w-[18%] border-b border-slate-200 px-4 py-3 text-sm">
+                        <span
+                          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold tracking-[0.12em] ${
+                            row.status === "EXTRACTED"
+                              ? "bg-emerald-100 text-emerald-800"
+                              : "bg-red-100 text-red-700"
+                          }`}
+                        >
+                          {row.status}
+                        </span>
+                      </td>
+                      <td className="border-b border-slate-200 px-4 py-3 text-sm leading-6 text-slate-700">
+                        {row.value}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-sm text-slate-500">
+              Whitespace field mapping appears after analysis.
+            </p>
+          )}
         </Card>
       </div>
     </main>

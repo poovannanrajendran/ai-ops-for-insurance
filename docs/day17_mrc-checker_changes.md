@@ -20,3 +20,9 @@
 
 ## Analytics
 - Statcounter tracking is enabled for the Day 17 route to monitor MRC checker adoption and entry patterns.
+
+## Lessons learnt
+- Keep Vercel project linkage explicit per app to avoid cross-project deploys.
+- Ensure monorepo project settings are pinned (`rootDirectory`, workspace install/build commands).
+- Set shared Supabase env vars at project level before production deploy.
+- Run visual smoke + runtime console checks before release.

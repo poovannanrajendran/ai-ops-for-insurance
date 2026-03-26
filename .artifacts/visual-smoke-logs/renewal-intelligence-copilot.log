@@ -1,0 +1,16 @@
+
+> @ai-ops/renewal-intelligence-copilot@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/renewal-intelligence-copilot
+> next dev --port 3022
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3022
+- Network:       http://192.168.1.86:3022
+
+✓ Starting...
+✓ Ready in 487ms
+ GET / 200 in 831ms (compile: 755ms, render: 76ms)
+ GET / 200 in 25ms (compile: 3ms, render: 21ms)
+ GET / 200 in 56ms (compile: 1224µs, render: 55ms)
+ GET / 200 in 60ms (compile: 16ms, render: 44ms)
+ GET / 200 in 43ms (compile: 3ms, render: 40ms)
+ GET / 200 in 44ms (compile: 13ms, render: 31ms)

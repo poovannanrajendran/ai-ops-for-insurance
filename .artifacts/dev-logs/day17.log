@@ -1,0 +1,10 @@
+
+> @ai-ops/mrc-checker@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/mrc-checker
+> next dev --port 3017
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3017
+- Network:       http://192.168.1.86:3017
+
+✓ Starting...
+✓ Ready in 312ms

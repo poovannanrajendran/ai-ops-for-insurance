@@ -1,0 +1,16 @@
+
+> @ai-ops/meeting-prep-briefing@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/meeting-prep-briefing
+> next dev --port 3021
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3021
+- Network:       http://192.168.1.86:3021
+
+✓ Starting...
+✓ Ready in 530ms
+ GET / 200 in 925ms (compile: 839ms, render: 86ms)
+ GET / 200 in 17ms (compile: 1404µs, render: 16ms)
+ GET / 200 in 18ms (compile: 1334µs, render: 17ms)
+ GET / 200 in 60ms (compile: 1632µs, render: 59ms)
+ GET / 200 in 41ms (compile: 1947µs, render: 39ms)
+ GET / 200 in 39ms (compile: 1961µs, render: 37ms)

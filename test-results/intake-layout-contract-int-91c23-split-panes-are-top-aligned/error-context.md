@@ -1,0 +1,121 @@
+# Page snapshot
+
+```yaml
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - img [ref=e17]
+          - generic [ref=e23]:
+            - paragraph [ref=e24]: Day 30 Internal Tool
+            - paragraph [ref=e25]: 30 Useful Insurance and Productivity Apps | Challenge Portfolio Showcase
+        - generic [ref=e26]:
+          - heading "Challenge Portfolio Showcase" [level=1] [ref=e27]
+          - paragraph [ref=e28]: Consolidate challenge outcomes into a publish-ready portfolio narrative with deterministic scoring, evidence tracking, and next-step planning.
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: Created by
+          - paragraph [ref=e32]: Poovannan Rajendran
+        - generic [ref=e33]:
+          - paragraph [ref=e34]: Analysis and review time (MM:SS:CS)
+          - paragraph [ref=e35]: 00:00:00
+        - generic [ref=e36]:
+          - paragraph [ref=e37]: Current file
+          - paragraph [ref=e38]: milestone-pack.txt
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: Showcase status
+          - paragraph [ref=e41]: Not run yet
+        - generic [ref=e43]:
+          - paragraph [ref=e44]: Storage
+          - paragraph [ref=e45]: Awaiting run
+        - generic [ref=e47]:
+          - paragraph [ref=e48]: Mode
+          - paragraph [ref=e49]: Deterministic portfolio summarisation and readiness scoring
+    - generic [ref=e50]:
+      - generic [ref=e52]:
+        - paragraph [ref=e53]: Intake
+        - heading "Portfolio showcase input" [level=2] [ref=e54]
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - paragraph [ref=e57]: Showcase source input
+          - generic [ref=e58]:
+            - paragraph [ref=e59]: Upload zone
+            - paragraph [ref=e60]: Use key-value lines to describe completion status, evidence, outcomes, and launch narrative.
+            - button "Select File" [ref=e62]
+            - generic [ref=e63]: Source label
+            - textbox "Source label" [ref=e64]: milestone-pack.txt
+          - generic [ref=e65]:
+            - button "Milestone pack Strong evidence-led update for the first 30-day challenge milestone." [ref=e66]:
+              - paragraph [ref=e67]: Milestone pack
+              - paragraph [ref=e68]: Strong evidence-led update for the first 30-day challenge milestone.
+            - button "Partial evidence Portfolio summary with gaps in deployment evidence and blocker tracking." [ref=e69]:
+              - paragraph [ref=e70]: Partial evidence
+              - paragraph [ref=e71]: Portfolio summary with gaps in deployment evidence and blocker tracking.
+            - button "Missing required gate Intentionally incomplete payload to trigger validation gate." [ref=e72]:
+              - paragraph [ref=e73]: Missing required gate
+              - paragraph [ref=e74]: Intentionally incomplete payload to trigger validation gate.
+        - generic [ref=e75]:
+          - paragraph [ref=e76]: Showcase statement input
+          - generic [ref=e77]:
+            - paragraph [ref=e78]: Statement text
+            - textbox [ref=e79]: challenge_name=30 Useful Insurance and Productivity Apps apps_completed=29 domain_coverage=Underwriting, claims, exposure, placement, productivity outcomes=Live apps deployed with deterministic extraction and audit trails deployment_status=Most apps live on Vercel with Supabase persistence evidence_links=GitHub commits, Vercel URLs, QA logs next_focus=Final day launch and consolidated portfolio page story_hook=From idea to 30 production-grade insurance AI tools in one month strength_1=Consistent UI/UX and governance controls strength_2=Automated quality gates and visual checks next_1=Publish final Day 30 showcase next_2=Package reusable framework for future cohorts
+            - generic [ref=e80]: Query prompt
+            - textbox "Query prompt" [ref=e81]: What should be highlighted in the final launch narrative?
+            - generic [ref=e82]:
+              - button "Build showcase" [ref=e83]
+              - paragraph [ref=e84]: Runs deterministic showcase scoring and narrative checks through the app route.
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e88]:
+          - paragraph [ref=e89]: Summary
+          - heading "Showcase overview" [level=2] [ref=e90]
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - paragraph [ref=e93]: Showcase score
+            - paragraph [ref=e94]: "-"
+          - generic [ref=e95]:
+            - paragraph [ref=e96]: Band
+            - paragraph [ref=e97]: "-"
+          - generic [ref=e98]:
+            - paragraph [ref=e99]: Completeness
+            - paragraph [ref=e100]: "-"
+          - generic [ref=e101]:
+            - paragraph [ref=e102]: Confidence
+            - paragraph [ref=e103]: "-"
+      - generic [ref=e104]:
+        - generic [ref=e106]:
+          - paragraph [ref=e107]: Query
+          - heading "Prompt match snippets" [level=2] [ref=e108]
+        - paragraph [ref=e109]: No snippets matched the query tokens in this run.
+    - generic [ref=e110]:
+      - generic [ref=e112]:
+        - paragraph [ref=e113]: Whitespace
+        - heading "Whitespace wording table" [level=2] [ref=e114]
+      - generic [ref=e115]:
+        - table [ref=e116]:
+          - rowgroup [ref=e117]:
+            - row "Field wording Extracted value Status" [ref=e118]:
+              - columnheader "Field wording" [ref=e119]
+              - columnheader "Extracted value" [ref=e120]
+              - columnheader "Status" [ref=e121]
+          - rowgroup
+        - paragraph [ref=e122]: Run an analysis to view extracted whitespace fields.
+    - generic [ref=e123]:
+      - generic [ref=e124]:
+        - generic [ref=e126]:
+          - paragraph [ref=e127]: Strengths
+          - heading "Portfolio strengths" [level=2] [ref=e128]
+        - paragraph [ref=e129]: No strengths extracted yet.
+      - generic [ref=e130]:
+        - generic [ref=e132]:
+          - paragraph [ref=e133]: Blockers
+          - heading "Launch blockers" [level=2] [ref=e134]
+        - paragraph [ref=e135]: No blockers extracted yet.
+    - generic [ref=e136]:
+      - generic [ref=e138]:
+        - paragraph [ref=e139]: Plan
+        - heading "Next actions" [level=2] [ref=e140]
+      - paragraph [ref=e141]: Run an analysis to generate next actions.
+```

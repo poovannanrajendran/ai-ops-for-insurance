@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --page-bg: #f2eee5;
-  --page-ink: #1f2937;
-  --accent: #9a3412;
-  --accent-soft: #ffe8bf;
-  --accent-strong: #7c2d12;
-  --panel-subtle: rgba(255, 255, 255, 0.84);
-  --panel-border: rgba(120, 53, 15, 0.18);
-  --hero-border: rgba(255, 247, 237, 0.92);
+  --page-bg: #e8f2ff;
+  --page-ink: #0f172a;
+  --accent: #0f766e;
+  --accent-soft: #d1f2f8;
+  --accent-strong: #164e63;
+  --panel-subtle: rgba(255, 255, 255, 0.88);
+  --panel-border: rgba(15, 118, 110, 0.16);
+  --hero-border: rgba(15, 118, 110, 0.25);
   --dot-stored: #15803d;
   --dot-failed: #b91c1c;
   --dot-skipped: #b45309;
@@ -21,9 +21,9 @@
 
 html {
   background:
-    radial-gradient(circle at top left, rgba(245, 158, 11, 0.18), transparent 24%),
-    radial-gradient(circle at top right, rgba(194, 65, 12, 0.16), transparent 22%),
-    linear-gradient(180deg, #fffaf1 0%, var(--page-bg) 100%);
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 26%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+    linear-gradient(180deg, #fdfdfd 0%, var(--page-bg) 100%);
 }
 
 body {
@@ -38,8 +38,8 @@ body {
     Arial,
     sans-serif;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 42%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(31, 41, 55, 0));
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(15, 23, 42, 0));
 }
 
 button,

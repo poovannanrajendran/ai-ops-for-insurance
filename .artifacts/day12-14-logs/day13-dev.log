@@ -1,0 +1,13 @@
+
+> @ai-ops/exposure-clash-detector@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/exposure-clash-detector
+> next dev --port 3013
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3013
+- Network:       http://192.168.1.86:3013
+
+✓ Starting...
+✓ Ready in 718ms
+ GET / 200 in 847ms (compile: 764ms, render: 83ms)
+ GET / 200 in 33ms (compile: 3ms, render: 30ms)
+[?25h

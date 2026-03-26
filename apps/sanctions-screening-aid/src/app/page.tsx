@@ -152,7 +152,16 @@ export default function Page() {
               <MetaCard label="Active file" value={activeFileDisplay} />
               <MetaCard label="Screening state" value={gate.label} dotClass={gate.dotClass} />
               <MetaCard label="Storage state" value={storage.label} dotClass={storage.dotClass} />
-              <MetaCard label="Mode" value="Deterministic sanctions proximity screening" />
+              <MetaCard
+                label="Sanctions data updated"
+                value={result?.analysis.summary.sanctionsDataUpdatedAtDisplay ?? "Not synced yet"}
+              />
+              <MetaCard
+                className="sm:col-span-2"
+                compact
+                label="Mode"
+                value="Deterministic sanctions proximity screening"
+              />
             </div>
           </div>
         </section>
@@ -378,9 +387,23 @@ export default function Page() {
   );
 }
 
-function MetaCard({ label, value, dotClass }: { label: string; value: string; dotClass?: string }) {
+function MetaCard({
+  label,
+  value,
+  dotClass,
+  className,
+  compact
+}: {
+  label: string;
+  value: string;
+  dotClass?: string;
+  className?: string;
+  compact?: boolean;
+}) {
   return (
-    <article className="rounded-[18px] border border-[var(--panel-border)] bg-white/80 px-4 py-3">
+    <article
+      className={`rounded-[18px] border border-[var(--panel-border)] bg-white/80 px-4 ${compact ? "py-2" : "py-3"} ${className ?? ""}`}
+    >
       <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</p>
       <p className="mt-2 flex items-center gap-2 text-base font-semibold text-slate-900">
         {dotClass ? <span className={`inline-block h-2.5 w-2.5 rounded-full ${dotClass}`} /> : null}

@@ -7,6 +7,8 @@ import { MrcCheckerLogo } from "@/components/mrc-checker-logo";
 import { demoSamples } from "@/lib/demo-samples";
 import type { MrcInsight } from "@/types/mrc-checker";
 
+const REQUEST_TIMEOUT_MS = 12000;
+
 interface AnalyzeResponse {
   analysis: MrcInsight;
   persistence: {
@@ -69,25 +71,40 @@ export default function Page() {
 
   async function runAnalysis() {
     const startedAt = performance.now();
-    const response = await fetch("/api/mrcchecker/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        mrcText,
-        question,
-        sourceLabel
-      })
-    });
+    const abortController = new AbortController();
+    const timeoutId = setTimeout(() => abortController.abort(), REQUEST_TIMEOUT_MS);
 
-    const payload = (await response.json()) as AnalyzeResponse | { error: string };
-    if (!response.ok || "error" in payload) {
+    try {
+      const response = await fetch("/api/mrcchecker/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mrcText,
+          question,
+          sourceLabel
+        }),
+        signal: abortController.signal
+      });
+
+      const payload = (await response.json()) as AnalyzeResponse | { error: string };
+      if (!response.ok || "error" in payload) {
+        setResult(null);
+        setError("error" in payload ? payload.error : "MRC check failed.");
+        return;
+      }
+
+      setResult(payload);
+      setAnalysisTimeMs(payload.processingTimeMs ?? Math.round(performance.now() - startedAt));
+    } catch (requestError) {
       setResult(null);
-      setError("error" in payload ? payload.error : "MRC check failed.");
-      return;
+      if (requestError instanceof DOMException && requestError.name === "AbortError") {
+        setError("Request timed out after 12s. Please retry and check Supabase connectivity.");
+        return;
+      }
+      throw requestError;
+    } finally {
+      clearTimeout(timeoutId);
     }
-
-    setResult(payload);
-    setAnalysisTimeMs(payload.processingTimeMs ?? Math.round(performance.now() - startedAt));
   }
 
   function run() {
@@ -307,6 +324,47 @@ export default function Page() {
             )}
           </Card>
         </div>
+
+        <Card eyebrow="Whitespace" title="Whitespace wording table">
+          {result ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                  <tr>
+                    <th className="px-2 py-2">Field wording</th>
+                    <th className="px-2 py-2">Extracted value</th>
+                    <th className="px-2 py-2">Extraction status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.analysis.fieldChecks.map((field, index) => {
+                    const extractionStatus =
+                      field.status === "matched" ? "EXTRACTED" : field.status === "attention" ? "ATTENTION" : "MISSING";
+                    const tone = field.status === "matched" ? "ok" : field.status === "attention" ? "warn" : "issue";
+
+                    return (
+                      <tr
+                        className={`border-t border-slate-200 ${index % 2 === 0 ? "bg-white/90" : "bg-slate-50/80"}`}
+                        key={`whitespace-${field.fieldKey}`}
+                      >
+                        <td className="px-2 py-2 font-medium text-slate-700">{field.label}</td>
+                        <td className="px-2 py-2 text-slate-600">{field.extractedValue ?? "—"}</td>
+                        <td className="px-2 py-2">
+                          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold tracking-[0.12em] text-slate-700">
+                            <Dot tone={tone} />
+                            {extractionStatus}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="text-sm text-slate-500">Whitespace extraction rows render after analysis.</p>
+          )}
+        </Card>
       </div>
     </main>
   );
@@ -320,4 +378,3 @@ function MetaCard({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-

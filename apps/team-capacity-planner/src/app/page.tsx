@@ -34,10 +34,43 @@ function statusAppearance(status: string): { dotClass: string; label: string } {
 }
 
 function capacityAppearance(state: TeamCapacityInsight["summary"]["capacityState"] | null) {
-  if (state === "healthy") return { dotClass: "bg-emerald-600", label: "Healthy" };
-  if (state === "overloaded") return { dotClass: "bg-red-600", label: "Overloaded" };
-  if (state === "watch") return { dotClass: "bg-amber-500", label: "Watch" };
-  return { dotClass: "bg-slate-400", label: "Not run yet" };
+  if (state === "healthy") return { dotClass: "bg-emerald-500", badgeClass: "bg-emerald-50 border-emerald-200 text-emerald-700", label: "Healthy" };
+  if (state === "overloaded") return { dotClass: "bg-red-500", badgeClass: "bg-red-50 border-red-200 text-red-700", label: "Overloaded" };
+  if (state === "watch") return { dotClass: "bg-amber-500", badgeClass: "bg-amber-50 border-amber-200 text-amber-700", label: "Watch" };
+  return { dotClass: "bg-slate-400", badgeClass: "bg-slate-100 border-slate-200 text-slate-500", label: "Not run yet" };
+}
+
+function priorityAppearance(priority: "critical" | "high" | "normal") {
+  if (priority === "critical") return { dot: "bg-red-500", badge: "bg-red-50 border-red-200 text-red-700" };
+  if (priority === "high") return { dot: "bg-amber-500", badge: "bg-amber-50 border-amber-200 text-amber-700" };
+  return { dot: "bg-slate-400", badge: "bg-slate-100 border-slate-200 text-slate-500" };
+}
+
+function MiniBar({ label, value, max, warnPct, critPct, unit = "%" }: {
+  label: string;
+  value: number;
+  max: number;
+  warnPct: number;
+  critPct: number;
+  unit?: string;
+}) {
+  const pct = Math.min(100, Math.round((value / max) * 100));
+  const barColor =
+    pct >= critPct ? "bg-red-500" : pct >= warnPct ? "bg-amber-400" : "bg-emerald-500";
+
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-medium text-slate-600">{label}</span>
+        <span className={`text-xs font-semibold ${pct >= critPct ? "text-red-600" : pct >= warnPct ? "text-amber-600" : "text-emerald-700"}`}>
+          {value}{unit}
+        </span>
+      </div>
+      <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+        <div className={`h-full rounded-full transition-all ${barColor}`} style={{ width: `${pct}%` }} />
+      </div>
+    </div>
+  );
 }
 
 export default function Page() {
@@ -109,9 +142,13 @@ export default function Page() {
     setError(null);
   }
 
+  const dm = result?.analysis.derived;
+  const fields = result?.analysis.extractedFields;
+
   return (
     <main className="min-h-screen px-6 py-10 md:px-10 md:py-14">
       <div className="mx-auto flex max-w-7xl flex-col gap-8">
+        {/* Hero */}
         <section className="overflow-hidden rounded-[34px] border border-[var(--hero-border)] bg-white/90 p-6 shadow-[0_24px_70px_rgba(21,51,72,0.12)] backdrop-blur md:p-8">
           <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div className="flex flex-col gap-5">
@@ -130,22 +167,23 @@ export default function Page() {
               <div className="space-y-3">
                 <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-slate-950 md:text-6xl">{appName}</h1>
                 <p className="max-w-3xl text-base leading-7 text-slate-600 md:text-lg">
-                  Convert team workload and staffing signals into deterministic capacity states, manager-ready narrative,
-                  and immediate allocation actions.
+                  Convert team workload and staffing signals into deterministic capacity states, utilization metrics,
+                  SLA posture, and priority-ranked allocation actions.
                 </p>
               </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 xl:min-w-[25rem]">
               <MetaCard label="Created by" value="Poovannan Rajendran" />
-              <MetaCard label="Analysis and review time (MM:SS:CS)" value={formatDuration(analysisTimeMs)} />
+              <MetaCard label="Analysis time (MM:SS:CS)" value={formatDuration(analysisTimeMs)} />
               <MetaCard label="Current file" value={activeFileDisplay} />
               <MetaCard label="Capacity state" value={capacity.label} dotClass={capacity.dotClass} />
               <MetaCard label="Storage" value={storage.label} dotClass={storage.dotClass} />
-              <MetaCard label="Mode" value="Deterministic team capacity allocation planning" />
+              <MetaCard label="Mode" value="Deterministic capacity allocation" />
             </div>
           </div>
         </section>
 
+        {/* Intake */}
         <Card eyebrow="Intake" title="Team capacity intake and prompt">
           <div className="grid gap-5 xl:grid-cols-[1fr_1fr]">
             <div className="space-y-4">
@@ -153,8 +191,8 @@ export default function Page() {
               <div className="rounded-[20px] border border-dashed border-[var(--accent)]/30 bg-white/65 p-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Upload zone</p>
                 <p className="mt-3 text-sm leading-6 text-slate-600">
-                  Paste key-value lines for workforce fields (for example <code>available_capacity_fte</code>,
-                  <code>urgent_queue</code>, and <code>overtime_pct</code>).
+                  Paste key-value lines for workforce fields — for example{" "}
+                  <code>available_capacity_fte</code>, <code>sla_breach_count</code>, <code>referral_backlog</code>.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <input className="hidden" onChange={handleFileSelection} ref={fileRef} type="file" />
@@ -176,7 +214,7 @@ export default function Page() {
                   value={sourceLabel}
                 />
               </div>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {demoSamples.map((sample) => {
                   const active = selectedSampleId === sample.id;
                   return (
@@ -228,7 +266,7 @@ export default function Page() {
                     {isPending ? "Running..." : "Analyze team capacity"}
                   </button>
                   <p className="text-center text-sm text-slate-500">
-                    Runs deterministic team-capacity parsing, overload scoring, and prompt matching through the app route.
+                    Deterministic capacity scoring — utilization, SLA posture, priority-ranked actions.
                   </p>
                 </div>
               </div>
@@ -242,46 +280,145 @@ export default function Page() {
           </Card>
         ) : null}
 
+        {/* Summary + Derived metrics — visual layout */}
         <div className="grid gap-5 xl:grid-cols-2">
+          {/* Summary card — Option A: state badge + 3 mini-bars */}
           <Card eyebrow="Summary" title="Capacity overview">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <MetricTile label="Completeness" value={result ? `${result.analysis.summary.completenessPct}%` : "-"} />
-              <MetricTile label="State" value={result ? result.analysis.summary.capacityState : "Not run yet"} />
-              <MetricTile label="Confidence" value={result ? result.analysis.summary.confidence : "-"} />
-              <MetricTile label="Warnings" value={result ? String(result.analysis.warnings.length) : "-"} />
+            <div className="flex h-full flex-col gap-5">
+              {/* State badge row */}
+              <div className="flex items-center gap-4">
+                <span className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold ${capacity.badgeClass}`}>
+                  <span className={`h-2.5 w-2.5 rounded-full ${capacity.dotClass}`} />
+                  {result ? result.analysis.summary.capacityState.toUpperCase() : "NOT RUN"}
+                </span>
+                <div className="flex gap-4 text-sm text-slate-600">
+                  <span>
+                    <span className="font-semibold text-slate-900">{result ? `${result.analysis.summary.completenessPct}%` : "—"}</span>
+                    {" "}complete
+                  </span>
+                  <span>
+                    <span className="font-semibold text-slate-900">{result ? result.analysis.summary.confidence : "—"}</span>
+                    {" "}confidence
+                  </span>
+                  <span>
+                    <span className={`font-semibold ${(result?.analysis.summary.warnings ?? 0) > 0 ? "text-red-600" : "text-slate-900"}`}>
+                      {result ? result.analysis.summary.warnings : "—"}
+                    </span>
+                    {" "}warning{result?.analysis.summary.warnings !== 1 ? "s" : ""}
+                  </span>
+                </div>
+              </div>
+
+              {/* 3 mini-bars */}
+              <div className="space-y-4 rounded-[16px] border border-slate-100 bg-slate-50/60 px-4 py-4">
+                <MiniBar
+                  label={`Utilization — ${dm ? `${dm.effectiveFte} FTE / ${result?.analysis.extractedFields.in_flight_work_items ?? 0} items` : "FTE vs items"}`}
+                  value={dm ? Math.round(dm.utilizationRate * 10) : 0}
+                  max={50}
+                  warnPct={40}
+                  critPct={70}
+                  unit="×"
+                />
+                <MiniBar
+                  label={`Urgent queue${fields ? ` — ${fields.urgent_queue ?? 0} of ${fields.in_flight_work_items ?? 0} items` : ""}`}
+                  value={dm && fields ? Math.round(((fields.urgent_queue ?? 0) / Math.max(1, fields.in_flight_work_items ?? 1)) * 100) : 0}
+                  max={100}
+                  warnPct={20}
+                  critPct={40}
+                />
+                <MiniBar
+                  label={`Overtime${fields ? ` — ${fields.overtime_pct ?? 0}%` : ""}`}
+                  value={fields?.overtime_pct ?? 0}
+                  max={30}
+                  warnPct={33}
+                  critPct={60}
+                />
+              </div>
+
+              {/* SLA breach + velocity row */}
+              {dm ? (
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-[14px] border border-slate-200 bg-white px-3 py-3">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">SLA breach rate</p>
+                    <p className={`mt-1 text-xl font-semibold ${dm.slaBreachRatePct >= 20 ? "text-red-600" : "text-slate-900"}`}>
+                      {dm.slaBreachRatePct}%
+                    </p>
+                  </div>
+                  <div className="rounded-[14px] border border-slate-200 bg-white px-3 py-3">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">Queue velocity</p>
+                    <p className={`mt-1 text-xl font-semibold ${dm.queueVelocityDelta > 0 ? "text-red-600" : "text-emerald-700"}`}>
+                      {dm.queueVelocityDelta > 0 ? `+${dm.queueVelocityDelta}` : dm.queueVelocityDelta} items/wk
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-[14px] border border-slate-200 bg-white px-3 py-3">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">SLA breach rate</p>
+                    <p className="mt-1 text-xl font-semibold text-slate-400">—</p>
+                  </div>
+                  <div className="rounded-[14px] border border-slate-200 bg-white px-3 py-3">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-500">Queue velocity</p>
+                    <p className="mt-1 text-xl font-semibold text-slate-400">—</p>
+                  </div>
+                </div>
+              )}
             </div>
           </Card>
-          <Card eyebrow="Query" title="Prompt match snippets">
-            {result?.analysis.promptHits.length ? (
-              <ul className="space-y-2 text-sm leading-6 text-slate-700">
-                {result.analysis.promptHits.map((line, index) => (
-                  <li key={`${line}-${index}`}>- {line}</li>
-                ))}
-              </ul>
+
+          {/* Derived metrics card */}
+          <Card eyebrow="Metrics" title="Derived capacity metrics">
+            {dm && fields ? (
+              <div className="grid grid-cols-2 gap-3">
+                <MetricTile label="Effective FTE" value={String(dm.effectiveFte)} sub={fields.absentee_count ? `${fields.absentee_count} absentee(s) excluded` : "Full team available"} />
+                <MetricTile label="Utilization rate" value={`${dm.utilizationRate}×`} sub={`${dm.utilizationPct}% of 4× ceiling`} />
+                <MetricTile
+                  label="Cycle vs target"
+                  value={dm.cycleVsTarget != null ? (dm.cycleVsTarget > 0 ? `+${dm.cycleVsTarget}d lagging` : "On target") : "No target set"}
+                  sub={fields.avg_cycle_days != null ? `${fields.avg_cycle_days} day avg` : ""}
+                />
+                <MetricTile
+                  label="Capacity runway"
+                  value={dm.capacityRunwayDays != null ? `${dm.capacityRunwayDays} day(s)` : "Stable"}
+                  sub={dm.capacityRunwayDays != null && dm.capacityRunwayDays < 5 ? "⚠ Ceiling imminent" : "At current intake rate"}
+                />
+                <MetricTile label="Referral backlog" value={String(fields.referral_backlog ?? 0)} sub="items pending referral" />
+                <MetricTile label="New submissions" value={String(fields.new_submissions_week ?? "—")} sub="this week" />
+              </div>
             ) : (
-              <p className="text-sm text-slate-500">No snippets matched the query tokens in this run.</p>
+              <p className="text-sm text-slate-500">Derived metrics appear after analysis.</p>
             )}
           </Card>
         </div>
 
+        {/* Narrative + Action plan */}
         <div className="grid gap-5 xl:grid-cols-2">
           <Card eyebrow="Narrative" title="Allocation narrative">
             {result?.analysis.allocationNarrative.length ? (
-              <ul className="space-y-2 text-sm leading-6 text-slate-700">
+              <ul className="space-y-3 text-sm leading-6 text-slate-700">
                 {result.analysis.allocationNarrative.map((line, index) => (
-                  <li key={`${line}-${index}`}>- {line}</li>
+                  <li className="rounded-[12px] border border-slate-100 bg-slate-50/60 px-3 py-2.5" key={`${line}-${index}`}>{line}</li>
                 ))}
               </ul>
             ) : (
               <p className="text-sm text-slate-500">Narrative appears after analysis.</p>
             )}
           </Card>
-          <Card eyebrow="Actions" title="Action plan">
+
+          <Card eyebrow="Actions" title="Priority-ranked action plan">
             {result?.analysis.actionPlan.length ? (
-              <ul className="space-y-2 text-sm leading-6 text-slate-700">
-                {result.analysis.actionPlan.map((line, index) => (
-                  <li key={`${line}-${index}`}>- {line}</li>
-                ))}
+              <ul className="space-y-2">
+                {result.analysis.actionPlan.map((item, index) => {
+                  const p = priorityAppearance(item.priority);
+                  return (
+                    <li className="flex items-start gap-3 rounded-[12px] border border-slate-100 bg-white px-3 py-2.5" key={`action-${index}`}>
+                      <span className={`mt-1 inline-flex shrink-0 items-center rounded-full border px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wide ${p.badge}`}>
+                        {item.priority}
+                      </span>
+                      <span className="text-sm leading-6 text-slate-700">{item.action}</span>
+                    </li>
+                  );
+                })}
               </ul>
             ) : (
               <p className="text-sm text-slate-500">Action plan appears after analysis.</p>
@@ -289,22 +426,34 @@ export default function Page() {
             {result?.analysis.warnings.length ? (
               <ul className="mt-4 space-y-2 text-sm leading-6 text-red-700">
                 {result.analysis.warnings.map((warning, index) => (
-                  <li className="rounded-xl border border-red-200 bg-red-50 px-3 py-2" key={`${warning}-${index}`}>
-                    {warning}
-                  </li>
+                  <li className="rounded-xl border border-red-200 bg-red-50 px-3 py-2" key={`${warning}-${index}`}>{warning}</li>
                 ))}
               </ul>
             ) : null}
           </Card>
         </div>
 
-        <Card eyebrow="Whitespace" title="Whitespace wording table">
+        {/* Query hits */}
+        <Card eyebrow="Query" title="Prompt match snippets">
+          {result?.analysis.promptHits.length ? (
+            <ul className="space-y-2 text-sm leading-6 text-slate-700">
+              {result.analysis.promptHits.map((line, index) => (
+                <li className="rounded-[12px] border border-slate-100 bg-slate-50/60 px-3 py-2" key={`${line}-${index}`}>— {line}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-slate-500">No snippets matched the query tokens in this run.</p>
+          )}
+        </Card>
+
+        {/* Whitespace table */}
+        <Card eyebrow="Whitespace" title="Field extraction table">
           {result?.analysis.whitespaceRows.length ? (
             <div className="overflow-hidden rounded-[18px] border border-slate-200">
               <table className="w-full border-collapse text-left text-sm">
                 <thead className="bg-slate-100 text-xs uppercase tracking-[0.18em] text-slate-500">
                   <tr>
-                    <th className="px-4 py-2.5">Field wording</th>
+                    <th className="px-4 py-2.5">Field</th>
                     <th className="px-4 py-2.5">Extracted value</th>
                     <th className="px-4 py-2.5">Status</th>
                   </tr>
@@ -312,17 +461,22 @@ export default function Page() {
                 <tbody>
                   {result.analysis.whitespaceRows.map((row, index) => (
                     <tr className={index % 2 === 0 ? "bg-white" : "bg-slate-50/70"} key={`${row.fieldWording}-${index}`}>
-                      <td className="px-4 py-2.5 font-medium text-slate-800">{row.fieldWording}</td>
-                      <td className="px-4 py-2.5 text-slate-700">{row.extractedValue || "-"}</td>
+                      <td className="px-4 py-2.5 font-medium text-slate-800">
+                        {row.fieldWording}
+                        {row.optional ? <span className="ml-2 text-[0.65rem] font-normal text-slate-400">optional</span> : null}
+                      </td>
+                      <td className="px-4 py-2.5 text-slate-700">{row.extractedValue || "—"}</td>
                       <td className="px-4 py-2.5">
                         <span
                           className={`rounded-full px-2.5 py-1 text-xs font-semibold uppercase ${
                             row.status === "EXTRACTED"
                               ? "border border-emerald-200 bg-emerald-50 text-emerald-700"
-                              : "border border-red-200 bg-red-50 text-red-700"
+                              : row.optional
+                                ? "border border-slate-200 bg-slate-100 text-slate-500"
+                                : "border border-red-200 bg-red-50 text-red-700"
                           }`}
                         >
-                          {row.status}
+                          {row.status === "MISSING" && row.optional ? "OPTIONAL" : row.status}
                         </span>
                       </td>
                     </tr>
@@ -331,7 +485,7 @@ export default function Page() {
               </table>
             </div>
           ) : (
-            <p className="text-sm text-slate-500">Whitespace table appears after analysis.</p>
+            <p className="text-sm text-slate-500">Field extraction table appears after analysis.</p>
           )}
         </Card>
       </div>
@@ -351,11 +505,12 @@ function MetaCard({ label, value, dotClass }: { label: string; value: string; do
   );
 }
 
-function MetricTile({ label, value }: { label: string; value: string }) {
+function MetricTile({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white/75 px-4 py-3">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-slate-900">{value}</p>
+      <p className="mt-1.5 text-xl font-semibold text-slate-900">{value}</p>
+      {sub ? <p className="mt-0.5 text-[0.7rem] text-slate-400">{sub}</p> : null}
     </div>
   );
 }

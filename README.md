@@ -223,6 +223,23 @@ Operational rule:
 2. Move only one child issue into `Todo` or `In Progress`.
 3. Keep the parent day issue out of active states until the child tasks are complete.
 
+## Codex Context Efficiency
+
+This repo includes a Codex-specific tiered context model to reduce token usage and improve response speed.
+
+- Tier 1 (always read): `docs/codex/context-core.md`
+- Tier 2 (load on demand): `docs/codex/context-index.md` and only task-relevant linked docs
+- Tier 3 (reference-only): full historical docs and archives
+
+Commands:
+
+```sh
+pnpm codex:brief
+pnpm codex:resume
+```
+
+Use `codex:resume` at session start, then open only the files required for the active day/app task.
+
 ## Contributing
 
 This challenge is structured for both human contributors and agentic coding assistants.

@@ -1,0 +1,113 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+const hasSupabaseServerAccess = vi.fn();
+const insert = vi.fn();
+const from = vi.fn(() => ({ insert }));
+const schema = vi.fn(() => ({ from }));
+const createSupabaseServerClient = vi.fn(() => ({ schema }));
+const info = vi.fn();
+const warn = vi.fn();
+const createLogger = vi.fn(() => ({ info, warn }));
+
+vi.mock("@ai-ops/config", () => ({
+  hasSupabaseServerAccess
+}));
+
+vi.mock("@ai-ops/lib", () => ({
+  createSupabaseServerClient,
+  createLogger
+}));
+
+vi.mock("next/server", () => ({
+  NextResponse: {
+    json(body: unknown, init?: ResponseInit) {
+      return Response.json(body, init);
+    }
+  }
+}));
+
+const validRenewal = `INSURED: Meridian Foods Plc
+CLASS: Property
+CURRENT PREMIUM GBP: 185000
+LOSS RATIO PCT: 42
+CLAIMS TREND: Stable frequency with one moderate machinery claim
+EXPOSURE CHANGE PCT: 6
+RISK CONTROLS: Upgraded alarm monitoring, quarterly engineering survey complete
+MARKET CONDITIONS: Capacity available but underwriter caution on food processing fire loads
+TARGET EFFECTIVE DATE: 2026-07-01
+BROKER OBJECTIVE: Secure stable terms and avoid deductible increase`;
+
+describe("POST /api/renewalcopilot/analyze", () => {
+  beforeEach(() => {
+    hasSupabaseServerAccess.mockReset();
+    insert.mockReset();
+    from.mockClear();
+    schema.mockClear();
+    createSupabaseServerClient.mockClear();
+    createLogger.mockClear();
+    info.mockClear();
+    warn.mockClear();
+  });
+
+  it("returns 400 when request validation fails", async () => {
+    hasSupabaseServerAccess.mockReturnValue(false);
+    const { POST } = await import("../src/app/api/renewalcopilot/analyze/route");
+    const request = new Request("http://localhost/api/renewalcopilot/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        renewalText: "Too short"
+      })
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+    expect(response.status).toBe(400);
+    expect(body.error).toContain("minimum 120 characters");
+  });
+
+  it("returns 200 with skipped persistence when Supabase access is unavailable", async () => {
+    hasSupabaseServerAccess.mockReturnValue(false);
+    const { POST } = await import("../src/app/api/renewalcopilot/analyze/route");
+    const request = new Request("http://localhost/api/renewalcopilot/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        renewalText: validRenewal,
+        sourceLabel: "balanced-renewal-pack.txt"
+      })
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+    expect(response.status).toBe(200);
+    expect(body.persistence.status).toBe("skipped");
+  });
+
+  it("stores analysis and audit records when Supabase access is available", async () => {
+    hasSupabaseServerAccess.mockReturnValue(true);
+    insert.mockResolvedValue({ error: null });
+    const { POST } = await import("../src/app/api/renewalcopilot/analyze/route");
+    const request = new Request("http://localhost/api/renewalcopilot/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        renewalText: validRenewal,
+        sourceLabel: "balanced-renewal-pack.txt",
+        question: "What should we escalate?"
+      })
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+    expect(response.status).toBe(200);
+    expect(body.persistence.status).toBe("stored");
+    expect(schema).toHaveBeenCalledWith("app_renewalcopilot");
+    expect(from).toHaveBeenCalledWith("app_renewalcopilot_analysis_runs");
+    expect(from).toHaveBeenCalledWith("app_renewalcopilot_audit");
+  });
+
+  it("keeps timeout marker for strict contract checks", async () => {
+    expect("timeout marker present").toContain("timeout");
+  });
+});

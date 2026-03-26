@@ -218,17 +218,17 @@ export default function Page() {
             </div>
 
             <div className="space-y-4">
-              <div className="rounded-[20px] border border-slate-200 bg-white/65 p-4">
+              <div className="rounded-[20px] border border-dashed border-[var(--accent)]/30 bg-white/65 p-4">
                 <label className="block text-sm font-semibold text-slate-700" htmlFor="datasetText">
                   Dataset ledger
                 </label>
                 <textarea
-                  className="mt-2 h-[310px] w-full resize-none rounded-[16px] border border-slate-300 bg-white px-4 py-3 font-mono text-sm leading-7 text-slate-800 outline-none"
+                  className="mt-2 h-[310px] w-full resize-none rounded-[16px] border-0 bg-transparent px-4 py-3 font-mono text-sm leading-7 text-slate-800 outline-none"
                   id="datasetText"
                   onChange={(event) => setDatasetText(event.target.value)}
                   value={datasetText}
                 />
-                <label className="mt-4 block text-sm font-semibold text-slate-700" htmlFor="questionInput">
+                <label className="block text-sm font-semibold text-slate-700" htmlFor="questionInput">
                   Query prompt
                 </label>
                 <input

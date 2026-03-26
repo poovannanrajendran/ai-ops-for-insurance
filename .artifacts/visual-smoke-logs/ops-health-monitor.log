@@ -1,0 +1,16 @@
+
+> @ai-ops/ops-health-monitor@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/ops-health-monitor
+> next dev --port 3023
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3023
+- Network:       http://192.168.1.86:3023
+
+✓ Starting...
+✓ Ready in 367ms
+ GET / 200 in 788ms (compile: 721ms, render: 67ms)
+ GET / 200 in 28ms (compile: 3ms, render: 25ms)
+ GET / 200 in 92ms (compile: 1558µs, render: 91ms)
+ GET / 200 in 76ms (compile: 1705µs, render: 74ms)
+ GET / 200 in 87ms (compile: 16ms, render: 71ms)
+ GET / 200 in 145ms (compile: 2ms, render: 143ms)

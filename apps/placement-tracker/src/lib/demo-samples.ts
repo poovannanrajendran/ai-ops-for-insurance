@@ -42,5 +42,31 @@ PL-512,Harbor Cold Storage,City Wholesale,Anchor Markets,Open,15,0,10,8000000,36
     question: "Which markets are still open?",
     csvText: `placement_id,account_name,broker,market_name,status,target_share_pct
 PL-001,Short Example,Broker,Lead,Placed,30`
+  },
+  {
+    id: "multi-class-programme",
+    label: "Multi-class programme",
+    description: "Energy programme with five lines across Property, Marine, and Liability - two markets declined, one stale.",
+    sourceLabel: "multi-class-programme.csv",
+    question: "Which declined lines need replacement and how much capacity is at risk?",
+    csvText: `placement_id,account_name,broker,market_name,status,target_share_pct,signed_share_pct,quoted_share_pct,line_size_gbp,premium_gbp,follow_up_age_days,capacity_change_pct,class_of_business,territory
+PL-780,Caspian Energy Ltd,Global Risk Partners,Pinnacle Syndicate,Placed,25,25,25,25000000,1125000,1,0,Energy,Kazakhstan
+PL-780,Caspian Energy Ltd,Global Risk Partners,Continental Re,Placed,20,20,20,25000000,1125000,2,3,Energy,Kazakhstan
+PL-780,Caspian Energy Ltd,Global Risk Partners,Meridian Specialty,Declined,20,0,0,25000000,1125000,9,-25,Energy,Kazakhstan
+PL-780,Caspian Energy Ltd,Global Risk Partners,Pacific Underwriters,Follow Up,20,0,12,25000000,1125000,8,-10,Energy,Kazakhstan
+PL-780,Caspian Energy Ltd,Global Risk Partners,Nordic Lines,Open,15,0,0,25000000,1125000,3,-5,Energy,Kazakhstan`
+  },
+  {
+    id: "near-full-placement",
+    label: "Near full placement",
+    description: "Programme 95% placed, small open tail, renewal due in 5 days.",
+    sourceLabel: "near-full-placement.csv",
+    question: "What is the remaining open capacity and is placement on track?",
+    csvText: `placement_id,account_name,broker,market_name,status,target_share_pct,signed_share_pct,quoted_share_pct,line_size_gbp,premium_gbp,follow_up_age_days,capacity_change_pct,class_of_business,territory
+PL-920,Thames Valley Power,City Brokers,Alpha Syndicate,Placed,30,30,30,18000000,720000,1,2,Power Generation,United Kingdom
+PL-920,Thames Valley Power,City Brokers,Beta Markets,Placed,25,25,25,18000000,720000,1,1,Power Generation,United Kingdom
+PL-920,Thames Valley Power,City Brokers,Gamma Re,Placed,20,20,20,18000000,720000,1,0,Power Generation,United Kingdom
+PL-920,Thames Valley Power,City Brokers,Delta Specialty,Placed,20,20,20,18000000,720000,2,3,Power Generation,United Kingdom
+PL-920,Thames Valley Power,City Brokers,Epsilon Lines,Open,5,0,5,18000000,720000,2,-2,Power Generation,United Kingdom`
   }
 ];

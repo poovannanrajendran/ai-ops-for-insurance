@@ -15,10 +15,17 @@ const numericFields = [
   "combined_ratio_pct",
   "premium_delta_pct",
   "renewal_retention_pct",
-  "open_claims_count"
+  "open_claims_count",
+  "large_loss_count",
+  "new_business_gwp_gbp"
 ] as const;
 
+const optionalFields = new Set<string>(["large_loss_count", "new_business_gwp_gbp", "market_conditions_note"]);
+
 const wordingMap: Record<keyof QbrInputFields, string> = {
+  company_name: "Company / division",
+  class_of_business: "Class of business",
+  quarter: "Quarter",
   gwp_gbp: "Gross written premium (GBP)",
   loss_ratio_pct: "Loss ratio %",
   ntu_rate_pct: "NTU rate %",
@@ -26,7 +33,10 @@ const wordingMap: Record<keyof QbrInputFields, string> = {
   premium_delta_pct: "Premium delta %",
   renewal_retention_pct: "Renewal retention %",
   open_claims_count: "Open claims count",
-  broker_mix_note: "Broker mix note"
+  large_loss_count: "Large loss count",
+  new_business_gwp_gbp: "New business GWP (GBP)",
+  broker_mix_note: "Broker mix note",
+  market_conditions_note: "Market conditions note"
 };
 
 function parsePayload(text: string): Record<string, string> {
@@ -62,6 +72,9 @@ export function analyzeQbrNarrative(input: unknown): QbrNarrativeInsight {
   const payload = parsePayload(parsed.qbrText);
 
   const extracted: QbrInputFields = {
+    company_name: payload.company_name ?? "",
+    class_of_business: payload.class_of_business ?? "",
+    quarter: payload.quarter ?? "",
     gwp_gbp: toNumber(payload.gwp_gbp),
     loss_ratio_pct: toNumber(payload.loss_ratio_pct),
     ntu_rate_pct: toNumber(payload.ntu_rate_pct),
@@ -69,16 +82,22 @@ export function analyzeQbrNarrative(input: unknown): QbrNarrativeInsight {
     premium_delta_pct: toNumber(payload.premium_delta_pct),
     renewal_retention_pct: toNumber(payload.renewal_retention_pct),
     open_claims_count: toNumber(payload.open_claims_count),
-    broker_mix_note: payload.broker_mix_note ?? ""
+    large_loss_count: toNumber(payload.large_loss_count),
+    new_business_gwp_gbp: toNumber(payload.new_business_gwp_gbp),
+    broker_mix_note: payload.broker_mix_note ?? "",
+    market_conditions_note: payload.market_conditions_note ?? ""
   };
 
   const missing = numericFields.filter((field) => extracted[field] == null);
-  const denominator = numericFields.length + 1;
-  const completeness = denominator - missing.length - (extracted.broker_mix_note ? 0 : 1);
+  const textFields = ["company_name", "class_of_business", "quarter", "broker_mix_note", "market_conditions_note"] as const;
+  const missingText = textFields.filter((f) => !extracted[f]);
+  const denominator = numericFields.length + textFields.length;
+  const completeness = denominator - missing.length - missingText.length;
   const completenessPct = Math.max(0, Math.round((completeness / denominator) * 100));
 
   const warnings: string[] = [];
-  if (missing.length) warnings.push(`Missing required numeric fields: ${missing.join(", ")}.`);
+  if (!extracted.company_name) warnings.push("Company name not provided — add company_name to identify the reporting entity.");
+  if (missing.length) warnings.push(`Missing numeric fields: ${missing.join(", ")}.`);
   if ((extracted.combined_ratio_pct ?? 0) > 102) warnings.push("Combined ratio is above 102%, indicating underwriting pressure.");
   if ((extracted.renewal_retention_pct ?? 100) < 75) warnings.push("Renewal retention below 75%; include distribution recovery actions.");
   if ((extracted.premium_delta_pct ?? 0) < 0) warnings.push("Premium trend is negative versus prior period.");
@@ -90,16 +109,24 @@ export function analyzeQbrNarrative(input: unknown): QbrNarrativeInsight {
         ? "improving"
         : "stable";
 
+  const companyPrefix = extracted.company_name ? `${extracted.company_name} — ` : "";
+  const cobSuffix = extracted.class_of_business ? ` (${extracted.class_of_business})` : "";
+  const quarterSuffix = extracted.quarter ? ` for ${extracted.quarter}` : "";
+
   const executiveNarrative = [
-    `Quarter closed at GBP ${(extracted.gwp_gbp ?? 0).toLocaleString("en-GB")} GWP with ${state} performance profile.`,
+    `${companyPrefix}${state.charAt(0).toUpperCase() + state.slice(1)} performance profile recorded${quarterSuffix}${cobSuffix} with GBP ${(extracted.gwp_gbp ?? 0).toLocaleString("en-GB")} GWP.`,
     `Loss ratio stands at ${extracted.loss_ratio_pct ?? "n/a"}% and combined ratio at ${extracted.combined_ratio_pct ?? "n/a"}%.`,
-    `Renewal retention is ${extracted.renewal_retention_pct ?? "n/a"}% with premium delta ${extracted.premium_delta_pct ?? "n/a"}% versus last period.`
+    `Renewal retention is ${extracted.renewal_retention_pct ?? "n/a"}% with premium delta ${extracted.premium_delta_pct ?? "n/a"}% versus prior period.`,
+    ...(extracted.new_business_gwp_gbp != null
+      ? [`New business contributed GBP ${extracted.new_business_gwp_gbp.toLocaleString("en-GB")} GWP this quarter.`]
+      : [])
   ];
 
   const boardTalkingPoints = [
     `Highlight NTU rate of ${extracted.ntu_rate_pct ?? "n/a"}% and its effect on margin resilience.`,
-    `Open claims count at ${extracted.open_claims_count ?? "n/a"}; confirm large-loss tracking cadence.`,
-    extracted.broker_mix_note ? `Broker mix context: ${extracted.broker_mix_note}` : "Broker mix context not supplied in source pack."
+    `Open claims count at ${extracted.open_claims_count ?? "n/a"}${extracted.large_loss_count != null ? `; ${extracted.large_loss_count} large loss(es) active` : ""}. Confirm large-loss tracking cadence.`,
+    extracted.broker_mix_note ? `Broker mix: ${extracted.broker_mix_note}` : "Broker mix context not supplied in source pack.",
+    extracted.market_conditions_note ? `Market context: ${extracted.market_conditions_note}` : "Market conditions not provided — include in board commentary."
   ];
 
   const queryTokens = parsed.question.toLowerCase().split(/[^a-z0-9]+/).filter((token) => token.length > 2);
@@ -112,7 +139,8 @@ export function analyzeQbrNarrative(input: unknown): QbrNarrativeInsight {
     return {
       fieldWording: wordingMap[field],
       extractedValue: value == null ? "" : String(value),
-      status: value == null || value === "" ? "MISSING" : "EXTRACTED"
+      status: value == null || value === "" ? "MISSING" : "EXTRACTED",
+      optional: optionalFields.has(field)
     };
   });
 

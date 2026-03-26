@@ -15,6 +15,7 @@ export interface SanctionsSummary {
   mediumRiskMatches: number;
   lowRiskMatches: number;
   screeningState: "clear" | "review" | "block";
+  sanctionsDataUpdatedAtDisplay?: string;
 }
 
 export interface SanctionsScreeningInsight {

@@ -1,0 +1,16 @@
+
+> @ai-ops/regulatory-update-digest@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/regulatory-update-digest
+> next dev --port 3020
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3020
+- Network:       http://192.168.1.86:3020
+
+✓ Starting...
+✓ Ready in 394ms
+ GET / 200 in 794ms (compile: 728ms, render: 66ms)
+ GET / 200 in 17ms (compile: 1438µs, render: 16ms)
+ GET / 200 in 47ms (compile: 1863µs, render: 45ms)
+ GET / 200 in 52ms (compile: 7ms, render: 46ms)
+ GET / 200 in 62ms (compile: 1242µs, render: 61ms)
+ GET / 200 in 55ms (compile: 1294µs, render: 53ms)

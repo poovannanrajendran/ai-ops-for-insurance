@@ -1,0 +1,10 @@
+INSURED: Atlas Marine Logistics
+CLASS: Marine Cargo
+CURRENT PREMIUM GBP: 420000
+LOSS RATIO PCT: 89
+CLAIMS TREND: Frequency increase with two theft losses and one high-severity spoilage event
+EXPOSURE CHANGE PCT: 14
+RISK CONTROLS: Incomplete route-security evidence and delayed sanctions control attestation
+MARKET CONDITIONS: Capacity tightening and elevated deductible appetite in segment
+TARGET EFFECTIVE DATE: 2026-06-15
+BROKER OBJECTIVE: Retain line size while preventing punitive premium movement

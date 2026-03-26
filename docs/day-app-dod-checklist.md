@@ -11,6 +11,7 @@ Applies to: Every day app from Day 11 onward (and retrofits when existing apps a
 - [ ] `pnpm --filter <pkg> build` passes
 - [ ] Positive and negative unit tests exist for analyzer/service logic
 - [ ] Positive and negative route tests exist (`200` success + `400` validation/gate failure)
+- [ ] Route tests include timeout/cancellation behavior
 - [ ] Route-level request validation is implemented with explicit error messages
 - [ ] Required-field or minimum-input gate exists and is tested
 
@@ -32,9 +33,12 @@ Applies to: Every day app from Day 11 onward (and retrofits when existing apps a
 - [ ] Primary source and text/content panes are visually balanced
 - [ ] No duplicate-looking nested input boxes
 - [ ] Warning visuals are obvious and consistent (amber warning state)
+- [ ] Status-dot contract follows green/amber/red semantics (no drift)
 - [ ] Desktop and mobile screenshots captured
 - [ ] Result state screenshot captured
 - [ ] Playwright visual smoke check passes (border + intake visibility baseline)
+- [ ] Playwright layout contracts pass (intake alignment + pane baseline + CSV border)
+- [ ] Playwright runtime guard passes (no duplicate React keys/hydration errors)
 
 ## 4. Deployment and runtime gates
 
@@ -54,6 +58,11 @@ bash scripts/predeploy-check.sh <app-folder>
 
 # 2) Build/test quality gates
 node scripts/qa/verify-app-tests.mjs <app-folder>
+VERIFY_TIMEOUT_COVERAGE=1 node scripts/qa/verify-app-tests.mjs <app-folder>
+node scripts/qa/check-sample-diversity.mjs <app-folder>
+node scripts/qa/check-status-dot-contract.mjs <app-folder>
+# Optional once schema and audit table are provisioned:
+node scripts/qa/check-audit-sequence.mjs <schema> <audit-table>
 pnpm --filter @ai-ops/<app-folder> lint
 pnpm --filter @ai-ops/<app-folder> test
 pnpm --filter @ai-ops/<app-folder> typecheck

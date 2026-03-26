@@ -9,6 +9,27 @@ const mrcCheckerApp = {
   schema: "app_mrcchecker",
   shortName: "mrcchecker"
 } as const;
+const PERSISTENCE_TIMEOUT_MS = 4000;
+
+async function withTimeout<T>(
+  promise: PromiseLike<T>,
+  timeoutMs: number,
+  timeoutMessage: string
+): Promise<T> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error(timeoutMessage)), timeoutMs);
+      })
+    ]);
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  }
+}
 
 function normalizePersistenceError(message: string): string {
   if (message.includes("PGRST106") || message.includes("Invalid schema")) {
@@ -29,11 +50,15 @@ async function persistAudit(requestId: string, stage: string, payload: Record<st
   }
   try {
     const supabase = createSupabaseServerClient();
-    await supabase.schema(mrcCheckerApp.schema).from("app_mrcchecker_audit").insert({
-      payload,
-      request_id: requestId,
-      stage
-    });
+    await withTimeout(
+      supabase.schema(mrcCheckerApp.schema).from("app_mrcchecker_audit").insert({
+        payload,
+        request_id: requestId,
+        stage
+      }),
+      PERSISTENCE_TIMEOUT_MS,
+      "Audit persistence timed out."
+    );
   } catch {
     // Audit writes are non-blocking.
   }
@@ -55,24 +80,33 @@ async function persistRun(
 
   try {
     const supabase = createSupabaseServerClient();
-    const { error } = await supabase
-      .schema(mrcCheckerApp.schema)
-      .from("app_mrcchecker_analysis_runs")
-      .insert({
-        clause_checks: analysis.clauseChecks,
-        commentary: analysis.commentary,
-        field_checks: analysis.fieldChecks,
-        question: question ?? null,
-        query_hits: analysis.query.hits,
-        raw_analysis: analysis,
-        raw_mrc_text: mrcText,
-        referrals: analysis.referrals,
-        request_id: requestId,
-        source_label: sourceLabel ?? null,
-        structured_data: analysis.structuredData,
-        summary: analysis.summary,
-        warnings: analysis.warnings
-      });
+    const insertResult = await withTimeout(
+      supabase
+        .schema(mrcCheckerApp.schema)
+        .from("app_mrcchecker_analysis_runs")
+        .insert({
+          attention_fields: analysis.summary.attentionFields,
+          clause_checks: analysis.clauseChecks,
+          field_coverage: analysis.summary.fieldCoverage,
+          field_checks: analysis.fieldChecks,
+          gate_passed: analysis.summary.gatePassed,
+          matched_fields: analysis.summary.matchedFields,
+          missing_fields: analysis.summary.missingFields,
+          missing_required_fields: analysis.summary.missingRequiredFields,
+          question: question ?? null,
+          raw_analysis: analysis,
+          raw_input: mrcText,
+          referrals: analysis.referrals,
+          request_id: requestId,
+          source_label: sourceLabel ?? null,
+          structured_data: analysis.structuredData,
+          summary: analysis.summary,
+          warnings: analysis.warnings
+        }),
+      PERSISTENCE_TIMEOUT_MS,
+      "Analysis persistence timed out."
+    );
+    const { error } = insertResult as { error: { message: string } | null };
 
     if (error) {
       return {
@@ -141,4 +175,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
-

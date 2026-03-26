@@ -1,0 +1,16 @@
+
+> @ai-ops/data-quality-validator@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/data-quality-validator
+> next dev --port 3024
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3024
+- Network:       http://192.168.1.86:3024
+
+✓ Starting...
+✓ Ready in 571ms
+ GET / 200 in 1033ms (compile: 943ms, render: 90ms)
+ GET / 200 in 18ms (compile: 1384µs, render: 17ms)
+ GET / 200 in 71ms (compile: 1708µs, render: 69ms)
+ GET / 200 in 75ms (compile: 16ms, render: 59ms)
+ GET / 200 in 61ms (compile: 4ms, render: 57ms)
+ GET / 200 in 21ms (compile: 4ms, render: 17ms)

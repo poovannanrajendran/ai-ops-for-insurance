@@ -1,0 +1,16 @@
+
+> @ai-ops/qbr-narrative-generator@0.0.0 dev /Users/poovannanrajendran/Documents/GitHub/ai-ops-for-insurance/apps/qbr-narrative-generator
+> next dev --port 3026
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3026
+- Network:       http://192.168.1.86:3026
+
+✓ Starting...
+✓ Ready in 383ms
+ GET / 200 in 369ms (compile: 297ms, render: 72ms)
+ GET / 200 in 20ms (compile: 1609µs, render: 18ms)
+ GET / 200 in 74ms (compile: 1275µs, render: 72ms)
+ GET / 200 in 58ms (compile: 2ms, render: 56ms)
+ GET / 200 in 60ms (compile: 9ms, render: 51ms)
+ GET / 200 in 92ms (compile: 10ms, render: 83ms)

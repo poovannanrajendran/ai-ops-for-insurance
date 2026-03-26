@@ -1,0 +1,10 @@
+INSURED: Meridian Foods Plc
+CLASS: Property
+CURRENT PREMIUM GBP: 185000
+LOSS RATIO PCT: 42
+CLAIMS TREND: Stable frequency with one moderate machinery claim
+EXPOSURE CHANGE PCT: 6
+RISK CONTROLS: Upgraded alarm monitoring, quarterly engineering survey complete
+MARKET CONDITIONS: Capacity available but underwriter caution on food processing fire loads
+TARGET EFFECTIVE DATE: 2026-07-01
+BROKER OBJECTIVE: Secure stable terms and avoid deductible increase

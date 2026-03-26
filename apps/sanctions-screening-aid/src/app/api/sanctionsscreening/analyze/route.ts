@@ -3,6 +3,7 @@ import { createLogger, createSupabaseServerClient } from "@ai-ops/lib";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { loadWatchlistFromDb } from "@/lib/sanctions-feed";
 import { analyzeSanctionsScreening } from "@/services/analyze-sanctions-screening";
 
 const appConfig = {
@@ -121,8 +122,14 @@ export async function POST(request: Request) {
       hasQuestion: Boolean(parsed.data.question)
     });
 
+    const watchlistData = await loadWatchlistFromDb();
     const analyzed = await withTimeout(
-      Promise.resolve(analyzeSanctionsScreening(parsed.data.screeningText, parsed.data.question)),
+      Promise.resolve(
+        analyzeSanctionsScreening(parsed.data.screeningText, parsed.data.question, {
+          watchlist: watchlistData.entries,
+          sanctionsDataUpdatedAtDisplay: watchlistData.updatedAtDisplay
+        })
+      ),
       3000
     );
     if (analyzed.missing.length > 0) {

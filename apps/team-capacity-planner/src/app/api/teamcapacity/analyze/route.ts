@@ -33,11 +33,16 @@ async function persistAudit(requestId: string, stage: string, payload: Record<st
   if (!hasSupabaseServerAccess()) return;
   try {
     const supabase = createSupabaseServerClient();
-    await supabase.schema(appConfig.schema).from("app_teamcapacity_audit").insert({
-      request_id: requestId,
-      stage,
-      payload
-    });
+    await withTimeout(
+      Promise.resolve(
+        supabase.schema(appConfig.schema).from("app_teamcapacity_audit").insert({
+          request_id: requestId,
+          stage,
+          payload
+        })
+      ),
+      1500
+    );
   } catch {
     // non-blocking audit path
   }
@@ -56,23 +61,28 @@ async function persistAnalysis(
 
   try {
     const supabase = createSupabaseServerClient();
-    const { error } = await supabase
-      .schema(appConfig.schema)
-      .from("app_teamcapacity_analysis_runs")
-      .insert({
-        request_id: requestId,
-        source_label: sourceLabel ?? null,
-        capacity_text: capacityText,
-        question: question ?? null,
-        summary: analysis.summary,
-        extracted_fields: analysis.extractedFields,
-        allocation_narrative: analysis.allocationNarrative,
-        action_plan: analysis.actionPlan,
-        prompt_hits: analysis.promptHits,
-        warnings: analysis.warnings,
-        whitespace_rows: analysis.whitespaceRows,
-        raw_analysis: analysis
-      });
+    const { error } = await withTimeout(
+      Promise.resolve(
+        supabase
+          .schema(appConfig.schema)
+          .from("app_teamcapacity_analysis_runs")
+          .insert({
+            request_id: requestId,
+            source_label: sourceLabel ?? null,
+            capacity_text: capacityText,
+            question: question ?? null,
+            summary: analysis.summary,
+            extracted_fields: analysis.extractedFields,
+            allocation_narrative: analysis.allocationNarrative,
+            action_plan: analysis.actionPlan,
+            prompt_hits: analysis.promptHits,
+            warnings: analysis.warnings,
+            whitespace_rows: analysis.whitespaceRows,
+            raw_analysis: analysis
+          })
+      ),
+      2500
+    );
 
     if (error) {
       return { status: "failed", reason: formatPersistenceFailure(error.message) } as const;
@@ -109,12 +119,12 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const parsed = requestSchema.safeParse(body);
   if (!parsed.success) {
-    await persistAudit(requestId, "validation_failed", { issues: parsed.error.issues });
+    void persistAudit(requestId, "validation_failed", { issues: parsed.error.issues });
     return NextResponse.json({ error: parsed.error.issues[0]?.message ?? "Invalid team capacity payload." }, { status: 400 });
   }
 
   try {
-    await persistAudit(requestId, "request_received", {
+    void persistAudit(requestId, "request_received", {
       sourceLabel: parsed.data.sourceLabel ?? null,
       hasQuestion: Boolean(parsed.data.question)
     });
@@ -130,9 +140,9 @@ export async function POST(request: Request) {
       3000
     );
 
-    const missing = insight.whitespaceRows.filter((row) => row.status === "MISSING").map((row) => row.fieldWording);
+    const missing = insight.whitespaceRows.filter((row) => row.status === "MISSING" && !row.optional).map((row) => row.fieldWording);
     if (missing.length > 0) {
-      await persistAudit(requestId, "validation_failed", { missing });
+      void persistAudit(requestId, "validation_failed", { missing });
       return NextResponse.json({ error: `Missing required fields: ${missing.join(", ")}.` }, { status: 400 });
     }
 
@@ -144,7 +154,7 @@ export async function POST(request: Request) {
       insight
     );
 
-    await persistAudit(requestId, "analysis_completed", {
+    void persistAudit(requestId, "analysis_completed", {
       capacityState: insight.summary.capacityState,
       confidence: insight.summary.confidence,
       persistenceStatus: persistence.status
@@ -164,7 +174,7 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Team capacity analysis failed.";
-    await persistAudit(requestId, "analysis_failed", { error: message });
+    void persistAudit(requestId, "analysis_failed", { error: message });
     logger.warn("team capacity analysis failed", { error: message });
     return NextResponse.json({ error: message }, { status: 400 });
   }

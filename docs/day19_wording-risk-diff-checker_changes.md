@@ -21,3 +21,9 @@
 
 ## Analytics
 - Statcounter instrumentation is enabled on the Day 19 route for usage telemetry and trend tracking.
+
+## Lessons learnt
+- Keep Vercel project linkage explicit per app to avoid cross-project deploys.
+- Ensure monorepo project settings are pinned (`rootDirectory`, workspace install/build commands).
+- Set shared Supabase env vars at project level before production deploy.
+- Run visual smoke + runtime console checks before release.

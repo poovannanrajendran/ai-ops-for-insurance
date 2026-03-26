@@ -20,6 +20,18 @@
 - Update RAG notes, Linear boards, and Notion pages with the latest docs + dev status.
 - Continue planning the next 5 days of apps with dedicated agents (manager, review, QA, DB) and parallel workstreams.
 
+## Latest Deployment Lessons Learnt (Day 12-19)
+- Vercel deploys in a monorepo can route to the wrong project when local `.vercel` links drift; explicit relinking is required.
+- New Day 15-19 projects must have `rootDirectory` set to `apps/<app-folder>` or monorepo builds fail or deploy wrong app content.
+- Workspace install/build commands must be set at project level:
+  - `pnpm install --frozen-lockfile --dir ../..`
+  - `pnpm --dir ../.. --filter @ai-ops/<app-package> build`
+- Before production deploy, force-set:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+- Verified outcome:
+  - Day 12-19 now deploy as independent Vercel projects with working production aliases.
+
 ## References
 - Workbench: `apps/` directory for each Day app + `screenshots/` in repo root.
 - Scripts: `scripts/supabase`, `scripts/qa`, `scripts/codex` for automation.

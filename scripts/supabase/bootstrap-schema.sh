@@ -52,7 +52,13 @@ echo "==> Applying init SQL: ${INIT_SQL}"
 psql "${SUPABASE_DATABASE_URL}" -v ON_ERROR_STOP=1 -f "${INIT_SQL}" >/dev/null
 
 echo "==> Ensuring Data API schema exposure for role 'authenticator'"
-CURRENT_SCHEMAS="$(psql "${SUPABASE_DATABASE_URL}" -Atqc "select coalesce(current_setting('pgrst.db_schemas', true), '')")"
+CURRENT_SCHEMAS="$(
+  psql "${SUPABASE_DATABASE_URL}" -Atqc "
+    set role authenticator;
+    select coalesce(current_setting('pgrst.db_schemas', true), '');
+    reset role;
+  " | tail -n 1
+)"
 BASE_SCHEMAS="${CURRENT_SCHEMAS:-public,graphql_public}"
 MERGED_SCHEMAS="$(
   printf "%s,%s\n" "${BASE_SCHEMAS}" "${SCHEMA_NAME}" \

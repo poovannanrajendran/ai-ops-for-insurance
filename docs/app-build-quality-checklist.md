@@ -94,10 +94,24 @@ Applies to: Day 5 onward and retrofits to existing apps when touched
   - validation/gate failure
   - persistence stored/skipped/failed paths
 - Route tests must assert `200` and `400` explicitly.
+- Route tests should include timeout/cancellation behavior (`AbortController`/timeout helper).
 - Run test contract verifier:
   - `node scripts/qa/verify-app-tests.mjs <app-folder>`
+- Enforce timeout coverage (strict mode):
+  - `VERIFY_TIMEOUT_COVERAGE=1 node scripts/qa/verify-app-tests.mjs <app-folder>`
+- Run sample diversity contract:
+  - `node scripts/qa/check-sample-diversity.mjs <app-folder>`
+- Run status-dot visual contract:
+  - `node scripts/qa/check-status-dot-contract.mjs <app-folder>`
+- Run audit stage sequence contract (when schema and audit table exist):
+  - `node scripts/qa/check-audit-sequence.mjs <schema> <audit-table>`
 - Run Playwright visual smoke:
   - `bash scripts/qa/run-app-visual.sh <app-folder> @ai-ops/<app-folder> <port>`
+- Playwright contracts must also pass:
+  - intake split-pane top alignment
+  - CSV pane single-border/no nested-border regression
+  - left/right pane baseline alignment
+  - runtime duplicate React key guard
 - Run and pass:
   - `lint`
   - `test`
@@ -149,8 +163,13 @@ Applies to: Day 5 onward and retrofits to existing apps when touched
 - [ ] Unit tests include positive + negative scenarios.
 - [ ] API route tests pass.
 - [ ] API route tests include explicit `200` + `400` assertions.
+- [ ] API route tests include timeout/cancellation scenario.
 - [ ] `lint`, `test`, `typecheck`, `build` all pass locally.
 - [ ] `node scripts/qa/verify-app-tests.mjs <app-folder>` passes.
+- [ ] `VERIFY_TIMEOUT_COVERAGE=1 node scripts/qa/verify-app-tests.mjs <app-folder>` passes.
+- [ ] `node scripts/qa/check-sample-diversity.mjs <app-folder>` passes.
+- [ ] `node scripts/qa/check-status-dot-contract.mjs <app-folder>` passes.
+- [ ] `node scripts/qa/check-audit-sequence.mjs <schema> <audit-table>` passes (when schema/audit are provisioned).
 - [ ] `bash scripts/qa/run-app-visual.sh <app-folder> @ai-ops/<app-folder> <port>` passes.
 - [ ] Visual screenshots captured for desktop/mobile and analyzed/error states.
 - [ ] Vercel settings verified (root directory, build/install commands, env vars).

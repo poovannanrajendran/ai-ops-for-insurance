@@ -20,3 +20,9 @@
 
 ## Analytics
 - Statcounter is active on the day-16 route so we capture usage and referral introductions for the exposure modeller.
+
+## Lessons learnt
+- Keep Vercel project linkage explicit per app to avoid cross-project deploys.
+- Ensure monorepo project settings are pinned (`rootDirectory`, workspace install/build commands).
+- Set shared Supabase env vars at project level before production deploy.
+- Run visual smoke + runtime console checks before release.
