@@ -1,0 +1,6 @@
+kpi,current,target,previous,owner,direction
+Quote turnaround hours,31,30,32,Broking Ops,lower_better
+Referral aging over 5d,11,10,12,Underwriting Ops,lower_better
+Bind ratio pct,34,36,33,Placement,higher_better
+Claims closure 30d pct,69,70,68,Claims,higher_better
+Data quality completeness pct,96,97,95,Data Ops,higher_better

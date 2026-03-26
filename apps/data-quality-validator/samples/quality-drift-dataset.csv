@@ -1,0 +1,4 @@
+record_id,class_of_business,country,premium_gbp,inception_date,expiry_date
+SUB-2001,Property,United Kingdom,-25000,2026-01-01,2026-12-31
+SUB-2001,Casualty,France,92000,2026-02-01,2025-12-31
+SUB-2003,,Germany,131000,2026-03-15,2027-03-14

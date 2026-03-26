@@ -1,0 +1,4 @@
+kpi,current,target,previous,owner,direction
+Quote turnaround hours,52,,41,Broking Ops,lower_better
+Referral aging over 5d,26,10,18,Underwriting Ops,
+Bind ratio pct,,36,28,Placement,higher_better
