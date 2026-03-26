@@ -200,6 +200,7 @@ export default function Page() {
   const summary = result?.analysis.summary;
   const storageStatus = result?.persistence.status ?? "skipped";
   const gateStatus = result?.analysis.requiredFieldGate.passed ? "ready" : "failed";
+  const sourceLabelForHeader = sourceLabel.replace(/\.(csv|tsv|txt|md)$/i, "");
 
   return (
     <main className="min-h-screen px-6 py-10 md:px-10 md:py-14">
@@ -231,7 +232,7 @@ export default function Page() {
             <div className="grid gap-3 sm:grid-cols-2 xl:min-w-[24rem]">
               <MetaCard label="Created by" value="Poovannan Rajendran" />
               <MetaCard label="Analysis and review time (MM:SS:CS)" value={formatDuration(analysisTimeMs)} />
-              <MetaCard label="Current source" value={sourceLabel} />
+              <MetaCard label="Current file" value={sourceLabelForHeader} />
               <MetaCard label="Storage" value={<StatusDot status={storageStatus} fallbackLabel={result ? undefined : "Awaiting run"} />} />
               <MetaCard label="Required-field gate" value={<StatusDot status={gateStatus} fallbackLabel={result ? undefined : "Not run yet"} />} />
               <MetaCard label="Mode" value="Deterministic baseline + stress scenarios" />
@@ -239,20 +240,20 @@ export default function Page() {
           </div>
         </section>
 
-        <div className="grid gap-6 xl:grid-cols-2">
-          <Card eyebrow="Intake" title="Exposure portfolio input">
-            <div className="space-y-5">
-              <div className="rounded-[26px] border border-dashed border-[var(--accent)]/45 bg-white/70 p-5">
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">Upload zone</p>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">
-                      Use built-in samples, paste CSV rows, or load a local `.csv` / `.txt` extract with portfolio exposures.
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
+        <div className="space-y-6">
+          <Card eyebrow="Intake">
+            <div className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-5">
+                <h2 className="text-2xl font-semibold text-slate-900">Exposure portfolio</h2>
+                <div className="rounded-[26px] border border-dashed border-[var(--accent)]/45 bg-white/70 p-5 shadow-[0_12px_30px_rgba(120,53,15,0.08)]">
+                  <p className="text-sm font-semibold text-slate-700">Source input</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">Upload zone</p>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
+                    Use built-in samples, paste exposure rows, or load a local schedule extract with portfolio exposures.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
                     <button
-                      className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+                      className="rounded-full border border-slate-900/90 bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_25px_rgba(15,23,42,0.35)]"
                       onClick={() => fileInputRef.current?.click()}
                       type="button"
                     >
@@ -273,77 +274,76 @@ export default function Page() {
                       type="file"
                     />
                   </div>
+                  <div className="mt-5 space-y-2">
+                    <label className="block text-sm font-semibold text-slate-700" htmlFor="source-label">
+                      Source label
+                    </label>
+                    <input
+                      className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-700 outline-none transition focus:border-[var(--accent)]"
+                      id="source-label"
+                      onChange={(event) => setSourceLabel(event.target.value)}
+                      value={sourceLabel}
+                    />
+                  </div>
                 </div>
-                <div className="mt-5 space-y-2">
-                  <label className="block text-sm font-semibold text-slate-700" htmlFor="source-label">
-                    Source label
-                  </label>
-                  <input
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-700 outline-none transition focus:border-[var(--accent)]"
-                    id="source-label"
-                    onChange={(event) => setSourceLabel(event.target.value)}
-                    value={sourceLabel}
+
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {demoSamples.map((sample) => {
+                    const isActive = sample.id === selectedSampleId;
+                    return (
+                      <button
+                        key={sample.id}
+                        className={`rounded-[18px] border px-3 py-3 text-left transition ${
+                          isActive
+                            ? "border-[var(--accent)] bg-[var(--accent-soft)] shadow-[0_12px_24px_rgba(180,83,9,0.2)]"
+                            : "border-slate-200 bg-white/60 hover:border-[var(--accent)]/45"
+                        }`}
+                        onClick={() => loadSample(sample.id)}
+                        type="button"
+                      >
+                        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">{sample.label}</p>
+                        <p className="mt-2 text-sm leading-6 text-slate-600">{sample.description}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="grid h-full grid-rows-[auto_auto_auto] items-start gap-5">
+                <h2 className="text-left text-2xl font-semibold text-slate-900">Exposure CSV</h2>
+                <div className="rounded-[26px] border border-slate-300 bg-white/65 p-4 overflow-hidden">
+                  <textarea
+                    className="h-[300px] w-full resize-none overflow-y-auto appearance-none rounded-none border-0 bg-transparent px-2 py-2 font-mono text-sm leading-7 text-slate-700 outline-none shadow-none ring-0 transition focus:border-0 focus:outline-none focus:ring-0 lg:mt-0"
+                    id="csv-text"
+                    onChange={(event) => setCsvText(event.target.value)}
+                    value={csvText}
                   />
                 </div>
-              </div>
 
-              <div className="grid gap-3 sm:grid-cols-3">
-                {demoSamples.map((sample) => {
-                  const isActive = sample.id === selectedSampleId;
-                  return (
-                    <button
-                      key={sample.id}
-                      className={`rounded-[18px] border px-3 py-3 text-left transition ${
-                        isActive
-                          ? "border-[var(--accent)] bg-[var(--accent-soft)] shadow-[0_12px_24px_rgba(180,83,9,0.2)]"
-                          : "border-slate-200 bg-white/60 hover:border-[var(--accent)]/45"
-                      }`}
-                      onClick={() => loadSample(sample.id)}
-                      type="button"
-                    >
-                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">{sample.label}</p>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{sample.description}</p>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700" htmlFor="csv-text">
-                  Exposure CSV
-                </label>
-                <textarea
-                  className="min-h-[360px] w-full rounded-[18px] border border-slate-300 bg-white/80 px-4 py-3 font-mono text-sm leading-7 text-slate-700 outline-none transition focus:border-[var(--accent)]"
-                  id="csv-text"
-                  onChange={(event) => setCsvText(event.target.value)}
-                  value={csvText}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700" htmlFor="question">
-                  Query prompt
-                </label>
-                <input
-                  className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-700 outline-none transition focus:border-[var(--accent)]"
-                  id="question"
-                  onChange={(event) => setQuestion(event.target.value)}
-                  value={question}
-                />
-              </div>
-
-              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                <button
-                  className="rounded-full bg-[var(--accent)] px-8 py-3 text-base font-semibold text-white shadow-[0_16px_30px_rgba(154,52,18,0.28)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-65"
-                  disabled={isPending}
-                  onClick={submit}
-                  type="button"
-                >
-                  {isPending ? "Modeling..." : "Run scenario model"}
-                </button>
-                <p className="text-sm text-slate-500">
-                  Required columns: exposure_id, account_name, country, peril, segment, tiv_gbp, attachment_gbp, limit_gbp.
-                </p>
+                <div className="flex h-full flex-col justify-start gap-3 rounded-[24px] border border-slate-200 bg-white/65 p-4">
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-slate-700" htmlFor="question">
+                      Query prompt
+                    </label>
+                    <input
+                      className="w-full rounded-2xl border-0 bg-white px-4 py-3 text-base text-slate-700 outline-none ring-1 ring-slate-300 transition focus:ring-1 focus:ring-[var(--accent)]"
+                      id="question"
+                      onChange={(event) => setQuestion(event.target.value)}
+                      value={question}
+                    />
+                  </div>
+                  <button
+                    className="rounded-[26px] border border-[var(--accent)] bg-[var(--accent)]/95 px-8 py-3 text-base font-semibold text-white shadow-[0_16px_30px_rgba(154,52,18,0.35)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-65"
+                    disabled={isPending}
+                    onClick={submit}
+                    type="button"
+                  >
+                    {isPending ? "Modeling..." : "Run scenario model"}
+                  </button>
+                  <p className="text-sm text-slate-500">
+                    Required columns: exposure_id, account_name, country, peril, segment, tiv_gbp, attachment_gbp, limit_gbp.
+                  </p>
+                </div>
               </div>
             </div>
           </Card>
