@@ -1,0 +1,10 @@
+comms_type=Board Update
+audience=Executive Committee
+tone=Formal
+subject=Q2 underwriting and claims controls update
+context=Quarter close delivered with improved referral handling and stable loss ratio trend.
+message_1=Referral queue age reduced by 21% versus last quarter.
+message_2=Claims leakage indicators remain below threshold for all major lines.
+message_3=Two remediation actions are on track ahead of regulatory checkpoint.
+action_1=Approve hiring of one underwriting analyst in marine line.
+action_2=Endorse control attestation pack for audit committee review.

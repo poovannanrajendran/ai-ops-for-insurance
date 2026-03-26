@@ -1,0 +1,10 @@
+comms_type=Incident Briefing
+audience=Operations Leadership
+tone=Measured
+subject=System outage impact on referral triage
+context=Outage affected queue processing for three hours across two teams.
+message_1=Backlog increased by 64 items with temporary SLA pressure.
+message_2=No data integrity loss detected after restoration checks.
+message_3=Temporary reassignment plan is active until queue normalises.
+action_1=Confirm overtime approval for two shifts tonight.
+action_2=Issue client-facing status note by 16:00.
