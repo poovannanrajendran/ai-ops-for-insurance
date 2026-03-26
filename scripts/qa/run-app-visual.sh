@@ -21,10 +21,20 @@ cleanup() {
   if [[ -n "${PID}" ]] && kill -0 "${PID}" >/dev/null 2>&1; then
     kill "${PID}" >/dev/null 2>&1 || true
   fi
+  pkill -f "apps/${APP_FOLDER}/.next/dev/build/postcss.js" >/dev/null 2>&1 || true
+  pkill -f "apps/${APP_FOLDER}/node_modules/.bin/../next/dist/bin/next dev --webpack --port ${PORT}" >/dev/null 2>&1 || true
+  pkill -f "next dev --webpack --port ${PORT}" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
 
-pnpm --filter "${PACKAGE_NAME}" dev > ".artifacts/visual-smoke-logs/${APP_FOLDER}.log" 2>&1 &
+# Proactively clean stale dev workers from prior interrupted runs.
+pkill -f "apps/${APP_FOLDER}/.next/dev/build/postcss.js" >/dev/null 2>&1 || true
+pkill -f "apps/${APP_FOLDER}/node_modules/.bin/../next/dist/bin/next dev --webpack --port ${PORT}" >/dev/null 2>&1 || true
+pkill -f "next dev --webpack --port ${PORT}" >/dev/null 2>&1 || true
+
+# Use webpack mode for QA visual runs to avoid Turbopack worker spikes.
+pnpm --filter "${PACKAGE_NAME}" exec next dev --webpack --port "${PORT}" \
+  > ".artifacts/visual-smoke-logs/${APP_FOLDER}.log" 2>&1 &
 PID="$!"
 
 READY="false"
@@ -44,3 +54,9 @@ fi
 TARGET_URL="http://localhost:${PORT}" APP_KEY="${APP_FOLDER}" \
   pnpm exec playwright test tests/playwright/app-visual-smoke.spec.ts
 
+TARGET_URL="http://localhost:${PORT}" APP_KEY="${APP_FOLDER}" \
+  pnpm exec playwright test \
+    tests/playwright/intake-layout-contract.spec.ts \
+    tests/playwright/csv-pane-border-contract.spec.ts \
+    tests/playwright/pane-baseline-alignment.spec.ts \
+    tests/playwright/react-key-duplicate-guard.spec.ts

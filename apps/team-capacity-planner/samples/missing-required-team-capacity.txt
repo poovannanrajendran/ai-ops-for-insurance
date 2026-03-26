@@ -1,0 +1,4 @@
+team_size=
+available_capacity_fte=
+urgent_queue=5
+key_skill_note=Draft pack only.

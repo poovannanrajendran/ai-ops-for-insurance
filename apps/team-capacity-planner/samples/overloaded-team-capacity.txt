@@ -1,0 +1,8 @@
+team_size=16
+available_capacity_fte=8
+in_flight_work_items=41
+avg_cycle_days=11
+urgent_queue=14
+specialist_gap_count=4
+overtime_pct=24
+key_skill_note=Two classes rely on a single senior reviewer; new joiners not yet signed off.

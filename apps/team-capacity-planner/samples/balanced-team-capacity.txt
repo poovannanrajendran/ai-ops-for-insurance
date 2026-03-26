@@ -1,0 +1,8 @@
+team_size=18
+available_capacity_fte=14
+in_flight_work_items=22
+avg_cycle_days=5
+urgent_queue=3
+specialist_gap_count=0
+overtime_pct=6
+key_skill_note=Property and casualty team has two trained alternates for each key process.
