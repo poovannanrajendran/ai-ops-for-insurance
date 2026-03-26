@@ -231,6 +231,23 @@ export function analyzeExposureCsv(csvText: string, question?: string | null): E
   }));
 
   const warnings = buildWarnings(rows, totalTiv, maxLocationTiv, concentration);
+  const topCountry = concentration[0];
+  const topHotspot = hotspots[0];
+  const remainingHeadroomPct = Number((100 - (topCountry?.sharePct ?? 0)).toFixed(1));
+  const actions = warnings.length
+    ? warnings.map((warning) => {
+        if (warning.code === "high_country_concentration" && topCountry) {
+          return `Escalate ${topCountry.label} concentration (${topCountry.sharePct}% of TIV) and cap further intake until diversification plan is approved.`;
+        }
+        if (warning.code === "single_location_peak" && topHotspot) {
+          return `Review peak location controls for ${topHotspot.country} hotspot rank ${topHotspot.rank} and validate CAT protections for GBP ${topHotspot.totalTiv.toLocaleString("en-GB")} exposure.`;
+        }
+        return `Increase data density by adding missing schedules; current model uses ${rows.length} valid location(s) and leaves ${remainingHeadroomPct}% non-top-country spread.`;
+      })
+    : [
+        `No immediate breach: largest country share is ${topCountry?.sharePct ?? 0}% (${topCountry?.label ?? "N/A"}). Keep routine monthly concentration monitoring in place.`,
+        `Top hotspot remains ${topHotspot?.country ?? "N/A"} with GBP ${topHotspot?.totalTiv.toLocaleString("en-GB") ?? "0"} aggregated TIV; continue watch-list tracking.`
+      ];
 
   const commentary = {
     executiveSummary: `Processed ${rows.length} location(s) with total TIV ${totalTiv.toLocaleString("en-GB")}. ${warnings.length} warning(s) flagged.`,
@@ -239,12 +256,7 @@ export function analyzeExposureCsv(csvText: string, question?: string | null): E
       `Largest single-location TIV: ${maxLocationTiv.toLocaleString("en-GB")}.`,
       `Hotspots identified: ${hotspots.length}.`
     ],
-    actions: warnings.length
-      ? [
-          "Escalate top concentration zones for accumulation review.",
-          "Validate limits, CAT controls, and reinsurance protections for peak clusters."
-        ]
-      : ["No immediate concentration breach; continue standard accumulation monitoring."]
+    actions
   };
 
   return {

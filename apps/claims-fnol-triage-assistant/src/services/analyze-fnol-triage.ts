@@ -155,6 +155,9 @@ function buildFactors(parsed: ParsedFnol): TriageFactor[] {
 }
 
 function dispositionFromFactors(parsed: ParsedFnol, score: number): TriageDecision {
+  const reserveText = `GBP ${(parsed.estimatedReserveGbp ?? 0).toLocaleString("en-GB")}`;
+  const injuryText = parsed.thirdPartyInjury ? `${parsed.injuryCount} injury marker(s)` : "no third-party injury marker";
+  const representationText = parsed.claimantRepresented ? "represented claimant" : "unrepresented claimant";
   const shouldEscalate =
     parsed.fatalityIndicator ||
     parsed.fraudIndicator ||
@@ -176,9 +179,9 @@ function dispositionFromFactors(parsed: ParsedFnol, score: number): TriageDecisi
       headline: "Escalate to senior claims handler immediately.",
       rationale: "Severity, bodily injury, fraud, litigation, or reserve complexity exceeds controlled fast-track thresholds.",
       nextActions: [
-        "Assign senior handler and confirm indemnity / coverage review ownership.",
-        "Secure evidence pack, contact details, and third-party representation status.",
-        "Set same-day reserve and governance checkpoint with claims leadership."
+        `Assign senior handler and confirm indemnity / coverage ownership for reserve ${reserveText}.`,
+        `Secure evidence pack with police status=${parsed.policeReport ? "filed" : "missing"}, ${injuryText}, and ${representationText}.`,
+        `Set same-day governance checkpoint for score ${score} with litigation=${parsed.litigationIndicator ? "yes" : "no"} and fraud=${parsed.fraudIndicator ? "yes" : "no"}.`
       ]
     };
   }
@@ -189,9 +192,9 @@ function dispositionFromFactors(parsed: ParsedFnol, score: number): TriageDecisi
       headline: "Route to standard handler review before acknowledgement.",
       rationale: "The FNOL contains moderate complexity, missing core data, or reserve pressure that needs human review.",
       nextActions: [
-        "Request missing FNOL fields and supporting documents before closure of intake.",
-        "Validate reserve, cause of loss, and any police / third-party references.",
-        "Release acknowledgement once completeness and ownership are confirmed."
+        `Request ${parsed.missingFieldCount} missing FNOL field(s) plus supporting documents before intake closure.`,
+        `Validate reserve ${reserveText}, cause='${parsed.causeOfLoss ?? "unstated"}', and police/third-party references.`,
+        `Release acknowledgement once completeness improves and owner is confirmed for disposition score ${score}.`
       ]
     };
   }
@@ -201,9 +204,9 @@ function dispositionFromFactors(parsed: ParsedFnol, score: number): TriageDecisi
     headline: "Eligible for controlled fast-track handling.",
     rationale: "Low reserve, no injury/fraud/litigation markers, and sufficient completeness support accelerated intake.",
     nextActions: [
-      "Acknowledge receipt and allocate to fast-track handler queue.",
-      "Confirm low-severity reserve and obtain standard photo / invoice pack.",
-      "Monitor for any late-emerging injury, fraud, or representation signals."
+      `Acknowledge receipt and allocate to fast-track queue at reserve ${reserveText}.`,
+      `Confirm low-severity profile (${parsed.propertyDamageSeverity}) and obtain standard photo / invoice pack.`,
+      `Monitor for late-emerging markers: injury=${parsed.thirdPartyInjury ? "yes" : "no"}, fraud=${parsed.fraudIndicator ? "yes" : "no"}, representation=${parsed.claimantRepresented ? "yes" : "no"}.`
     ]
   };
 }

@@ -308,6 +308,24 @@ export function analyzeBinderCapacityCsv(csvText: string, question?: string | nu
   const warnings = buildWarnings(capacity, totalBound, totalForecast, classBreakdown, territoryBreakdown);
   const topRisks = buildTopRisks(rows, totalBound);
   const breachRisk = getBreachRisk(usedPct, forecastUsedPct);
+  const dynamicActions =
+    warnings.length > 0
+      ? warnings.map((warning) => {
+          if (warning.code === "current_breach") {
+            return `${binderName} is currently ${usedPct}% utilised (capacity GBP ${capacity.toLocaleString("en-GB")}); pause new binds until delegated headroom is restored.`;
+          }
+          if (warning.code === "forecast_breach") {
+            return `Forecast utilisation is ${forecastUsedPct}% (GBP ${totalForecast.toLocaleString("en-GB")}); redirect quoted pipeline and reallocate line before release.`;
+          }
+          if (warning.code === "low_headroom") {
+            return `Remaining headroom is GBP ${(capacity - totalBound).toLocaleString("en-GB")} (${roundPct(((capacity - totalBound) / capacity) * 100)}%); tighten referral thresholds immediately.`;
+          }
+          return `Concentration check: top class ${classBreakdown[0]?.label ?? "N/A"} at ${classBreakdown[0]?.sharePct ?? 0}% and top territory ${territoryBreakdown[0]?.label ?? "N/A"} at ${territoryBreakdown[0]?.sharePct ?? 0}% of bound volume.`;
+        })
+      : [
+          `Capacity remains within tolerance at ${usedPct}% utilised; keep routine monitoring for ${binderName}.`,
+          `Largest forecast risk is ${topRisks[0]?.insuredName ?? "N/A"} at GBP ${topRisks[0]?.forecastExposureGbp.toLocaleString("en-GB") ?? "0"} projected exposure.`
+        ];
 
   return {
     summary: {
@@ -336,16 +354,7 @@ export function analyzeBinderCapacityCsv(csvText: string, question?: string | nu
         `${territoryBreakdown[0]?.label ?? "N/A"} is the largest territory concentration at ${territoryBreakdown[0]?.sharePct ?? 0}% of bound volume.`,
         `${topRisks[0]?.insuredName ?? "N/A"} is the largest single risk at GBP ${topRisks[0]?.boundAmountGbp.toLocaleString("en-GB") ?? "0"}.`
       ],
-      actions: warnings.length > 0
-        ? [
-            "Review top class and territory concentrations against delegated authority wording.",
-            "Restrict new binds or redirect quotes if forecast utilization remains above amber thresholds.",
-            "Escalate the largest forecast risks for same-day capacity sign-off before release."
-          ]
-        : [
-            "Capacity remains within tolerance. Continue routine monitoring against class and territory mix.",
-            "Track quoted pipeline daily to prevent avoidable threshold drift."
-          ]
+      actions: dynamicActions
     }
   };
 }

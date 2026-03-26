@@ -391,9 +391,9 @@ function buildExecutiveBrief(summary: DiffSummary, clauseDiffs: ClauseDiff[], wa
         : `${summary.materialChangeCount} material wording delta(s) detected.` ,
     narrative: `The most consequential shifts are ${topLabels.join(", ")}. ${warnings[0]?.message ?? "Review the clause ledger before approval."}`,
     actions: [
-      "Confirm pricing and authority alignment for each high-severity clause",
-      "Obtain legal or wording sign-off for restrictive exclusions and notice obligations",
-      "Record accepted deltas in the renewal or endorsement decision log"
+      `Confirm pricing and authority alignment for ${summary.highSeverityCount || summary.materialChangeCount} key clause delta(s).`,
+      `Obtain legal/wording sign-off for highest-risk clause ${topDiffs[0]?.label ?? "N/A"} (${topDiffs[0]?.changeType ?? "changed"}).`,
+      `Record accepted deltas in decision log with warning codes: ${warnings.map((w) => w.code).join(", ") || "none"}.`
     ]
   };
 }

@@ -270,6 +270,14 @@ export function analyzeCatEventText(eventText: string, question?: string | null)
   };
 
   const regionLabel = regions.length > 0 ? regions.join(", ") : "reported regions not yet confirmed";
+  const highPriorityClasses = impacts.filter((item) => item.priority === "high").map((item) => item.className);
+  const severeWarningCount = warnings.filter((w) => /severe|critical|escalate|urgent/i.test(w.message)).length;
+  const suggestedActions = [
+    `Issue underwriting bulletin for ${selectedPeril} across ${regionLabel} with severity score ${score} (${summary.severityLabel.toLowerCase()}).`,
+    `Run accumulation sweep on priority classes: ${(highPriorityClasses.length ? highPriorityClasses : impacts.map((i) => i.className).slice(0, 3)).join(", ")}.`,
+    `Activate claims/FNOL surge readiness for ${regions.length || 1} territory cluster(s) with ${warnings.length} warning trigger(s).`,
+    `Set review checkpoint at ${date ?? "T+24h"} and refresh loss band ${summary.estimatedLossBand}; current severe warning count ${severeWarningCount}.`
+  ];
 
   return {
     summary,
@@ -292,12 +300,7 @@ export function analyzeCatEventText(eventText: string, question?: string | null)
           .join(", ") || "Property"}.`,
         `Expected monitoring intensity: ${summary.severityLabel.toLowerCase()} with ${warnings.length} warning trigger(s).`
       ],
-      suggestedActions: [
-        "Issue same-day underwriting bulletin with peril, territories, and temporary referral thresholds.",
-        "Run accumulation sweep against top exposed classes and geographies before quote release.",
-        "Coordinate claims/FNOL readiness note with contact points and surge guidance.",
-        "Schedule 24-hour update checkpoint for revised event intelligence and market movement."
-      ]
+      suggestedActions
     }
   };
 }

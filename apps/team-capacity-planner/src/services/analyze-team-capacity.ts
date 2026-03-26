@@ -93,8 +93,8 @@ export function analyzeTeamCapacity(input: unknown): TeamCapacityInsight {
   ];
 
   const actionPlan = [
-    `Rebalance queue ownership and protect urgent intake windows for the next 5 business days.`,
-    `Cross-train backup reviewers for specialist queues and publish rota adjustments by end of day.`,
+    `Rebalance queue ownership for ${extracted.urgent_queue ?? 0} urgent item(s) with ${extracted.available_capacity_fte ?? 0} FTE available over the next 5 business days.`,
+    `Cross-train backup reviewers for ${extracted.specialist_gap_count ?? 0} specialist gap(s) and publish rota adjustment based on team size ${extracted.team_size ?? 0}.`,
     extracted.key_skill_note ? `Skill context: ${extracted.key_skill_note}` : "No skill note supplied in the source pack."
   ];
 

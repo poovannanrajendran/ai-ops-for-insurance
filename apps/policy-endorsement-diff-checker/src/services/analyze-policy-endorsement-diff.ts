@@ -308,10 +308,16 @@ function buildExecutiveBrief(summary: DiffSummary, clauseDiffs: ClauseDiff[], qu
       : `${summary.materialChangeCount} material wording change(s) identified.`;
 
   const findings = topChanges.map((item) => `${item.label}: ${item.rationale}`);
+  const topHigh = clauseDiffs.find((item) => item.severity === "high");
+  const impactedAreas = [...new Set(clauseDiffs.map((item) => item.section).filter(Boolean))];
   const actionPoints = [
-    "Confirm whether underwriting intent supports the renewal wording restriction before release.",
-    "Issue a marked-up reviewer summary to broker or counsel for any high-severity change.",
-    "Capture commercial sign-off for deductible, limit, territory, or exclusion shifts."
+    `Confirm underwriting intent for ${topChanges[0]?.label ?? "top clause"} (${topChanges[0]?.changeType ?? "changed"}) before release.`,
+    topHigh
+      ? `Escalate ${topHigh.label} to legal/wording review due to high severity rationale: ${topHigh.rationale}.`
+      : `Issue reviewer summary covering ${summary.materialChangeCount} material change(s) for broker acknowledgement.`,
+      `Capture commercial sign-off for impacted areas: ${
+      impactedAreas.length ? impactedAreas.slice(0, 4).join(", ") : "deductible, limit, territory, exclusion"
+    }.`
   ];
 
   const queryResponse =
