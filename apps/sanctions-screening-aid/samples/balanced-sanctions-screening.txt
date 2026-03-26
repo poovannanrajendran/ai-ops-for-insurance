@@ -1,0 +1,5 @@
+insured_entity=Northbridge Food Ingredients Ltd
+beneficial_owner=Meridian Holdings Plc
+broker=Atlas Specialty Broker LLP
+territory=United Kingdom; Ireland
+counterparty=Harborline Logistics GmbH

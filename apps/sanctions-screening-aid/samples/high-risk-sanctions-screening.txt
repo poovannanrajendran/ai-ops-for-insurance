@@ -1,0 +1,5 @@
+insured_entity=Baltic Export Trading JSC
+beneficial_owner=Almazov Industrial Group
+broker=Orion Placement LLC
+territory=United Arab Emirates; Turkey
+counterparty=TransEastern Commodities FZE
