@@ -1,0 +1,13 @@
+sponsor=COO and CUO joint sponsorship
+target_domains=Underwriting triage, claims leakage, exposure management
+data_foundation=Curated warehouse with daily refresh and API access
+governance=Quarterly AI oversight board with control owners
+operating_model=Central AI enablement with domain product owners
+tooling=Prompt gateway, model eval pipeline, and observability dashboards
+skills=Two ML engineers, four analytics product leads, underwriter champions
+use_case_1=Referral queue prioritisation
+strength_1=Executive sponsorship is active
+strength_2=Production data contracts in place
+blocker_1=Inconsistent playbook adoption across regional teams
+plan_1=Standardise risk controls in all live apps
+plan_2=Launch AI enablement academy for underwriters

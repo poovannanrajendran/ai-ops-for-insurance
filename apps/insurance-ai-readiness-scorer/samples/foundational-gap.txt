@@ -1,0 +1,13 @@
+sponsor=Head of Operations
+target_domains=Claims and policy operations
+data_foundation=Manual extracts from multiple systems
+governance=None documented yet
+operating_model=Ad-hoc pilots inside business teams
+tooling=Basic workflow scripts only
+skills=One analyst with limited AI delivery experience
+use_case_1=Claims triage support
+blocker_1=No formal governance owner
+blocker_2=Data quality checks not standardised
+blocker_3=Pilot outcomes not tied to business KPIs
+plan_1=Nominate governance owner and control cadence
+plan_2=Define baseline KPI scorecard for pilots

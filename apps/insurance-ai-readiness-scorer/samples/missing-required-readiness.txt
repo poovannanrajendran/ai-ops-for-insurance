@@ -1,0 +1,5 @@
+sponsor=
+target_domains=Claims only
+data_foundation=
+governance=
+use_case_1=Draft only
