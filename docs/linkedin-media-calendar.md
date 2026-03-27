@@ -12,27 +12,60 @@
 - Day 20-30 post artefacts generated in this update
 - Screenshots available through Day 30 in `content/assets/screenshots/`
 
-## Calendar plan (next wave)
-| Date | Time | Post ID | Theme | Asset bundle | Status |
+## Calendar plan — full remaining schedule (D08 onwards)
+
+### Days 8–14 (27 Mar – 5 Apr): Claims, Broking & Exposure deep-dive
+| Date | Time | Post ID | Theme | Asset | Status |
 |---|---:|---|---|---|---|
-| 2026-03-30 | 08:30 | D20 | Regulatory Update Digest | `day20.png`, `day20.svg` | Ready |
-| 2026-03-31 | 08:30 | D21 | Meeting Prep Briefing | `day21.png`, `day21.svg` | Ready |
-| 2026-03-31 | 17:30 | P26 | General Insurance / Compliance - Section Start | `section-operations.png` | Ready |
-| 2026-04-01 | 08:30 | D22 | Renewal Intelligence Copilot | `day22.png`, `day22.svg` | Ready |
-| 2026-04-02 | 08:30 | D23 | Ops Health Monitor | `day23.png`, `day23.svg` | Ready |
-| 2026-04-02 | 17:30 | P24 | Productivity & Automation - Section Start | `section-operations.png` | Ready |
-| 2026-04-03 | 08:30 | D24 | Data Quality Validator | `day24.png`, `day24.svg` | Ready |
-| 2026-04-06 | 08:30 | D25 | Sanctions Screening Aid | `day25.png`, `day25.svg` | Ready |
-| 2026-04-07 | 08:30 | D26 | QBR Narrative Generator | `day26.png`, `day26.svg` | Ready |
-| 2026-04-07 | 17:30 | P25 | Leadership / Team Ops - Section Start | `section-operations.png` | Ready |
-| 2026-04-08 | 08:30 | D27 | Team Capacity Planner | `day27.png`, `day27.svg` | Ready |
-| 2026-04-09 | 08:30 | D28 | Stakeholder Comms Drafter | `day28.png`, `day28.svg` | Ready |
-| 2026-04-09 | 17:30 | P31 | Productivity & Automation - Section Wrap | `section-operations.png` | Ready |
-| 2026-04-10 | 08:30 | D29 | Insurance AI Readiness Scorer | `day29.png`, `day29.svg` | Ready |
-| 2026-04-13 | 08:30 | D30 | Loss Ratio Triangulator | `day30.png`, `day30.svg` | Ready |
-| 2026-04-14 | 17:30 | B1 | Challenge Portfolio Showcase (Bonus) | `day30.png`, `day30.svg` | Ready |
-| 2026-04-14 | 08:30 | P32 | Leadership / Team Ops - Section Wrap | `section-operations.png` | Ready |
-| 2026-04-15 | 08:30 | P33 | General Insurance / Compliance - Section Wrap | `section-operations.png` | Ready |
+| 2026-03-27 | 08:30 | P22 | Claims Ops — Section Start | `P22.png` | Pending image |
+| 2026-03-27 | 12:30 | D08 | Policy Endorsement Diff Checker | `D08.png` | Pending image |
+| 2026-03-28 | 08:30 | D09 | Referral Priority Queue Scorer | `D09.png` | Pending image |
+| 2026-03-29 | 08:30 | D10 | Claims FNOL Triage Assistant | `D10.png` | Pending image |
+| 2026-03-30 | 08:30 | D11 | Binder Capacity Monitor | `D11.png` | Pending image |
+| 2026-03-31 | 08:30 | P23 | Broking & Placement — Section Start | `P23.png` | Pending image |
+| 2026-03-31 | 12:30 | D12 | Treaty Structure Explainer | `D12.png` | Pending image |
+| 2026-04-01 | 08:30 | D13 | Exposure Clash Detector | `D13.png` | Pending image |
+| 2026-04-01 | 17:30 | P09 | What Broke and What I Fixed by Day 3 | — | Ready |
+| 2026-04-02 | 08:30 | D14 | Claims Leakage Flagger | `D14.png` | Pending image |
+| 2026-04-02 | 17:30 | P29 | Claims Ops — Section Wrap | `P29.png` | Pending image |
+
+### Days 15–19 (3–7 Apr): Broking, placement & market
+| Date | Time | Post ID | Theme | Asset | Status |
+|---|---:|---|---|---|---|
+| 2026-04-03 | 08:30 | D15 | Broker Submission Builder | `D15.png` | Pending image |
+| 2026-04-04 | 08:30 | P10 | Ten Days In: The System Is Compounding | — | Ready |
+| 2026-04-05 | 08:30 | D16 | Exposure Scenario Modeller | `D16.png` | Pending image |
+| 2026-04-05 | 17:30 | P28 | Exposure Management — Section Wrap | `P28.png` | Pending image |
+| 2026-04-06 | 08:30 | D17 | MRC Checker | `D17.png` | Pending image |
+| 2026-04-07 | 08:30 | D18 | Placement Tracker | `D18.png` | Pending image |
+| 2026-04-07 | 17:30 | P11 | Ten Lessons from Ten Days | — | Ready |
+| 2026-04-08 | 08:30 | D19 | Wording Risk Diff Checker | `D19.png` | Pending image |
+| 2026-04-08 | 17:30 | P30 | Broking & Placement — Section Wrap | `P30.png` | Pending image |
+
+### Days 20–25 (8–11 Apr): Productivity, compliance & data
+| Date | Time | Post ID | Theme | Asset | Status |
+|---|---:|---|---|---|---|
+| 2026-04-09 | 08:30 | P26 | General Insurance / Compliance — Section Start | `P26.png` | Pending image |
+| 2026-04-09 | 12:30 | D20 | Regulatory Update Digest | `D20.png` | Pending image |
+| 2026-04-10 | 08:30 | P24 | Productivity & Automation — Section Start | `P24.png` | Pending image |
+| 2026-04-10 | 12:30 | D21 | Meeting Prep Briefing | `D21.png` | Pending image |
+| 2026-04-11 | 08:30 | D22 | Renewal Intelligence Copilot | `D22.png` | Pending image |
+| 2026-04-12 | 08:30 | D23 | Ops Health Monitor | `D23.png` | Pending image |
+| 2026-04-13 | 08:30 | D24 | Data Quality Validator | `D24.png` | Pending image |
+| 2026-04-14 | 08:30 | D25 | Sanctions Screening Aid | `D25.png` | Pending image |
+| 2026-04-14 | 17:30 | P33 | General Insurance / Compliance — Section Wrap | `P33.png` | Pending image |
+
+### Days 26–30 (14–18 Apr): Leadership, QBR & capstone
+| Date | Time | Post ID | Theme | Asset | Status |
+|---|---:|---|---|---|---|
+| 2026-04-15 | 08:30 | D26 | QBR Narrative Generator | `D26.png` | Pending image |
+| 2026-04-15 | 17:30 | P25 | Leadership / Team Ops — Section Start | `P25.png` | Pending image |
+| 2026-04-16 | 08:30 | D27 | Team Capacity Planner | `D27.png` | Pending image |
+| 2026-04-17 | 08:30 | D28 | Stakeholder Comms Drafter | `D28.png` | Pending image |
+| 2026-04-17 | 17:30 | P32 | Leadership / Team Ops — Section Wrap | `P32.png` | Pending image |
+| 2026-04-18 | 08:30 | D29 | Insurance AI Readiness Scorer | `D29.png` | Pending image |
+| 2026-04-18 | 17:30 | P31 | Productivity & Automation — Section Wrap | `P31.png` | Pending image |
+| 2026-04-19 | 08:30 | D30 | Loss Ratio Triangulator — Reserving Capstone | `D30.png` | Pending image |
 
 ## CTA and narrative guidance
 - D20-D25: emphasise governance quality, compliance velocity, and explainability.

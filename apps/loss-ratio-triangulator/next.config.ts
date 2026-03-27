@@ -1,7 +1,19 @@
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { loadEnvConfig } from "@next/env";
 import type { NextConfig } from "next";
 
+const appDir = dirname(fileURLToPath(import.meta.url));
+const repoRoot = resolve(appDir, "../..");
+
+loadEnvConfig(repoRoot);
+
 const nextConfig: NextConfig = {
-  reactStrictMode: true
+  transpilePackages: ["@ai-ops/common-ui", "@ai-ops/config"],
+  outputFileTracingRoot: repoRoot,
+  turbopack: {
+    root: repoRoot
+  }
 };
 
 export default nextConfig;

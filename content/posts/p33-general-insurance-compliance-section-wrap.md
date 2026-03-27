@@ -3,6 +3,8 @@
 Compliance works best when built into work.
 Rules alone do not reduce risk. Good design does.
 
+3 apps built — Regulatory Update Digest · Data Quality Validator · Sanctions Screening Aid
+
 Practical and proportionate controls reduce friction while strengthening assurance.
 
 CTA: How would you simplify assurance while keeping controls proportionate and effective?

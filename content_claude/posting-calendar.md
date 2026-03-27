@@ -39,7 +39,7 @@
 | Tue 25 Mar | — | 08:15 | **P21** | Section Start: Exposure Management | Section start |
 | Tue 25 Mar | 6 | 12:30 | **D06** | Day 6: The Spreadsheet Said $200M. The Map Said "All in One Postcode." | Day app |
 | Wed 26 Mar | 7 | 08:15 | **D07** | Day 7: When a Cat Event Breaks, Your Team Needs a Briefing | Day app |
-| Wed 26 Mar | — | 17:00 | **P28** | Section Wrap: Exposure Management | Section wrap |
+| (see docs calendar) | — | — | **P28** | Section Wrap: Exposure Management — post after D16 (5 Apr) | Section wrap |
 
 ---
 
@@ -51,8 +51,7 @@
 | Thu 27 Mar | 8 | 12:30 | **D08** | Day 8: The Renewal Looked Identical Until I Diffed the Endorsement | Day app |
 | Fri 28 Mar | 9 | 08:15 | **D09** | Day 9: Your Referral Queue Is Lying to You About Priority | Day app |
 | Sat 29 Mar | 10 | 08:15 | **D10** | Day 10: The First Notice of Loss Is Where Speed and Accuracy Collide | Day app |
-| Sun 30 Mar | 11 | 08:15 | **D11** | Day 11: A Reserve Number Without Reasoning Is Just a Guess | Day app |
-| Sun 30 Mar | — | 17:00 | **P29** | Section Wrap: Claims Ops — Four Tools Across the Lifecycle | Section wrap |
+| Sun 30 Mar | 11 | 08:15 | **D11** | Day 11: Binder Capacity Pressure Should Be Visible Before Authority Is Breached | Day app |
 
 ---
 
@@ -92,11 +91,11 @@ Sat 22 Mar  D03                                      (day app)
 Sun 23 Mar  D04                                      (day app)
 Mon 24 Mar  D05 → P27                               (day app + section wrap)
 Tue 25 Mar  P21 → D06                               (section start + day app)
-Wed 26 Mar  D07 → P28                               (day app + section wrap)
+Wed 26 Mar  D07                                      (day app — P28 Exposure wrap moves to 5 Apr after D16)
 Thu 27 Mar  P22 → D08                               (section start + day app)
 Fri 28 Mar  D09                                      (day app)
 Sat 29 Mar  D10                                      (day app)
-Sun 30 Mar  D11 → P29                               (day app + section wrap)
+Sun 30 Mar  D11                                      (day app — P29 Claims wrap moves to 2 Apr after D14)
 Mon 31 Mar  P09                                      (milestone)
 Tue  1 Apr  P10                                      (milestone)
 Wed  2 Apr  P11                                      (milestone)
