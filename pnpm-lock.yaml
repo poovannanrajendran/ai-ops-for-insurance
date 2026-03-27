@@ -208,6 +208,55 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(@types/node@25.5.0)(jsdom@29.0.0)(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1))
 
+  apps/challenge-portfolio-showcase:
+    dependencies:
+      '@ai-ops/common-ui':
+        specifier: workspace:*
+        version: link:../../packages/common-ui
+      '@ai-ops/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@ai-ops/lib':
+        specifier: workspace:*
+        version: link:../../packages/lib
+      next:
+        specifier: 16.1.6
+        version: 16.1.6(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.2.1
+      '@types/node':
+        specifier: ^25.5.0
+        version: 25.5.0
+      '@types/react':
+        specifier: ^19.2.14
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.14)
+      postcss:
+        specifier: ^8.5.8
+        version: 8.5.8
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.2.1
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.0
+        version: 4.1.0(@types/node@25.5.0)(jsdom@29.0.0)(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1))
+
   apps/claims-fnol-triage-assistant:
     dependencies:
       '@ai-ops/common-ui':
@@ -506,6 +555,55 @@ importers:
         version: 4.1.0(@types/node@25.5.0)(jsdom@29.0.0)(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1))
 
   apps/exposure-scenario-modeller:
+    dependencies:
+      '@ai-ops/common-ui':
+        specifier: workspace:*
+        version: link:../../packages/common-ui
+      '@ai-ops/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@ai-ops/lib':
+        specifier: workspace:*
+        version: link:../../packages/lib
+      next:
+        specifier: 16.1.6
+        version: 16.1.6(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.2.1
+      '@types/node':
+        specifier: ^25.5.0
+        version: 25.5.0
+      '@types/react':
+        specifier: ^19.2.14
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.14)
+      postcss:
+        specifier: ^8.5.8
+        version: 8.5.8
+      tailwindcss:
+        specifier: ^4.2.1
+        version: 4.2.1
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.0
+        version: 4.1.0(@types/node@25.5.0)(jsdom@29.0.0)(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1))
+
+  apps/insurance-ai-readiness-scorer:
     dependencies:
       '@ai-ops/common-ui':
         specifier: workspace:*

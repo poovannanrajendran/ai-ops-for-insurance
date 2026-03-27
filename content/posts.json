@@ -822,6 +822,281 @@
     "file": "d19-day-19-wording-risk-needs-a-severity-led-diff-not-a-redline-wall-of-text.html"
   },
   {
+    "id": "D20",
+    "title": "Day 20: Regulatory updates should become ranked actions, not unread bulletins",
+    "hooks": [
+      "Regulatory volume is high, but decisions still need to be made by deadline.",
+      "Day 20 converts multi-source updates into a relevance-ranked action digest."
+    ],
+    "body": "Problem: Regulatory feeds are spread across sources, making prioritisation and ownership inconsistent.\n\nMVP achieved: Digest builder parses updates, scores relevance by class focus, and outputs governance-ready actions with persistence and audit.\n\nScale path: Automated source ingestion, role-based routing, control mapping, and deadline tracking across compliance teams.",
+    "cta": "Which source causes the most review friction in your team today?",
+    "hashtags": [
+      "#RegulatoryCompliance",
+      "#InsuranceAI",
+      "#Governance",
+      "#RiskOps",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/screenshots/day20.png",
+      "assets/app-logos/day20.svg"
+    ],
+    "category": "day-app",
+    "day": 20,
+    "app": "regulatory-update-digest",
+    "file": "d20-day-20-regulatory-updates-should-become-ranked-actions-not-unread-bulletins.html"
+  },
+  {
+    "id": "D21",
+    "title": "Day 21: Meeting preparation should produce decision-ready briefings in one pass",
+    "hooks": [
+      "Senior meetings lose value when teams debate facts instead of decisions.",
+      "Day 21 builds a structured briefing pack with risks, asks, and recommended posture."
+    ],
+    "body": "Problem: Pre-meeting data is scattered and briefing quality depends on manual assembly under time pressure.\n\nMVP achieved: Briefing tool synthesises meeting inputs into decision points, risks, and proposed actions with full audit trace.\n\nScale path: Calendar-linked prep workflows, role-specific briefing variants, and follow-up action tracking.",
+    "cta": "What one section is most often missing from your meeting packs?",
+    "hashtags": [
+      "#Leadership",
+      "#TeamOps",
+      "#InsuranceAI",
+      "#DecisionSupport",
+      "#OperatingRhythm"
+    ],
+    "media": [
+      "assets/screenshots/day21.png",
+      "assets/app-logos/day21.svg"
+    ],
+    "category": "day-app",
+    "day": 21,
+    "app": "meeting-prep-briefing",
+    "file": "d21-day-21-meeting-preparation-should-produce-decision-ready-briefings-in-one-pass.html"
+  },
+  {
+    "id": "D22",
+    "title": "Day 22: Renewals should start with portfolio intelligence, not static templates",
+    "hooks": [
+      "Renewal strategy should reflect current risk movement, not last year’s narrative.",
+      "Day 22 assembles renewal insight, pricing posture, and broker conversation cues."
+    ],
+    "body": "Problem: Renewal packs are often generic, with weak linkage between performance signals and strategy decisions.\n\nMVP achieved: Copilot parses renewal metrics, builds signal-led strategy guidance, and outputs action-oriented talking points with persistence.\n\nScale path: Account segmentation, peer benchmarking, and broker-channel strategy automation.",
+    "cta": "Which renewal signal is most decisive for your book right now?",
+    "hashtags": [
+      "#Renewals",
+      "#Underwriting",
+      "#InsuranceAI",
+      "#PricingStrategy",
+      "#PortfolioManagement"
+    ],
+    "media": [
+      "assets/screenshots/day22.png",
+      "assets/app-logos/day22.svg"
+    ],
+    "category": "day-app",
+    "day": 22,
+    "app": "renewal-intelligence-copilot",
+    "file": "d22-day-22-renewals-should-start-with-portfolio-intelligence-not-static-templates.html"
+  },
+  {
+    "id": "D23",
+    "title": "Day 23: Operational health should be monitored as risk, not vanity metrics",
+    "hooks": [
+      "Ops metrics matter only when they trigger clear intervention.",
+      "Day 23 turns service telemetry into a risk-rated operations action plan."
+    ],
+    "body": "Problem: Teams track many KPIs, but escalation decisions are inconsistent and delayed.\n\nMVP achieved: Health monitor scores ops indicators, categorises risk levels, and generates focused remediation actions with auditability.\n\nScale path: Real-time monitoring feeds, trend thresholds, and leadership-ready control dashboards.",
+    "cta": "Which KPI should trigger immediate intervention in your operating model?",
+    "hashtags": [
+      "#Operations",
+      "#InsuranceAI",
+      "#Productivity",
+      "#RiskMonitoring",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/screenshots/day23.png",
+      "assets/app-logos/day23.svg"
+    ],
+    "category": "day-app",
+    "day": 23,
+    "app": "ops-health-monitor",
+    "file": "d23-day-23-operational-health-should-be-monitored-as-risk-not-vanity-metrics.html"
+  },
+  {
+    "id": "D24",
+    "title": "Day 24: Data quality should fail fast before records enter critical workflows",
+    "hooks": [
+      "Bad bordereaux data should be blocked early, not discovered downstream.",
+      "Day 24 validates schema and row quality with severity-led remediation guidance."
+    ],
+    "body": "Problem: Ingestion pipelines accept low-quality data, causing costly rework in underwriting and reporting stages.\n\nMVP achieved: Validator checks required columns and row-level defects, then outputs prioritised correction actions with persistence.\n\nScale path: Source-level scorecards, supplier feedback loops, and automated quality gates before ingestion.",
+    "cta": "What data defect costs your team the most rework today?",
+    "hashtags": [
+      "#DataQuality",
+      "#InsuranceOps",
+      "#InsuranceAI",
+      "#Automation",
+      "#Governance"
+    ],
+    "media": [
+      "assets/screenshots/day24.png",
+      "assets/app-logos/day24.svg"
+    ],
+    "category": "day-app",
+    "day": 24,
+    "app": "data-quality-validator",
+    "file": "d24-day-24-data-quality-should-fail-fast-before-records-enter-critical-workflows.html"
+  },
+  {
+    "id": "D25",
+    "title": "Day 25: Sanctions checks should be repeatable, explainable, and schedule-driven",
+    "hooks": [
+      "Screening quality drops when list updates and checks are disconnected.",
+      "Day 25 screens entities deterministically and captures clear block/review outcomes."
+    ],
+    "body": "Problem: Manual screening is inconsistent and hard to evidence during assurance reviews.\n\nMVP achieved: Screening aid evaluates parties against sanctions references, returns disposition + rationale, and logs audit trails.\n\nScale path: Automated list refresh jobs, fuzzy-match tuning, and workflow handoff to compliance operations.",
+    "cta": "Would you prioritise stricter matching or lower false positives first?",
+    "hashtags": [
+      "#Sanctions",
+      "#Compliance",
+      "#InsuranceAI",
+      "#RiskControl",
+      "#RegTech"
+    ],
+    "media": [
+      "assets/screenshots/day25.png",
+      "assets/app-logos/day25.svg"
+    ],
+    "category": "day-app",
+    "day": 25,
+    "app": "sanctions-screening-aid",
+    "file": "d25-day-25-sanctions-checks-should-be-repeatable-explainable-and-schedule-driven.html"
+  },
+  {
+    "id": "D26",
+    "title": "Day 26: QBR packs should read like decisions, not disconnected metric dumps",
+    "hooks": [
+      "Quarterly reviews need a coherent narrative, not a spreadsheet recital.",
+      "Day 26 converts metrics and context into board-ready QBR narrative outputs."
+    ],
+    "body": "Problem: Teams spend too much time drafting narrative from fragmented data under deadline pressure.\n\nMVP achieved: Narrative generator structures performance storyline, risks, and actions with deterministic outputs and persistence.\n\nScale path: Persona-specific narrative variants, benchmark overlays, and automated publishing workflows.",
+    "cta": "Which QBR section usually takes longest to draft in your process?",
+    "hashtags": [
+      "#QBR",
+      "#Leadership",
+      "#InsuranceAI",
+      "#NarrativeDesign",
+      "#ExecReporting"
+    ],
+    "media": [
+      "assets/screenshots/day26.png",
+      "assets/app-logos/day26.svg"
+    ],
+    "category": "day-app",
+    "day": 26,
+    "app": "qbr-narrative-generator",
+    "file": "d26-day-26-qbr-packs-should-read-like-decisions-not-disconnected-metric-dumps.html"
+  },
+  {
+    "id": "D27",
+    "title": "Day 27: Capacity planning should combine workload, skills, and risk priority",
+    "hooks": [
+      "Backlog management fails when capacity is treated as a single number.",
+      "Day 27 plans team allocation using demand pressure and reviewer capability signals."
+    ],
+    "body": "Problem: Teams over-focus on queue size and under-focus on capability mix and escalation risk.\n\nMVP achieved: Planner scores workload pressure, maps coverage gaps, and recommends action priorities with audit trail persistence.\n\nScale path: Shift forecasting, dynamic skill matrices, and queue-to-capacity automation loops.",
+    "cta": "Where is your largest capacity mismatch: volume, skill, or ownership?",
+    "hashtags": [
+      "#WorkforcePlanning",
+      "#InsuranceOps",
+      "#InsuranceAI",
+      "#TeamOps",
+      "#Productivity"
+    ],
+    "media": [
+      "assets/screenshots/day27.png",
+      "assets/app-logos/day27.svg"
+    ],
+    "category": "day-app",
+    "day": 27,
+    "app": "team-capacity-planner",
+    "file": "d27-day-27-capacity-planning-should-combine-workload-skills-and-risk-priority.html"
+  },
+  {
+    "id": "D28",
+    "title": "Day 28: Stakeholder updates should be drafted from facts, not from memory",
+    "hooks": [
+      "Comms quality drops when update drafting starts from a blank page every time.",
+      "Day 28 drafts audience-specific updates from structured status and action context."
+    ],
+    "body": "Problem: Operational updates are repetitive, inconsistent, and often miss critical context for different audiences.\n\nMVP achieved: Comms drafter turns structured inputs into clear stakeholder messages with actions and next-step framing.\n\nScale path: Template governance, tone variants by audience, and approval workflow integration.",
+    "cta": "Which audience is hardest to keep aligned during active incidents?",
+    "hashtags": [
+      "#Communications",
+      "#StakeholderManagement",
+      "#InsuranceAI",
+      "#Leadership",
+      "#Automation"
+    ],
+    "media": [
+      "assets/screenshots/day28.png",
+      "assets/app-logos/day28.svg"
+    ],
+    "category": "day-app",
+    "day": 28,
+    "app": "stakeholder-comms-drafter",
+    "file": "d28-day-28-stakeholder-updates-should-be-drafted-from-facts-not-from-memory.html"
+  },
+  {
+    "id": "D29",
+    "title": "Day 29: AI readiness should be scored with blockers and enablers in plain sight",
+    "hooks": [
+      "Readiness discussions stall when maturity is subjective and unstructured.",
+      "Day 29 scores readiness, surfaces blockers, and proposes a practical execution roadmap."
+    ],
+    "body": "Problem: Organisations struggle to align capability, governance, and execution steps into one readiness view.\n\nMVP achieved: Scorer evaluates maturity dimensions, classifies band/confidence, and returns a ninety-day action plan with persistence.\n\nScale path: Periodic re-scoring, initiative tracking, and executive portfolio governance views.",
+    "cta": "What is your biggest readiness blocker today: data, governance, or operating model?",
+    "hashtags": [
+      "#AIReadiness",
+      "#InsuranceAI",
+      "#Transformation",
+      "#Leadership",
+      "#OperatingModel"
+    ],
+    "media": [
+      "assets/screenshots/day29.png",
+      "assets/app-logos/day29.svg"
+    ],
+    "category": "day-app",
+    "day": 29,
+    "app": "insurance-ai-readiness-scorer",
+    "file": "d29-day-29-ai-readiness-should-be-scored-with-blockers-and-enablers-in-plain-sight.html"
+  },
+  {
+    "id": "D30",
+    "title": "Day 30: Portfolio outcomes should be visible as one coherent challenge story",
+    "hooks": [
+      "A 30-app build only creates value when outcomes are easy to review and compare.",
+      "Day 30 consolidates challenge outputs into a publish-ready portfolio showcase."
+    ],
+    "body": "Problem: Without a unified view, lessons and impact signals remain scattered across individual apps.\n\nMVP achieved: Showcase app summarises portfolio maturity, highlights outcomes, and preserves decision traceability with audit support.\n\nScale path: Cross-app benchmarking, executive reporting exports, and continuous challenge performance tracking.",
+    "cta": "Would you use this as leadership review pack or external showcase asset first?",
+    "hashtags": [
+      "#BuildInPublic",
+      "#InsuranceAI",
+      "#PortfolioShowcase",
+      "#ProductEngineering",
+      "#AIOps"
+    ],
+    "media": [
+      "assets/screenshots/day30.png",
+      "assets/app-logos/day30.svg"
+    ],
+    "category": "day-app",
+    "day": 30,
+    "app": "challenge-portfolio-showcase",
+    "file": "d30-day-30-portfolio-outcomes-should-be-visible-as-one-coherent-challenge-story.html"
+  },
+  {
     "id": "P27",
     "title": "Lloyd's/Specialty Underwriting - Section Wrap",
     "hooks": [
