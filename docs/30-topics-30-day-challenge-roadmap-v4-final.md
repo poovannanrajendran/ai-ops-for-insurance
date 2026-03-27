@@ -562,7 +562,7 @@ Location/accumulation data patterns
 Day 22 (renewal-copilot)
 Day 4 (slip-reviewer)
 Slip parsing logic
-Day 30 (showcase)
+Day 30 (loss-ratio-triangulator)
 All apps
 Links, metadata, screenshots
 
@@ -574,7 +574,8 @@ audit log.
 2. Day 1 kickoff (Sat 14 March): detailed architecture for submission-triage-copilot → Linear plan → tests → build.
 3. Each day: ideas → architecture → Linear plan → tests → build (on your signal) → deploy → LinkedIn/X post.
 4. Weekly review: assess pace, swap in reserves if needed, adjust weekend ambition.
-5. Day 30: portfolio showcase goes live — one link to the whole body of work.
+5. Day 30: loss ratio triangulator goes live — actuarial reserving capstone with deterministic IBNR outputs.
+Bonus: challenge portfolio showcase remains available as an optional narrative artefact.
 Definition of Done (per app)
 Deliverable
 Details

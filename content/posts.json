@@ -1073,19 +1073,19 @@
   },
   {
     "id": "D30",
-    "title": "Day 30: Portfolio outcomes should be visible as one coherent challenge story",
+    "title": "Day 30: Reserving decisions need deterministic triangles, not spreadsheet drift",
     "hooks": [
-      "A 30-app build only creates value when outcomes are easy to review and compare.",
-      "Day 30 consolidates challenge outputs into a publish-ready portfolio showcase."
+      "IBNR confidence should come from transparent maths, not fragile workbook chains.",
+      "Day 30 delivers a deterministic chain-ladder capstone with auditable ultimate and reserve outputs."
     ],
-    "body": "Problem: Without a unified view, lessons and impact signals remain scattered across individual apps.\n\nMVP achieved: Showcase app summarises portfolio maturity, highlights outcomes, and preserves decision traceability with audit support.\n\nScale path: Cross-app benchmarking, executive reporting exports, and continuous challenge performance tracking.",
-    "cta": "Would you use this as leadership review pack or external showcase asset first?",
+    "body": "Problem: Quarterly reserving still depends on manual spreadsheet setups that are slow to review and easy to break.\n\nMVP achieved: Loss Ratio Triangulator parses cumulative/incremental triangles, computes weighted LDFs, projects ultimate, and surfaces IBNR band with audit notes.\n\nScale path: Add BF/Cape Cod methods, variance bands, and export-ready reserving packs for actuarial and finance committees.",
+    "cta": "Would you use this first for reserving sign-off, underwriting portfolio challenge, or CFO pre-board review?",
     "hashtags": [
-      "#BuildInPublic",
+      "#Reserving",
+      "#Actuarial",
       "#InsuranceAI",
-      "#PortfolioShowcase",
-      "#ProductEngineering",
-      "#AIOps"
+      "#IBNR",
+      "#ChainLadder"
     ],
     "media": [
       "assets/screenshots/day30.png",
@@ -1093,8 +1093,8 @@
     ],
     "category": "day-app",
     "day": 30,
-    "app": "challenge-portfolio-showcase",
-    "file": "d30-day-30-portfolio-outcomes-should-be-visible-as-one-coherent-challenge-story.html"
+    "app": "loss-ratio-triangulator",
+    "file": "d30-day-30-reserving-decisions-need-deterministic-triangles-not-spreadsheet-drift.html"
   },
   {
     "id": "P27",

@@ -1,62 +1,65 @@
-# Day 30 Execution Plan - Challenge Portfolio Showcase
+# Day 30 Execution Plan — Loss Ratio Triangulator
+## Reserving Intelligence Capstone
+
+**Replaces:** challenge-portfolio-showcase (original Day 30)
+**Full requirements:** `docs/day30_loss-ratio-triangulator_requirements.md`
 
 ## Objective
-Deliver a final, deterministic portfolio showcase app that consolidates Day 1-29 outcomes into a decision-ready narrative, readiness score, and next-action plan.
+Deliver a deterministic reserving engine that applies the Chain-Ladder method to a user-supplied loss development triangle, producing IBNR estimates, LDF tables, and an audit-ready methodology narrative.
 
 ## Scope
-- Intake: structured challenge summary payload (text/file)
-- Deterministic parser for key/value evidence blocks
-- Showcase scoring model with explicit gates
-- Whitespace extraction table with `EXTRACTED` / `MISSING`
-- Persistence to Supabase run + audit tables
-- Query prompt snippet matching
-- Production-ready UI aligned to project design system
+- CSV triangle paste intake (cumulative or incremental, auto-detected)
+- Volume-weighted LDF calculation per development period transition
+- Optional tail factor input
+- Chain-Ladder projection to ultimate per accident year
+- IBNR = Ultimate − Latest diagonal (per AY and total)
+- Reserving band: adequate / watch / strengthening-required
+- Confidence: high / medium / low (based on triangle completeness and LDF stability)
+- Whitespace extraction table
+- Persistence to Supabase runs + audit tables
 
 ## Data Model
-Schema: `app_portfolioshowcase`
+Schema: `app_lossratiotriangulator`
 
 Tables:
-- `app_portfolioshowcase_runs`
-- `app_portfolioshowcase_audit`
+- `app_lossratiotriangulator_analysis_runs`
+- `app_lossratiotriangulator_audit`
 
 Key persisted fields:
-- `showcase_score`, `showcase_band`, `completeness_pct`, `confidence`
-- `strengths`, `blockers`, `next_actions`, `prompt_hits`
-- `status`, `request_id`, `processing_ms`
+- `summary` (totalIbnr, reservingBand, confidence, completenessPct, warnings)
+- `triangle` (accidentYears, devPeriods, cells, inputType)
+- `ldfs` (weightedAvgFactor, selectedFactor, dataPoints per transition)
+- `results` (per accident-year: latestDiagonal, ultimate, ibnr, pctDeveloped)
+- `methodology`, `audit_notes`, `raw_analysis`
 
 ## Service Logic
-- Parse line-based key/value pairs
-- Required-field gate checks for core publication evidence
-- Compute maturity score + band:
-  - `Ready`
-  - `Needs review`
-  - `Blocked`
-- Generate deterministic strengths/blockers/next actions
-- Generate prompt token hit snippets for reviewer traceability
+- Parse CSV/text triangle → detect cumulative vs incremental
+- Build cumulative triangle (cumulate if incremental)
+- Compute volume-weighted average LDF per period transition
+- Apply tail factor if provided via `tail_factor=` prefix in input
+- Project each accident year to ultimate using product of remaining LDFs
+- Derive IBNR per AY and in total
+- Determine reserving band and confidence from ibnrToPaidRatio + completeness
+- Generate 5 warning conditions (short tail, sparse data points, immature AYs, etc.)
+- Generate methodology narrative (3–5 lines) and computation audit notes
+
+## UI
+- Accent: indigo/violet family
+- Section 1: Summary card — reserving band badge + 3 metric tiles (Total IBNR, IBNR/Paid, Completeness) + warnings strip
+- Section 2: Cumulative triangle table — observed cells (white), projected cells (indigo-50, italic), latest diagonal (indigo-100), ultimate column (violet-50)
+- Section 3: LDF table (left) + IBNR per accident year table (right)
+- Section 4: Methodology card + Audit trail card + Whitespace extraction table
 
 ## QA Gates
-App checks:
-- unit tests (service + route)
-- lint
-- typecheck
-- build
-
-Repository checks:
-- `verify-app-tests`
-- `check-sample-diversity`
-- `check-status-dot-contract`
+- Unit tests: 5 (mature triangle, tail factor, sparse triangle, incremental input, invalid input)
+- Route tests: 3 (200 valid, 400 short, 200 no optional fields)
+- lint, typecheck, build
+- verify-app-tests, check-sample-diversity, check-status-dot-contract
 - Playwright visual smoke
 
-## Lessons Applied
-- Single-source deterministic extraction over opaque heuristics
-- Status-dot semantic consistency (green/amber/red)
-- Full-width whitespace extraction pattern retained
-- Source label normalisation to avoid UI/test selector regressions
-- Maintain intake symmetry and border discipline
+## Dev Port
+3030
 
 ## Deployment
 - Monorepo Vercel config via app-local `vercel.json`
-- CLI deployment supported for hobby plan project-link limits
-- Required env vars:
-  - `NEXT_PUBLIC_SUPABASE_URL`
-  - `SUPABASE_SERVICE_ROLE_KEY`
+- Required env vars: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`

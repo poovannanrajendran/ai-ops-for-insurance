@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Challenge Portfolio Showcase (Bonus)",
-  description: "Bonus portfolio narrative app that consolidates challenge outcomes into a deterministic showcase view."
+  title: "Loss Ratio Triangulator",
+  description: "Run deterministic chain-ladder projections and IBNR estimates from cumulative or incremental loss triangles."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

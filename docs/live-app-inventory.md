@@ -35,4 +35,5 @@
 | 27 | 27 | Team Capacity Planner | Leadership / Team Ops | https://team-capacity-planner.vercel.app |
 | 28 | 28 | Stakeholder Comms Drafter | Productivity & Automation | https://stakeholder-comms-drafter.vercel.app |
 | 29 | 29 | Insurance AI Readiness Scorer | Productivity & Automation | https://insurance-ai-readiness-scorer.vercel.app |
-| 30 | 30 | Challenge Portfolio Showcase | Productivity & Automation | https://challenge-portfolio-showcase.vercel.app |
+| 30 | 30 | Loss Ratio Triangulator | Reserving | TBD |
+| B1 | Bonus | Challenge Portfolio Showcase | Productivity & Automation | https://challenge-portfolio-showcase.vercel.app |

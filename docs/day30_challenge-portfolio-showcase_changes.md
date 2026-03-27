@@ -33,3 +33,7 @@ Implemented the Day 30 capstone app to consolidate challenge outcomes into a pub
 ## Notes
 - Visual contract checks flagged generic selector fragility across apps; no Day 30 functional blocker.
 - Day 30 follows the same deterministic + auditable pattern used from earlier days.
+
+
+## Bonus Status
+This app remains in the repository as a bonus artefact after Day 30 was reassigned to Loss Ratio Triangulator.

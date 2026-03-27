@@ -1,3 +1,3 @@
-# Challenge Portfolio Showcase (Day 29)
+# Challenge Portfolio Showcase (Bonus App)
 
-Scores AI operating maturity from structured assessment inputs, highlights blockers, and generates a deterministic ninety-day implementation plan.
+Bonus narrative app that consolidates challenge outcomes into one deterministic portfolio-level review surface.

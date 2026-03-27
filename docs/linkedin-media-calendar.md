@@ -29,13 +29,14 @@
 | 2026-04-09 | 08:30 | D28 | Stakeholder Comms Drafter | `day28.png`, `day28.svg` | Ready |
 | 2026-04-09 | 17:30 | P31 | Productivity & Automation - Section Wrap | `section-operations.png` | Ready |
 | 2026-04-10 | 08:30 | D29 | Insurance AI Readiness Scorer | `day29.png`, `day29.svg` | Ready |
-| 2026-04-13 | 08:30 | D30 | Challenge Portfolio Showcase | `day30.png`, `day30.svg` | Ready |
+| 2026-04-13 | 08:30 | D30 | Loss Ratio Triangulator | `day30.png`, `day30.svg` | Ready |
+| 2026-04-14 | 17:30 | B1 | Challenge Portfolio Showcase (Bonus) | `day30.png`, `day30.svg` | Ready |
 | 2026-04-14 | 08:30 | P32 | Leadership / Team Ops - Section Wrap | `section-operations.png` | Ready |
 | 2026-04-15 | 08:30 | P33 | General Insurance / Compliance - Section Wrap | `section-operations.png` | Ready |
 
 ## CTA and narrative guidance
 - D20-D25: emphasise governance quality, compliance velocity, and explainability.
-- D26-D30: emphasise leadership operating rhythm, delivery maturity, and challenge outcomes.
+- D26-D30: emphasise leadership operating rhythm, delivery maturity, and reserving/actuarial credibility.
 - Wrap posts (`P31-P33`): consolidate outcomes, lessons, and practical operating model takeaways.
 
 ## Artefact locations
